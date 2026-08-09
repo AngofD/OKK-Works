@@ -1,0 +1,55 @@
+---
+import type { Project } from '@/content/projects';
+
+interface Props {
+  project: Project;
+  large?: boolean;
+}
+
+const { project, large = false } = Astro.props;
+---
+
+<div class:list={['project-visual', `theme-${project.theme}`, { large }]} aria-hidden="true">
+  <div class="visual-chrome">
+    <span></span><span></span><span></span>
+    <p>okk.works / {project.slug}</p>
+  </div>
+  {project.theme === 'acid' && (
+    <div class="visual-acid">
+      <p>Digital products</p>
+      <strong>that work.</strong>
+      <div class="acid-orbit"><i></i></div>
+      <span>{project.visualLabel}</span>
+    </div>
+  )}
+  {project.theme === 'paper' && (
+    <div class="visual-paper">
+      <span class="paper-index">02-24</span>
+      <div class="paper-image"><span></span></div>
+      <p>Focused digital<br/>experiences</p>
+      <b>PROJECT<br/>ARCHIVE</b>
+    </div>
+  )}
+  {project.theme === 'signal' && (
+    <div class="visual-signal">
+      <div class="phone-shell">
+        <div class="phone-head"><span>&lt;</span><b>Service bot</b><span>...</span></div>
+        <div class="message message-a">Choose what you need.</div>
+        <div class="message message-b">Request received.<br/>We will take it from here.</div>
+        <div class="bot-actions"><span>New request</span><span>My status</span></div>
+      </div>
+      <p>ONE TAP<br/><b>FORWARD</b></p>
+      <span class="signal-code">{project.visualLabel}</span>
+    </div>
+  )}
+  {project.theme === 'cobalt' && (
+    <div class="visual-cobalt">
+      <p>OPERATIONS / FLOW</p>
+      <div class="flow-map">
+        <span class="node n1">Input</span><i></i><span class="node n2">Logic</span><i></i><span class="node n3">Done</span>
+      </div>
+      <strong>AUTOMATE<br/>THE ROUTINE</strong>
+    </div>
+  )}
+  <div class="visual-noise"></div>
+</div>

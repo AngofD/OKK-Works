@@ -1,0 +1,9 @@
+---
+interface Props { eyebrow: string; title: string; index?: string; }
+const { eyebrow, title, index } = Astro.props;
+---
+
+<div class="section-heading reveal">
+  <div class="section-kicker"><span>{index ?? '+'}</span>{eyebrow}</div>
+  <h2>{title}</h2>
+</div>

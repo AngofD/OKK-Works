@@ -1,0 +1,33 @@
+---
+import { site } from '@/content/site';
+import Icon from './Icon.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="footer-top">
+    <a class="footer-wordmark" href="/">OKK<span>WORKS</span></a>
+    <p>Digital products that work.</p>
+  </div>
+  <div class="footer-grid">
+    <div>
+      <p class="eyebrow">Start a conversation</p>
+      <a class="footer-email" href={`mailto:${site.email}`}>{site.email}<Icon name="arrow" /></a>
+    </div>
+    <nav aria-label="Footer navigation">
+      <a href="/work/">Work</a>
+      <a href="/#services">Services</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+    <div class="footer-socials">
+      {site.telegram ? <a href={site.telegram} rel="noreferrer" target="_blank">Telegram <span>-&gt;</span></a> : <span>Telegram <small>link pending</small></span>}
+      {site.github ? <a href={site.github} rel="noreferrer" target="_blank">GitHub <span>-&gt;</span></a> : <span>GitHub <small>link pending</small></span>}
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; {year} OKK Works</span>
+    <span>Independent studio</span>
+    <a href="/privacy/">Privacy</a>
+  </div>
+</footer>
