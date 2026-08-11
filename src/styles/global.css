@@ -558,7 +558,7 @@ em { font-weight: 430; }
   border-radius: 8px;
   background:
     linear-gradient(145deg, rgba(7, 14, 21, .42), rgba(7, 14, 21, .86)),
-    url('/OKK-Works/media/hero-dawn.webp') center / cover;
+    url('/media/hero-dawn.webp') center / cover;
 }
 .scene-browser small { color: var(--sand-light); font-size: 8px; letter-spacing: .12em; }
 .scene-browser strong { font-family: var(--font-display); font-size: clamp(30px, 3.3vw, 52px); font-weight: 440; line-height: .92; }
@@ -577,7 +577,7 @@ em { font-weight: 430; }
   border-radius: 28px;
   background:
     linear-gradient(180deg, transparent, rgba(5, 11, 17, .82)),
-    url('/OKK-Works/media/hero-dawn-mobile.webp') center / cover;
+    url('/media/hero-dawn-mobile.webp') center / cover;
   box-shadow: 0 30px 60px rgba(0, 0, 0, .4);
 }
 .scene-mobile i { position: absolute; top: 8px; left: 37%; width: 26%; height: 5px; border-radius: 4px; background: #070d12; }
@@ -877,7 +877,7 @@ em { font-weight: 430; }
   place-items: center;
   padding: var(--section) var(--gutter);
   overflow: hidden;
-  background: url('/OKK-Works/media/hero-dawn.webp') center / cover;
+  background: url('/media/hero-dawn.webp') center / cover;
 }
 .final-cta-shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(6, 13, 20, .88), rgba(7, 14, 21, .55) 62%, rgba(7, 14, 21, .25)); }
 .final-cta-content { position: relative; width: min(100%, 1360px); }
@@ -909,7 +909,7 @@ em { font-weight: 430; }
   padding: 150px var(--gutter) 72px;
   isolation: isolate;
   overflow: hidden;
-  background: url('/OKK-Works/media/hero-dawn.webp') center / cover;
+  background: url('/media/hero-dawn.webp') center / cover;
 }
 .page-hero-shade { position: absolute; z-index: -1; inset: 0; background: linear-gradient(90deg, rgba(6, 13, 20, .88), rgba(7, 14, 21, .46)), linear-gradient(180deg, rgba(7, 14, 21, .35), transparent 40%, rgba(7, 14, 21, .75)); }
 .page-hero-content { width: min(100%, 1360px); margin: 0 auto; }
@@ -1015,7 +1015,7 @@ em { font-weight: 430; }
 .next-project:hover h2 { color: var(--sand-light); }
 
 .contact-page { position: relative; min-height: 100svh; padding: 170px var(--gutter) var(--section); overflow: hidden; isolation: isolate; background: var(--ink-deep); }
-.contact-atmosphere { position: absolute; z-index: -2; inset: 0; background: url('/OKK-Works/media/hero-dawn.webp') center / cover; opacity: .32; }
+.contact-atmosphere { position: absolute; z-index: -2; inset: 0; background: url('/media/hero-dawn.webp') center / cover; opacity: .32; }
 .contact-page::after { content: ''; position: absolute; z-index: -1; inset: 0; background: linear-gradient(90deg, rgba(5, 12, 18, .92), rgba(5, 12, 18, .74) 58%, rgba(5, 12, 18, .88)); }
 .contact-intro,
 .contact-grid { width: min(100%, 1360px); margin-right: auto; margin-left: auto; }
@@ -1064,7 +1064,7 @@ em { font-weight: 430; }
 .legal-lead { font-family: var(--font-display); font-size: clamp(27px, 3.4vw, 48px); letter-spacing: -.04em; line-height: 1.1; }
 .legal-copy h2 { margin: 44px 0 10px; font-family: var(--font-display); font-size: 27px; font-weight: 500; letter-spacing: -.035em; }
 .legal-copy > p:not(.legal-lead) { color: #5c6162; }
-.not-found { position: relative; min-height: 100svh; display: grid; align-items: center; padding: 150px var(--gutter) 80px; isolation: isolate; background: url('/OKK-Works/media/hero-dawn.webp') center / cover; }
+.not-found { position: relative; min-height: 100svh; display: grid; align-items: center; padding: 150px var(--gutter) 80px; isolation: isolate; background: url('/media/hero-dawn.webp') center / cover; }
 .not-found-shade { position: absolute; z-index: -1; inset: 0; background: linear-gradient(90deg, rgba(5, 12, 18, .9), rgba(5, 12, 18, .45)); }
 .not-found-content { width: min(100%, 1360px); margin: 0 auto; }
 .not-found h1 { margin-top: 32px; font-size: clamp(78px, 13vw, 194px); line-height: .82; }
@@ -1199,7 +1199,7 @@ em { font-weight: 430; }
   .process-step p { min-height: 0; }
   .about-copy h2 { font-size: clamp(42px, 12vw, 60px); }
   .trust-list li { font-size: 20px; }
-  .final-cta { min-height: 690px; background-image: url('/OKK-Works/media/hero-dawn-mobile.webp'); }
+  .final-cta { min-height: 690px; background-image: url('/media/hero-dawn-mobile.webp'); }
   .final-cta h2 { font-size: clamp(52px, 14vw, 72px); }
   .final-actions { align-items: flex-start; flex-direction: column; }
   .final-actions .button { width: 100%; }
@@ -1209,7 +1209,7 @@ em { font-weight: 430; }
   .footer-contact > a { font-size: 25px; }
   .footer-bottom { flex-wrap: wrap; }
   .footer-bottom span:nth-child(2) { display: none; }
-  .page-hero { min-height: 670px; padding-top: 124px; padding-bottom: 48px; background-image: url('/OKK-Works/media/hero-dawn-mobile.webp'); }
+  .page-hero { min-height: 670px; padding-top: 124px; padding-bottom: 48px; background-image: url('/media/hero-dawn-mobile.webp'); }
   .page-hero h1 { font-size: clamp(63px, 18vw, 90px); }
   .page-hero-bottom { grid-template-columns: 1fr; margin-top: 64px; }
   .page-hero-bottom > p:last-child { justify-self: start; }
@@ -1242,7 +1242,7 @@ em { font-weight: 430; }
   .next-project { padding: 82px 18px; }
   .next-project svg { width: 45px; }
   .contact-page { padding: 130px 18px 90px; }
-  .contact-atmosphere { background-image: url('/OKK-Works/media/hero-dawn-mobile.webp'); }
+  .contact-atmosphere { background-image: url('/media/hero-dawn-mobile.webp'); }
   .contact-intro h1 { font-size: clamp(58px, 16vw, 82px); }
   .contact-grid { gap: 64px; }
   .contact-direct { grid-template-columns: 1fr; }
@@ -1251,7 +1251,7 @@ em { font-weight: 430; }
   .legal-page { padding: 132px 18px 90px; }
   .legal-page h1 { font-size: clamp(62px, 18vw, 90px); }
   .legal-copy { margin-top: 58px; }
-  .not-found { padding: 130px 18px 60px; background-image: url('/OKK-Works/media/hero-dawn-mobile.webp'); }
+  .not-found { padding: 130px 18px 60px; background-image: url('/media/hero-dawn-mobile.webp'); }
   .not-found h1 { font-size: clamp(68px, 20vw, 98px); }
   .not-found-content > div { display: grid; }
   .not-found .button { width: 100%; }

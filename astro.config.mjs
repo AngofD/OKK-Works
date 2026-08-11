@@ -1,8 +1,7 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://angofd.github.io',
-  base: '/OKK-Works',
+  site: 'https://okk-works.pages.dev',
   output: 'static',
   build: {
     format: 'directory',
