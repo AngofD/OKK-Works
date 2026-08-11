@@ -3,6 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Icon from '@/components/Icon.astro';
 import ProjectVisual from '@/components/ProjectVisual.astro';
 import { getNextProject, projects, type Project } from '@/content/projects';
+import { withBase } from '@/lib/paths';
 
 export function getStaticPaths() {
   return projects.map((project) => ({ params: { slug: project.slug }, props: { project } }));
@@ -18,7 +19,7 @@ const externalLabel = project.category === 'Telegram' ? 'Відкрити Telegr
 <BaseLayout title={`${project.title} - кейс`} description={project.summary} image={project.coverImage}>
   <article class="case-study">
     <header class="case-hero">
-      <div class="case-topline"><a href="/work/">← Усі роботи</a><div><span>{project.category}</span><span>{project.year}</span><span>{project.status}</span></div></div>
+      <div class="case-topline"><a href={withBase('/work/')}>← Усі роботи</a><div><span>{project.category}</span><span>{project.year}</span><span>{project.status}</span></div></div>
       <h1>{project.title}</h1>
       <p>{project.headline}</p>
     </header>
@@ -38,10 +39,32 @@ const externalLabel = project.category === 'Telegram' ? 'Відкрити Telegr
       <ol class="deliverables-grid">{project.built.map((item, index) => <li class="reveal"><span>{String(index + 1).padStart(2, '0')}</span><p>{item}</p></li>)}</ol>
     </section>
 
+    {project.caseNotes?.length ? (
+      <section class="case-notes">
+        <div class="case-notes-grid">
+          {project.caseNotes.map((note) => (
+            <article class="case-note reveal">
+              <p class="eyebrow">{note.title}</p>
+              <p>{note.copy}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+    ) : null}
+
     <section class="case-gallery" aria-label="Вигляд проєкту на різних екранах">
-      <figure class="gallery-desktop reveal"><img src={project.coverImage} width="1440" height="900" alt={`Головна сторінка ${project.title} на комп’ютері`} loading="lazy" decoding="async" /></figure>
+      <figure class="gallery-desktop reveal"><img src={withBase(project.coverImage)} width="1440" height="900" alt={`Головна сторінка ${project.title} на комп’ютері`} loading="lazy" decoding="async" /></figure>
       <div class="gallery-caption reveal"><p class="eyebrow">Адаптивний досвід</p><p>Ієрархія, навігація й ключові дії спроєктовані окремо для великого та малого екрана.</p></div>
-      <figure class="gallery-mobile reveal"><img src={project.mobileImage} width="390" height="844" alt={`Головна сторінка ${project.title} на мобільному пристрої`} loading="lazy" decoding="async" /></figure>
+      <figure class="gallery-mobile reveal"><img src={withBase(project.mobileImage)} width="390" height="844" alt={`Головна сторінка ${project.title} на мобільному пристрої`} loading="lazy" decoding="async" /></figure>
+      {project.caseScreenshots?.length ? (
+        <div class="case-screenshot-grid">
+          {project.caseScreenshots.map((shot) => (
+            <figure class="case-shot reveal">
+              <img src={withBase(shot.src)} width={shot.width} height={shot.height} alt={shot.alt} loading="lazy" decoding="async" />
+            </figure>
+          ))}
+        </div>
+      ) : null}
     </section>
 
     <section class="case-capabilities">
@@ -53,5 +76,5 @@ const externalLabel = project.category === 'Telegram' ? 'Відкрити Telegr
       <div class="outcome-grid"><p class="eyebrow">Результат</p><div class="outcome-content reveal"><p>{project.outcome}</p><div class="outcome-actions">{project.liveUrl && <a class="button button-dark" href={project.liveUrl} target="_blank" rel="noreferrer">{externalLabel} <Icon name="arrow" /></a>}{project.githubUrl && <a class="button button-dark" href={project.githubUrl} target="_blank" rel="noreferrer">GitHub <Icon name="arrow" /></a>}</div></div></div>
     </section>
   </article>
-  {hasDistinctNext ? <a class="next-project" href={`/work/${next.slug}/`}><span>Наступний проєкт</span><div><h2>{next.title}</h2><Icon name="arrow" size={70} /></div></a> : <a class="next-project" href="/contact/"><span>Наступний проєкт може бути вашим</span><div><h2>Обговорімо задачу</h2><Icon name="arrow" size={70} /></div></a>}
+  {hasDistinctNext ? <a class="next-project" href={withBase(`/work/${next.slug}/`)}><span>Наступний проєкт</span><div><h2>{next.title}</h2><Icon name="arrow" size={70} /></div></a> : <a class="next-project" href={withBase('/contact/')}><span>Наступний проєкт може бути вашим</span><div><h2>Обговорімо задачу</h2><Icon name="arrow" size={70} /></div></a>}
 </BaseLayout>

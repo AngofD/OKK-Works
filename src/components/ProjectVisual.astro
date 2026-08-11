@@ -1,5 +1,6 @@
 ---
 import type { Project } from '@/content/projects';
+import { withBase } from '@/lib/paths';
 
 interface Props {
   project: Project;
@@ -11,10 +12,10 @@ const { project, large = false } = Astro.props;
 
 <div class:list={['project-visual', { large }]} aria-hidden="true">
   <div class="project-browser">
-    <div class="browser-bar"><i></i><i></i><i></i><span>okk.works</span></div>
+    <div class="browser-bar"><i></i><i></i><i></i><span>{project.displayUrl}</span></div>
     <img
-      src={project.coverImage}
-      srcset={!large ? `${project.coverThumb} 720w, ${project.coverImage} 1440w` : undefined}
+      src={withBase(project.coverImage)}
+      srcset={!large ? `${withBase(project.coverThumb)} 720w, ${withBase(project.coverImage)} 1440w` : undefined}
       sizes={!large ? '(max-width: 700px) 90vw, 74vw' : undefined}
       alt=""
       width="1440"
@@ -26,8 +27,8 @@ const { project, large = false } = Astro.props;
   <div class="project-phone">
     <div class="phone-sensor"></div>
     <img
-      src={project.mobileImage}
-      srcset={!large ? `${project.mobileThumb} 260w, ${project.mobileImage} 390w` : undefined}
+      src={withBase(project.mobileImage)}
+      srcset={!large ? `${withBase(project.mobileThumb)} 260w, ${withBase(project.mobileImage)} 390w` : undefined}
       sizes={!large ? '(max-width: 700px) 40vw, 22vw' : undefined}
       alt=""
       width="390"

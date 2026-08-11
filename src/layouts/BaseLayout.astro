@@ -2,6 +2,7 @@
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import { site } from '@/content/site';
+import { withBase } from '@/lib/paths';
 import '@/styles/global.css';
 
 interface Props {
@@ -23,11 +24,12 @@ const fullTitle = title === 'Цифрові продукти, що працюю�
   ? `${site.name} - ${title}`
   : title.startsWith(site.name) ? title : `${title} - ${site.name}`;
 const canonical = new URL(Astro.url.pathname, site.url);
+const siteUrl = new URL(withBase('/'), site.url);
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
   name: site.name,
-  url: site.url,
+  url: siteUrl,
   description: site.description,
   email: site.email,
   knowsAbout: ['Розробка сайтів', 'Розробка Telegram-ботів', 'Бізнес-автоматизація'],
@@ -42,21 +44,21 @@ const structuredData = {
     <meta name="theme-color" content="#111820" />
     <meta name="description" content={description} />
     <meta name="robots" content="index, follow" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
     <link rel="canonical" href={canonical} />
-    {preloadHero && <link rel="preload" as="image" href="/media/hero-dawn.webp" type="image/webp" media="(min-width: 701px)" fetchpriority="high" />}
-    {preloadHero && <link rel="preload" as="image" href="/media/hero-dawn-mobile.webp" type="image/webp" media="(max-width: 700px)" fetchpriority="high" />}
+    {preloadHero && <link rel="preload" as="image" href={withBase('/media/hero-dawn.webp')} type="image/webp" media="(min-width: 701px)" fetchpriority="high" />}
+    {preloadHero && <link rel="preload" as="image" href={withBase('/media/hero-dawn-mobile.webp')} type="image/webp" media="(max-width: 700px)" fetchpriority="high" />}
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="uk_UA" />
     <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={new URL(image, site.url)} />
+    <meta property="og:image" content={new URL(withBase(image), site.url)} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={new URL(image, site.url)} />
+    <meta name="twitter:image" content={new URL(withBase(image), site.url)} />
     <title>{fullTitle}</title>
     <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>

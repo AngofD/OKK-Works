@@ -2,25 +2,29 @@
 import type { Project } from '@/content/projects';
 import Icon from './Icon.astro';
 import ProjectVisual from './ProjectVisual.astro';
+import { withBase } from '@/lib/paths';
 
 interface Props { project: Project; index: number; }
 const { project, index } = Astro.props;
 ---
 
 <article class="project-card reveal" data-category={project.category}>
-  <a class="project-media" href={`/work/${project.slug}/`} aria-label={`Відкрити кейс ${project.title}`}>
+  <a class="project-media" href={withBase(`/work/${project.slug}/`)} aria-label={`Відкрити кейс ${project.title}`}>
     <ProjectVisual project={project} />
     <span class="view-pill">Переглянути кейс <Icon name="arrow" size={16} /></span>
   </a>
   <div class="project-info">
     <p class="project-number">{String(index + 1).padStart(2, '0')}</p>
     <div class="project-summary">
-      <p>{project.category}</p>
-      <h3><a href={`/work/${project.slug}/`}>{project.title}</a></h3>
+      <p class="project-meta">
+        <span>{project.category}</span>
+        {project.status !== 'Опубліковано' && <span>{project.status}</span>}
+      </p>
+      <h3><a href={withBase(`/work/${project.slug}/`)}>{project.title}</a></h3>
       <p>{project.summary}</p>
     </div>
     <div class="project-links">
-      <a class="text-link" href={`/work/${project.slug}/`}>Переглянути кейс <Icon name="arrow" size={15} /></a>
+      <a class="text-link" href={withBase(`/work/${project.slug}/`)}>Переглянути кейс <Icon name="arrow" size={15} /></a>
       {project.liveUrl && <a class="text-link" href={project.liveUrl} target="_blank" rel="noreferrer">Відкрити сайт <Icon name="arrow" size={15} /></a>}
     </div>
   </div>

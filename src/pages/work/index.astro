@@ -6,14 +6,14 @@ import { categories, projects } from '@/content/projects';
 const availableCategories = categories.filter((category) => category === 'Усі' || projects.some((project) => project.category === category));
 ---
 
-<BaseLayout title="Роботи" description="Реальні сайти, Telegram-боти та системи автоматизації, підготовлені OKK Works.">
+<BaseLayout title="Роботи" description="Опубліковані сайти, showcase-проєкти та цифрові системи, підготовлені OKK Works.">
   <header class="page-hero work-hero">
     <div class="page-hero-shade" aria-hidden="true"></div>
     <div class="page-hero-content">
       <p class="eyebrow">Роботи / Архів</p>
       <h1>Зроблено<br/><em>для роботи.</em></h1>
       <div class="page-hero-bottom">
-        <p>Публікуємо тільки проєкти з готовими матеріалами й перевіреними посиланнями. Без вигаданих клієнтів і результатів.</p>
+        <p>Публікуємо проєкти з готовими матеріалами й чіткою позначкою формату: реальний запуск, власний продукт або концепт-проєкт. Без вигаданих клієнтів, результатів і фальшивих посилань.</p>
         <p><span>{projects.length.toString().padStart(2, '0')}</span> {projects.length === 1 ? 'опублікований кейс' : 'опубліковані кейси'}</p>
       </div>
     </div>

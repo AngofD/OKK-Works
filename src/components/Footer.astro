@@ -1,5 +1,6 @@
 ---
 import { site } from '@/content/site';
+import { withBase } from '@/lib/paths';
 import Icon from './Icon.astro';
 
 const year = new Date().getFullYear();
@@ -7,7 +8,7 @@ const year = new Date().getFullYear();
 
 <footer class="site-footer">
   <div class="footer-lead">
-    <a class="footer-wordmark" href="/">OKK Works</a>
+    <a class="footer-wordmark" href={withBase('/')}>OKK Works</a>
     <p>Незалежна студія цифрової розробки для українського бізнесу.</p>
   </div>
   <div class="footer-main">
@@ -16,16 +17,16 @@ const year = new Date().getFullYear();
       <a href={`mailto:${site.email}`}>{site.email}<Icon name="arrow" /></a>
     </div>
     <nav aria-label="Навігація у футері">
-      <a href="/#services">Послуги</a>
-      <a href="/work/">Роботи</a>
-      <a href="/#process">Процес</a>
-      <a href="/contact/">Контакти</a>
+      <a href={withBase('/#services')}>Послуги</a>
+      <a href={withBase('/work/')}>Роботи</a>
+      <a href={withBase('/#process')}>Процес</a>
+      <a href={withBase('/contact/')}>Контакти</a>
     </nav>
     {site.telegram && <div class="footer-external"><a href={site.telegram} rel="noreferrer" target="_blank">Telegram <Icon name="arrow" size={15} /></a></div>}
   </div>
   <div class="footer-bottom">
     <span>&copy; {year} OKK Works</span>
     <span>Україна / Працюємо дистанційно</span>
-    <a href="/privacy/">Приватність</a>
+    <a href={withBase('/privacy/')}>Приватність</a>
   </div>
 </footer>

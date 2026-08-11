@@ -1,6 +1,6 @@
 export const site = {
   name: 'OKK Works',
-  url: 'https://okk.works',
+  url: 'https://angofd.github.io',
   email: 'hello@okk.works', // TODO: confirm production inbox.
   telegram: '', // TODO: add the public Telegram URL.
   github: '', // TODO: add the public GitHub URL.

@@ -24,7 +24,7 @@ export const services: Service[] = [
     value: 'Чітка пропозиція, впевнена цифрова присутність і коротший шлях клієнта до звернення.',
     capabilities: ['Лендінги та бізнес-сайти', 'UX/UI дизайн', 'Мобільна адаптація', 'Швидкість і SEO'],
     cta: 'Обговорити вебсайт',
-    projectSlugs: ['okk-works'],
+    projectSlugs: ['beauty-site', 'okk-works'],
   },
   {
     key: 'telegram',

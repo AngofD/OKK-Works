@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
 import { projects } from '@/content/projects';
 import { site } from '@/content/site';
+import { withBase } from '@/lib/paths';
 
 const staticRoutes = ['', 'work/', 'contact/', 'privacy/'];
 
@@ -10,7 +11,7 @@ export const GET: APIRoute = () => {
     ...projects.map((project) => `work/${project.slug}/`),
   ];
   const urls = routes
-    .map((route) => `  <url><loc>${site.url}/${route}</loc></url>`)
+    .map((route) => `  <url><loc>${new URL(withBase(route ? `/${route}` : '/'), site.url)}</loc></url>`)
     .join('\n');
 
   return new Response(
