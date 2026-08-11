@@ -6,28 +6,26 @@ const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
-  <div class="footer-top">
-    <a class="footer-wordmark" href="/">OKK<span>WORKS</span></a>
-    <p>Цифрові продукти, що працюють.</p>
+  <div class="footer-lead">
+    <a class="footer-wordmark" href="/">OKK Works</a>
+    <p>Незалежна студія цифрової розробки для українського бізнесу.</p>
   </div>
-  <div class="footer-grid">
-    <div>
+  <div class="footer-main">
+    <div class="footer-contact">
       <p class="eyebrow">Почати розмову</p>
-      <a class="footer-email" href={`mailto:${site.email}`}>{site.email}<Icon name="arrow" /></a>
+      <a href={`mailto:${site.email}`}>{site.email}<Icon name="arrow" /></a>
     </div>
-    <nav aria-label="Footer navigation">
-      <a href="/work/">Роботи</a>
+    <nav aria-label="Навігація у футері">
       <a href="/#services">Послуги</a>
-      <a href="/contact/">Контакт</a>
+      <a href="/work/">Роботи</a>
+      <a href="/#process">Процес</a>
+      <a href="/contact/">Контакти</a>
     </nav>
-    <div class="footer-socials">
-      {site.telegram ? <a href={site.telegram} rel="noreferrer" target="_blank">Telegram <span>-&gt;</span></a> : <span>Telegram <small>посилання очікується</small></span>}
-      {site.github ? <a href={site.github} rel="noreferrer" target="_blank">GitHub <span>-&gt;</span></a> : <span>GitHub <small>посилання очікується</small></span>}
-    </div>
+    {site.telegram && <div class="footer-external"><a href={site.telegram} rel="noreferrer" target="_blank">Telegram <Icon name="arrow" size={15} /></a></div>}
   </div>
   <div class="footer-bottom">
     <span>&copy; {year} OKK Works</span>
-    <span>Незалежна студія</span>
+    <span>Україна / Працюємо дистанційно</span>
     <a href="/privacy/">Приватність</a>
   </div>
 </footer>

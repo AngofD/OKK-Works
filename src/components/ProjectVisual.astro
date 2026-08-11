@@ -9,47 +9,32 @@ interface Props {
 const { project, large = false } = Astro.props;
 ---
 
-<div class:list={['project-visual', `theme-${project.theme}`, { large }]} aria-hidden="true">
-  <div class="visual-chrome">
-    <span></span><span></span><span></span>
-    <p>okk.works / {project.slug}</p>
+<div class:list={['project-visual', { large }]} aria-hidden="true">
+  <div class="project-browser">
+    <div class="browser-bar"><i></i><i></i><i></i><span>okk.works</span></div>
+    <img
+      src={project.coverImage}
+      srcset={!large ? `${project.coverThumb} 720w, ${project.coverImage} 1440w` : undefined}
+      sizes={!large ? '(max-width: 700px) 90vw, 74vw' : undefined}
+      alt=""
+      width="1440"
+      height="900"
+      loading={large ? 'eager' : 'lazy'}
+      decoding="async"
+    />
   </div>
-  {project.theme === 'acid' && (
-    <div class="visual-acid">
-      <p>Цифрові продукти</p>
-      <strong>що працюють.</strong>
-      <div class="acid-orbit"><i></i></div>
-      <span>{project.visualLabel}</span>
-    </div>
-  )}
-  {project.theme === 'paper' && (
-    <div class="visual-paper">
-      <span class="paper-index">02-24</span>
-      <div class="paper-image"><span></span></div>
-      <p>Сфокусовані digital<br/>досвіди</p>
-      <b>АРХІВ<br/>ПРОЄКТІВ</b>
-    </div>
-  )}
-  {project.theme === 'signal' && (
-    <div class="visual-signal">
-      <div class="phone-shell">
-        <div class="phone-head"><span>&lt;</span><b>Бот сервісу</b><span>...</span></div>
-        <div class="message message-a">Оберіть, що вам потрібно.</div>
-        <div class="message message-b">Запит отримано.<br/>Ми візьмемо все далі на себе.</div>
-        <div class="bot-actions"><span>Нова заявка</span><span>Мій статус</span></div>
-      </div>
-      <p>ОДИН ТАП<br/><b>УПЕРЕД</b></p>
-      <span class="signal-code">{project.visualLabel}</span>
-    </div>
-  )}
-  {project.theme === 'cobalt' && (
-    <div class="visual-cobalt">
-      <p>ОПЕРАЦІЇ / ПОТІК</p>
-      <div class="flow-map">
-        <span class="node n1">Вхід</span><i></i><span class="node n2">Логіка</span><i></i><span class="node n3">Готово</span>
-      </div>
-      <strong>АВТОМАТИЗУЙТЕ<br/>РУТИНУ</strong>
-    </div>
-  )}
-  <div class="visual-noise"></div>
+  <div class="project-phone">
+    <div class="phone-sensor"></div>
+    <img
+      src={project.mobileImage}
+      srcset={!large ? `${project.mobileThumb} 260w, ${project.mobileImage} 390w` : undefined}
+      sizes={!large ? '(max-width: 700px) 40vw, 22vw' : undefined}
+      alt=""
+      width="390"
+      height="844"
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+  <p class="project-stamp">{project.category} / {project.year}</p>
 </div>

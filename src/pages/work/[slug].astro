@@ -11,32 +11,47 @@ export function getStaticPaths() {
 interface Props { project: Project; }
 const { project } = Astro.props;
 const next = getNextProject(project.slug);
-const externalLabel = project.category === 'Telegram-боти' ? 'Відкрити Telegram-бот' : 'Переглянути проєкт онлайн';
+const hasDistinctNext = projects.length > 1 && next.slug !== project.slug;
+const externalLabel = project.category === 'Telegram' ? 'Відкрити Telegram-бота' : 'Переглянути проєкт онлайн';
 ---
 
-<BaseLayout title={`${project.title} кейс`} description={project.summary}>
-  <article>
+<BaseLayout title={`${project.title} - кейс`} description={project.summary} image={project.coverImage}>
+  <article class="case-study">
     <header class="case-hero">
-      <div class="case-topline"><span>{project.visualLabel}</span><div><span>{project.category}</span><span>{project.year}</span><span>{project.status}</span></div></div>
-      <h1>{project.title}<span>{project.headline}</span></h1>
+      <div class="case-topline"><a href="/work/">← Усі роботи</a><div><span>{project.category}</span><span>{project.year}</span><span>{project.status}</span></div></div>
+      <h1>{project.title}</h1>
+      <p>{project.headline}</p>
     </header>
+
     <div class="case-preview"><ProjectVisual project={project} large /></div>
+
     <section class="case-overview">
       <div class="overview-lead reveal"><p class="eyebrow">Огляд</p><p>{project.overview}</p></div>
       <div class="case-columns">
-        <div class="case-block reveal"><p class="eyebrow">Задача</p><h2>Що потрібно було змінити.</h2><p>{project.challenge}</p></div>
-        <div class="case-block reveal"><p class="eyebrow">Рішення</p><h2>Як ми підійшли до роботи.</h2><p>{project.solution}</p></div>
+        <div class="case-block reveal"><p class="eyebrow">Завдання</p><h2>Що потрібно було змінити</h2><p>{project.challenge}</p></div>
+        <div class="case-block reveal"><p class="eyebrow">Рішення</p><h2>Як побудували досвід</h2><p>{project.solution}</p></div>
       </div>
-      <div class="deliverables reveal"><h2>Що було зроблено.</h2><ul class="deliverables-grid">{project.built.map((item, index) => <li><span>0{index + 1}</span>{item}</li>)}</ul></div>
     </section>
-    <section class="case-gallery" aria-label="Презентація проєкту">
-      <div class="gallery-frame reveal"><ProjectVisual project={project} large /></div>
-      <div class="gallery-detail reveal"><span>Система / Деталь</span><p>Зібрано як один цілісний досвід.</p></div>
-      <div class="capabilities-panel reveal"><h2>Компетенції</h2><ul>{project.capabilities.map((item, index) => <li><span>{item}</span><small>0{index + 1}</small></li>)}</ul></div>
+
+    <section class="case-built">
+      <div class="case-section-title reveal"><p class="eyebrow">Що реалізовано</p><h2>Одна система.<br/><em>Усі ключові сценарії.</em></h2></div>
+      <ol class="deliverables-grid">{project.built.map((item, index) => <li class="reveal"><span>{String(index + 1).padStart(2, '0')}</span><p>{item}</p></li>)}</ol>
     </section>
+
+    <section class="case-gallery" aria-label="Вигляд проєкту на різних екранах">
+      <figure class="gallery-desktop reveal"><img src={project.coverImage} width="1440" height="900" alt={`Головна сторінка ${project.title} на комп’ютері`} loading="lazy" decoding="async" /></figure>
+      <div class="gallery-caption reveal"><p class="eyebrow">Адаптивний досвід</p><p>Ієрархія, навігація й ключові дії спроєктовані окремо для великого та малого екрана.</p></div>
+      <figure class="gallery-mobile reveal"><img src={project.mobileImage} width="390" height="844" alt={`Головна сторінка ${project.title} на мобільному пристрої`} loading="lazy" decoding="async" /></figure>
+    </section>
+
+    <section class="case-capabilities">
+      <div class="capability-column reveal"><p class="eyebrow">Компетенції</p><ul>{project.capabilities.map((item) => <li>{item}</li>)}</ul></div>
+      <div class="capability-column reveal"><p class="eyebrow">Технології</p><ul>{project.technologies.map((item) => <li>{item}</li>)}</ul></div>
+    </section>
+
     <section class="case-outcome">
-      <div class="outcome-grid"><p class="eyebrow">Результат</p><div class="outcome-content reveal"><p>{project.outcome}</p><div class="outcome-actions">{project.liveUrl && <a class="button" href={project.liveUrl} target="_blank" rel="noreferrer">{externalLabel} <Icon name="arrow" /></a>}{project.githubUrl && <a class="button" href={project.githubUrl} target="_blank" rel="noreferrer">GitHub <Icon name="arrow" /></a>}{!project.liveUrl && <span class="pending-label">Зовнішнє посилання очікує реальні дані проєкту</span>}</div></div></div>
+      <div class="outcome-grid"><p class="eyebrow">Результат</p><div class="outcome-content reveal"><p>{project.outcome}</p><div class="outcome-actions">{project.liveUrl && <a class="button button-dark" href={project.liveUrl} target="_blank" rel="noreferrer">{externalLabel} <Icon name="arrow" /></a>}{project.githubUrl && <a class="button button-dark" href={project.githubUrl} target="_blank" rel="noreferrer">GitHub <Icon name="arrow" /></a>}</div></div></div>
     </section>
   </article>
-  <a class="next-project" href={`/work/${next.slug}/`}><span>Наступний проєкт</span><div><h2>{next.title}</h2><Icon name="arrow" size={70} /></div></a>
+  {hasDistinctNext ? <a class="next-project" href={`/work/${next.slug}/`}><span>Наступний проєкт</span><div><h2>{next.title}</h2><Icon name="arrow" size={70} /></div></a> : <a class="next-project" href="/contact/"><span>Наступний проєкт може бути вашим</span><div><h2>Обговорімо задачу</h2><Icon name="arrow" size={70} /></div></a>}
 </BaseLayout>

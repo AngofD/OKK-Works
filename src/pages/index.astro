@@ -3,97 +3,134 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Icon from '@/components/Icon.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
 import SectionHeading from '@/components/SectionHeading.astro';
-import { capabilities, processSteps, services, values } from '@/content/home';
+import { processSteps, services, trustPoints } from '@/content/home';
 import { projects } from '@/content/projects';
+import { site } from '@/content/site';
 
 const featured = projects.filter((project) => project.featured);
 ---
 
-<BaseLayout>
+<BaseLayout preloadHero>
   <section class="hero" data-hero>
-    <div class="hero-copy reveal">
-      <p class="availability">Незалежна студія цифрової розробки</p>
-      <h1 class="hero-title">
-        <span>Сайти.</span>
-        <span>Telegram-боти.</span>
-        <span>Системи автоматизації.</span>
-      </h1>
-      <p class="hero-intro">OKK Works проєктує й розробляє цифрові системи, які допомагають бізнесу комунікувати, обслуговувати клієнтів і наводити лад в операціях.</p>
+    <picture class="hero-media" aria-hidden="true">
+      <source media="(max-width: 700px)" srcset="/media/hero-dawn-mobile.webp" />
+      <img src="/media/hero-dawn.webp" width="1672" height="941" alt="" fetchpriority="high" decoding="async" />
+    </picture>
+    <div class="hero-shade" aria-hidden="true"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow reveal">Незалежна студія цифрової розробки</p>
+      <h1 class="hero-wordmark">OKK Works</h1>
+      <ul class="hero-services" aria-label="Основні послуги">
+        <li>Вебсайти</li>
+        <li>Telegram-боти</li>
+        <li>Автоматизація</li>
+      </ul>
+      <p class="hero-intro">Створюємо зрозумілі цифрові продукти, які допомагають бізнесу залучати клієнтів, спрощувати сервіс і менше часу витрачати на рутину.</p>
       <div class="hero-actions">
-        <a class="button button-primary magnetic" href="/contact/">Обговорити проєкт <Icon name="arrow" /></a>
-        <a class="button button-secondary" href="/work/">Переглянути роботи <Icon name="arrow" /></a>
+        <a class="button button-primary" href="/work/">Переглянути роботи <Icon name="arrow" /></a>
+        <a class="button button-ghost" href="/contact/">Обговорити проєкт <Icon name="arrow" /></a>
       </div>
     </div>
-    <div class="hero-architecture" aria-hidden="true">
-      <div class="portal portal-a"></div>
-      <div class="portal portal-b"></div>
-      <div class="portal portal-c"></div>
-      <div class="light-shaft"></div>
-      <div class="system-line line-a"></div>
-      <div class="system-line line-b"></div>
+    <div class="hero-foot">
+      <span>Від ідеї до запуску</span>
+      <a href="#services">Дізнатися більше <span aria-hidden="true">↓</span></a>
     </div>
   </section>
 
-  <section class="capability-strip" aria-label="Core capabilities">
-    {capabilities.map((item, index) => <a href={index === 3 ? '#process' : '#services'}><span>0{index + 1}</span>{item}</a>)}
-  </section>
+  <section class="services" id="services" aria-labelledby="services-title" data-service-experience>
+    <div class="services-intro reveal">
+      <p class="eyebrow">Послуги / 01</p>
+      <h2 id="services-title">Оберіть задачу.<br/><em>Побачте рішення.</em></h2>
+      <p>Вибір змінює лише наступний блок. Структура сторінки й доступ до робіт залишаються незмінними.</p>
+    </div>
+    <div class="service-tabs" role="tablist" aria-label="Напрями роботи">
+      {services.map((service, index) => (
+        <button
+          class:list={['service-tab', { active: index === 0 }]}
+          id={`service-tab-${service.key}`}
+          type="button"
+          role="tab"
+          aria-selected={index === 0 ? 'true' : 'false'}
+          aria-controls={`service-panel-${service.key}`}
+          tabindex={index === 0 ? 0 : -1}
+          data-service-tab={service.key}
+        >
+          <span>0{index + 1}</span>{service.label}
+        </button>
+      ))}
+    </div>
 
-  <section class="services" id="services">
-    <SectionHeading eyebrow="Послуги" index="01" title="Три сфокусовані напрями, щоб digital працював краще." />
-    <div class="services-layout">
-      <div class="service-list" data-services>
-        {services.map((service, index) => (
-          <article class:list={['service-item reveal', { active: index === 0 }]}>
-            <button class="service-trigger" type="button" aria-expanded={index === 0 ? 'true' : 'false'} aria-controls={`service-copy-${index}`} data-service={index}>
-              <span>0{index + 1}</span><strong>{service.name}</strong><i></i>
-            </button>
-            <div class="service-copy" id={`service-copy-${index}`}><div><p>{service.copy}</p><ul>{service.tags.map((tag) => <li>{tag}</li>)}</ul></div></div>
+    <div class="service-panels">
+      {services.map((service, index) => {
+        const related = service.projectSlugs.map((slug) => projects.find((project) => project.slug === slug)).filter(Boolean);
+        return (
+          <article
+            class:list={['service-panel', `service-${service.key}`, { active: index === 0 }]}
+            id={`service-panel-${service.key}`}
+            role="tabpanel"
+            aria-labelledby={`service-tab-${service.key}`}
+            data-service-panel={service.key}
+            hidden={index !== 0}
+          >
+            <div class="service-panel-copy">
+              <p class="service-panel-eyebrow">{service.eyebrow}</p>
+              <p class="service-problem"><span>Задача</span>{service.problem}</p>
+              <h3>{service.title}</h3>
+              <p class="service-description">{service.description}</p>
+              <div class="service-value"><span>Результат для бізнесу</span><p>{service.value}</p></div>
+              <ul class="service-capabilities" aria-label="Що реалізуємо">{service.capabilities.map((item) => <li>{item}</li>)}</ul>
+              <a class="button button-primary" href={`/contact/?service=${service.key}`}>{service.cta} <Icon name="arrow" /></a>
+            </div>
+            <div class="service-visual" aria-hidden="true">
+              {service.key === 'websites' && <div class="web-scene"><div class="scene-browser"><span></span><span></span><span></span><div><small>OKK / WEB</small><strong>Зрозуміло.<br/>Швидко.<br/><em>Впевнено.</em></strong></div></div><div class="scene-mobile"><i></i><b>Ваш бізнес<br/>завжди поруч.</b></div></div>}
+              {service.key === 'telegram' && <div class="telegram-scene"><div class="telegram-phone"><div class="telegram-head"><i></i><span>Сервіс-бот</span><b>•••</b></div><p>Вітаємо! Що бажаєте зробити?</p><div class="telegram-choice">Забронювати послугу</div><div class="telegram-reply">Оберіть зручний день</div><div class="telegram-days"><span>Ср, 12</span><span>Чт, 13</span></div></div><p>Один чат.<br/><em>Менше кроків.</em></p></div>}
+              {service.key === 'automation' && <div class="automation-scene"><p>Робочий процес</p><div class="automation-flow"><span>Заявка<small>01</small></span><i></i><span>Перевірка<small>02</small></span><i></i><span>Сповіщення<small>03</small></span><i></i><span>Готово<small>04</small></span></div><strong>Рутина рухається<br/><em>без ручного контролю.</em></strong></div>}
+              {service.key === 'support' && <div class="support-scene"><div class="release-card"><p>Запуск продукту</p><ul><li><span>Домен і SSL</span><b>Готово</b></li><li><span>Production</span><b>Готово</b></li><li><span>Аналітика</span><b>Готово</b></li><li><span>Моніторинг</span><b>Активний</b></li></ul><div><i></i>Система працює стабільно</div></div><strong>Запустили.<br/><em>Залишаємося поруч.</em></strong></div>}
+            </div>
+            <div class="service-proof">
+              <p>Пов’язана робота</p>
+              {related.length > 0 ? related.map((project) => project && <a href={`/work/${project.slug}/`}><span>{project.category}</span><strong>{project.title}</strong><Icon name="arrow" size={18} /></a>) : <p class="proof-pending">Профільний кейс опублікуємо після підготовки реальних матеріалів. Покажемо релевантний підхід під час розмови.</p>}
+            </div>
           </article>
-        ))}
-      </div>
-      <div class="services-stage reveal" aria-hidden="true">
-        <div class="service-scene active" data-scene="0">
-          <div class="scene-label"><span>Web experience</span><span>01 / 03</span></div>
-          <div class="web-window"><b>Ясність<br/>рухає.</b><span>OKK / WEB</span></div>
-        </div>
-        <div class="service-scene" data-scene="1">
-          <div class="scene-label"><span>Telegram-утиліта</span><span>02 / 03</span></div>
-          <div class="bot-phone"><div class="bot-bubble">Чим можемо допомогти?</div><div class="bot-bubble accent">Створити заявку</div><div class="bot-bubble">Добре. Оберіть послугу нижче.</div><div class="bot-buttons"><span>Сайт</span><span>Автоматизація</span></div></div>
-        </div>
-        <div class="service-scene" data-scene="2">
-          <div class="scene-label"><span>Connected operations</span><span>03 / 03</span></div>
-          <div class="automation-flow"><span>Вхід</span><span>Логіка</span><span>Результат</span></div>
-        </div>
-      </div>
+        );
+      })}
     </div>
   </section>
 
   <section class="selected-work" id="work">
-    <div class="work-heading-row reveal"><div><p class="eyebrow">02 / Вибрані роботи</p><h2>Докази, не обіцянки.</h2></div><a class="text-link" href="/work/">Усі роботи <Icon name="arrow" /></a></div>
+    <div class="work-heading-row reveal">
+      <div><p class="eyebrow">Вибрані роботи / 02</p><h2>Реальна робота.<br/><em>Видимий результат.</em></h2></div>
+      <a class="text-link" href="/work/">Усі роботи <Icon name="arrow" /></a>
+    </div>
     {featured.map((project, index) => <ProjectCard project={project} index={index} />)}
   </section>
 
-  <section class="value">
-    <div class="value-intro reveal"><p class="eyebrow">03 / Чому OKK</p><h2>Незалежна студія. Дорослі рішення. Практична реалізація.</h2></div>
-    <div class="value-list">
-      {values.map((item) => <article class="value-row reveal"><h3>{item.title}</h3><p>{item.copy}</p></article>)}
-    </div>
-  </section>
-
   <section class="process" id="process">
-    <SectionHeading eyebrow="Процес" index="04" title="Зрозумілий шлях від ідеї до продукту, який працює." />
-    <div class="process-list" data-process><div class="process-line" aria-hidden="true"></div>
-      {processSteps.map((step, index) => <article class="process-step"><span>{String(index + 1).padStart(2, '0')}</span><h3>{step.title}</h3><p>{step.copy}</p></article>)}
+    <SectionHeading eyebrow="Процес" index="03" title="Зрозумілий шлях від задачі до стабільного продукту." />
+    <div class="process-list" data-process>
+      <div class="process-line" aria-hidden="true"><span></span></div>
+      {processSteps.map((step, index) => <article class="process-step reveal"><span>{String(index + 1).padStart(2, '0')}</span><h3>{step.title}</h3><p>{step.copy}</p></article>)}
     </div>
   </section>
 
   <section class="about" id="about">
-    <div class="about-grid"><p class="eyebrow">05 / Про нас</p><div class="about-copy reveal"><p>OKK Works - незалежна студія цифрової розробки.</p><div class="about-detail"><p>Ми поєднуємо продуктове мислення, дизайн і engineering в одному прямому процесі. Без вигаданої історії великої команди. Без технологічного театру. Лише уважні рішення й відповідальна реалізація.</p><a class="button button-secondary" href="/contact/">Працювати з нами <Icon name="arrow" /></a></div></div></div>
+    <div class="about-grid">
+      <p class="eyebrow">Про студію / 04</p>
+      <div class="about-copy reveal">
+        <h2>OKK Works - незалежна студія цифрової розробки.</h2>
+        <p>Поєднуємо продуктове мислення, дизайн і розробку в одному прямому процесі. Не імітуємо велику корпорацію: уважно розбираємо задачу, показуємо роботу в процесі й відповідаємо за запуск.</p>
+      </div>
+    </div>
+    <ul class="trust-list">{trustPoints.map((point, index) => <li class="reveal"><span>0{index + 1}</span>{point}</li>)}</ul>
   </section>
 
   <section class="final-cta">
-    <p class="eyebrow">Є проєкт на думці?</p>
-    <h2>Збудуймо те, що працює.</h2>
-    <div class="cta-bottom"><p>Розкажіть, що має змінитися, покращитися або з’явитися. Ми допоможемо визначити правильний наступний крок.</p><a class="button button-primary magnetic" href="/contact/">Обговорити проєкт <Icon name="arrow" /></a></div>
+    <div class="final-cta-shade" aria-hidden="true"></div>
+    <div class="final-cta-content reveal">
+      <p class="eyebrow">Почнімо з вашої задачі</p>
+      <h2>Маєте ідею або<br/><em>бізнес-задачу?</em></h2>
+      <p>Перетворімо її на цифровий продукт, який зрозумілий людям і реально працює для бізнесу.</p>
+      <div class="final-actions"><a class="button button-primary" href="/contact/">Обговорити проєкт <Icon name="arrow" /></a><a href={`mailto:${site.email}`}>{site.email}</a>{site.telegram && <a href={site.telegram} target="_blank" rel="noreferrer">Telegram</a>}</div>
+    </div>
   </section>
 </BaseLayout>

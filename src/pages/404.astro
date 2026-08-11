@@ -3,5 +3,8 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Icon from '@/components/Icon.astro';
 ---
 <BaseLayout title="Сторінку не знайдено">
-  <section class="not-found"><p class="eyebrow">Помилка / 404</p><h1>Не той поворот.<br/><span>Корисний вихід.</span></h1><p>Сторінка не існує або була переміщена. Поверніться на головну або перегляньте роботи.</p><a class="button button-primary" href="/">На головну <Icon name="arrow" /></a></section>
+  <section class="not-found">
+    <div class="not-found-shade" aria-hidden="true"></div>
+    <div class="not-found-content"><p class="eyebrow">Помилка / 404</p><h1>Не той<br/><em>поворот.</em></h1><p>Сторінка не існує або була переміщена. Поверніться на головну чи одразу перейдіть до робіт.</p><div><a class="button button-primary" href="/">На головну <Icon name="arrow" /></a><a class="button button-ghost" href="/work/">Переглянути роботи <Icon name="arrow" /></a></div></div>
+  </section>
 </BaseLayout>

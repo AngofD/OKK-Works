@@ -4,21 +4,27 @@ import Icon from '@/components/Icon.astro';
 import { site } from '@/content/site';
 ---
 
-<BaseLayout title="Обговорити проєкт" description="Розкажіть OKK Works про сайт, Telegram-бот або систему автоматизації для вашого бізнесу.">
+<BaseLayout title="Обговорити проєкт" description="Розкажіть OKK Works про вебсайт, Telegram-бота або автоматизацію для вашого бізнесу.">
   <section class="contact-page">
-    <h1>Зробімо так,<span>щоб працювало.</span></h1>
+    <div class="contact-atmosphere" aria-hidden="true"></div>
+    <header class="contact-intro reveal">
+      <p class="eyebrow">Новий проєкт</p>
+      <h1>Почнімо<br/><em>з вашої задачі.</em></h1>
+      <p>Не потрібен ідеальний бриф. Опишіть, що має працювати краще, а ми допоможемо визначити наступний крок.</p>
+    </header>
     <div class="contact-grid">
-      <div class="contact-direct">
-        <p class="eyebrow">Зручніше email?</p>
+      <aside class="contact-direct">
+        <p class="eyebrow">Напряму</p>
         <a href={`mailto:${site.email}`}>{site.email}<Icon name="arrow" /></a>
-        <p class="contact-note">Не потрібен ідеальний бриф. Достатньо описати проблему, поточну ситуацію та бажаний результат.</p>
-      </div>
+        {site.telegram && <a href={site.telegram} target="_blank" rel="noreferrer">Telegram<Icon name="arrow" /></a>}
+        <div class="contact-expectations"><p>Що буде далі</p><ol><li><span>01</span>Прочитаємо контекст</li><li><span>02</span>Уточнимо важливе</li><li><span>03</span>Запропонуємо наступний крок</li></ol></div>
+      </aside>
       <form class="inquiry-form" data-inquiry-form>
-        <div class="form-row"><div class="field"><label for="name">Ваше ім’я</label><input id="name" name="name" autocomplete="name" required /></div><div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required /></div></div>
-        <div class="form-row"><div class="field"><label for="service">Що потрібно?</label><select id="service" name="service" required><option value="">Оберіть послугу</option><option>Сайт</option><option>Telegram-бот</option><option>Бізнес-автоматизація</option><option>Поки не впевнений / не впевнена</option></select></div><div class="field"><label for="budget">Орієнтовний бюджет</label><select id="budget" name="budget"><option value="">Не хочу вказувати</option><option>До $2,000</option><option>$2,000-$5,000</option><option>$5,000-$10,000</option><option>$10,000+</option></select></div></div>
+        <div class="form-row"><div class="field"><label for="name">Ваше ім’я</label><input id="name" name="name" autocomplete="name" required /></div><div class="field"><label for="email">Електронна пошта</label><input id="email" name="email" type="email" autocomplete="email" required /></div></div>
+        <div class="form-row"><div class="field"><label for="service">Що потрібно?</label><select id="service" name="service" required><option value="">Оберіть послугу</option><option value="websites">Вебсайт</option><option value="telegram">Telegram-бот</option><option value="automation">Автоматизація</option><option value="support">Запуск і підтримка</option><option value="unsure">Поки не впевнений / не впевнена</option></select></div><div class="field"><label for="budget">Орієнтовний бюджет</label><select id="budget" name="budget"><option value="">Не хочу вказувати</option><option>До $2 000</option><option>$2 000-$5 000</option><option>$5 000-$10 000</option><option>$10 000+</option></select></div></div>
         <div class="field"><label for="message">Контекст проєкту</label><textarea id="message" name="message" placeholder="Що має працювати краще?" required></textarea></div>
         <div class="form-status" role="status" aria-live="polite" data-form-status></div>
-        <button class="button button-primary" type="submit">Підготувати email <Icon name="arrow" /></button>
+        <button class="button button-primary" type="submit">Підготувати лист <Icon name="arrow" /></button>
       </form>
     </div>
   </section>

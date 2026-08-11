@@ -2,20 +2,29 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
 import { categories, projects } from '@/content/projects';
+
+const availableCategories = categories.filter((category) => category === 'Усі' || projects.some((project) => project.category === category));
 ---
 
-<BaseLayout title="Роботи" description="Вибрані сайти, Telegram-боти та системи автоматизації від OKK Works.">
-  <section class="page-hero">
-    <p class="eyebrow">Вибрані проєкти / Архів</p>
-    <h1>Роботи, що<br/>працюють.</h1>
-    <div class="page-hero-bottom"><p>Продукти, створені під реальну задачу: пояснити пропозицію, прибрати тертя або зробити процес кращим.</p><p>{projects.length.toString().padStart(2, '0')} проєкти / Архів зростає</p></div>
-  </section>
-  <section class="work-index">
-    <div class="filters" role="group" aria-label="Фільтрувати проєкти" data-filters>
-      {categories.map((category, index) => <button class:list={['filter-button', { active: index === 0 }]} type="button" data-filter={category} aria-pressed={index === 0 ? 'true' : 'false'}>{category}</button>)}
+<BaseLayout title="Роботи" description="Реальні сайти, Telegram-боти та системи автоматизації, підготовлені OKK Works.">
+  <header class="page-hero work-hero">
+    <div class="page-hero-shade" aria-hidden="true"></div>
+    <div class="page-hero-content">
+      <p class="eyebrow">Роботи / Архів</p>
+      <h1>Зроблено<br/><em>для роботи.</em></h1>
+      <div class="page-hero-bottom">
+        <p>Публікуємо тільки проєкти з готовими матеріалами й перевіреними посиланнями. Без вигаданих клієнтів і результатів.</p>
+        <p><span>{projects.length.toString().padStart(2, '0')}</span> {projects.length === 1 ? 'опублікований кейс' : 'опубліковані кейси'}</p>
+      </div>
     </div>
-    <div aria-live="polite" data-project-list>
+  </header>
+  <section class="work-index">
+    {availableCategories.length > 2 && <div class="filters" role="group" aria-label="Фільтрувати проєкти" data-filters>
+      {availableCategories.map((category, index) => <button class:list={['filter-button', { active: index === 0 }]} type="button" data-filter={category} aria-pressed={index === 0 ? 'true' : 'false'}>{category}</button>)}
+    </div>}
+    <div class="work-projects" aria-live="polite" data-project-list>
       {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
     </div>
+    <div class="archive-note reveal"><p class="eyebrow">Архів зростає</p><p>Наступні кейси з’являться тут після підготовки реального контенту, візуалів і зовнішніх посилань.</p></div>
   </section>
 </BaseLayout>

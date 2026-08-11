@@ -4,32 +4,29 @@ import Icon from './Icon.astro';
 const path = Astro.url.pathname;
 const home = path === '/';
 const links = [
-  { label: 'Роботи', href: '/work/' },
-  { label: 'Послуги', href: home ? '#services' : '/#services' },
-  { label: 'Процес', href: home ? '#process' : '/#process' },
-  { label: 'Про нас', href: home ? '#about' : '/#about' },
-  { label: 'Контакт', href: '/contact/' },
+  { label: 'Послуги', href: home ? '#services' : '/#services', current: false },
+  { label: 'Роботи', href: '/work/', current: path.startsWith('/work') },
+  { label: 'Процес', href: home ? '#process' : '/#process', current: false },
+  { label: 'Про нас', href: home ? '#about' : '/#about', current: false },
+  { label: 'Контакти', href: '/contact/', current: path.startsWith('/contact') },
 ];
 ---
 
-<header class="site-header" data-header>
-  <a class="wordmark" href="/">
-    <span>OKK</span><span class="wordmark-dot"></span><span>WORKS</span>
+<header class:list={['site-header', { 'header-solid': (path.startsWith('/work/') && path !== '/work/') || path.startsWith('/privacy') }]} data-header>
+  <a class="wordmark" href="/" aria-label="OKK Works, головна">
+    <strong>OKK Works</strong>
+    <span>Студія розробки</span>
   </a>
-  <nav class="desktop-nav" aria-label="Primary navigation">
-    {links.map((link) => (
-      <a href={link.href} aria-current={path.startsWith(link.href) && link.href !== '/' ? 'page' : undefined}>{link.label}</a>
-    ))}
+  <nav class="desktop-nav" aria-label="Головна навігація">
+    {links.map((link) => <a href={link.href} aria-current={link.current ? 'page' : undefined}>{link.label}</a>)}
   </nav>
-  <a class="header-cta magnetic" href="/contact/">
-    Обговорити проєкт <Icon name="arrow" size={17} />
-  </a>
+  <a class="header-cta" href="/contact/">Обговорити проєкт <Icon name="arrow" size={16} /></a>
   <button class="menu-toggle" type="button" aria-label="Відкрити навігацію" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
     <span class="menu-open"><Icon name="menu" /></span>
     <span class="menu-close"><Icon name="close" /></span>
   </button>
   <div class="mobile-menu" id="mobile-menu" data-mobile-menu hidden>
-    <nav aria-label="Mobile navigation">
+    <nav aria-label="Мобільна навігація">
       {links.map((link, index) => <a href={link.href}><span>0{index + 1}</span>{link.label}</a>)}
     </nav>
     <a class="button button-primary" href="/contact/">Обговорити проєкт <Icon name="arrow" /></a>

@@ -9,6 +9,7 @@ interface Props {
   description?: string;
   image?: string;
   noFooter?: boolean;
+  preloadHero?: boolean;
 }
 
 const {
@@ -16,8 +17,11 @@ const {
   description = site.description,
   image = '/og-cover.png',
   noFooter = false,
+  preloadHero = false,
 } = Astro.props;
-const fullTitle = title === 'Цифрові продукти, що працюють' ? `${site.name} - ${title}` : `${title} - ${site.name}`;
+const fullTitle = title === 'Цифрові продукти, що працюють'
+  ? `${site.name} - ${title}`
+  : title.startsWith(site.name) ? title : `${title} - ${site.name}`;
 const canonical = new URL(Astro.url.pathname, site.url);
 const structuredData = {
   '@context': 'https://schema.org',
@@ -35,11 +39,16 @@ const structuredData = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta name="theme-color" content="#11110f" />
+    <meta name="theme-color" content="#111820" />
     <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonical} />
+    {preloadHero && <link rel="preload" as="image" href="/media/hero-dawn.webp" type="image/webp" media="(min-width: 701px)" fetchpriority="high" />}
+    {preloadHero && <link rel="preload" as="image" href="/media/hero-dawn-mobile.webp" type="image/webp" media="(max-width: 700px)" fetchpriority="high" />}
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content="uk_UA" />
+    <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
@@ -47,12 +56,12 @@ const structuredData = {
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, site.url)} />
     <title>{fullTitle}</title>
     <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
   <body>
     <a class="skip-link" href="#main">Перейти до контенту</a>
-    <div class="page-progress" aria-hidden="true"><span data-progress></span></div>
     <Header />
     <main id="main"><slot /></main>
     {!noFooter && <Footer />}
