@@ -8,9 +8,9 @@ const { project, index } = Astro.props;
 ---
 
 <article class="project-card reveal" data-category={project.category}>
-  <a class="project-media" href={`/work/${project.slug}/`} aria-label={`View ${project.title} case study`}>
+  <a class="project-media" href={`/work/${project.slug}/`} aria-label={`Відкрити кейс ${project.title}`}>
     <ProjectVisual project={project} />
-    <span class="view-pill">View case <Icon name="arrow" size={16} /></span>
+    <span class="view-pill">Дивитись кейс <Icon name="arrow" size={16} /></span>
   </a>
   <div class="project-info">
     <p class="project-number">0{index + 1}</p>
@@ -21,7 +21,7 @@ const { project, index } = Astro.props;
     <div class="project-meta">
       <span>{project.category}</span>
       <span>{project.year}</span>
-      {project.status === 'Content pending' && <span class="pending-label">Content pending</span>}
+      {project.status === 'Контент очікується' && <span class="pending-label">Контент очікується</span>}
     </div>
   </div>
 </article>

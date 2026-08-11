@@ -8,26 +8,26 @@ const year = new Date().getFullYear();
 <footer class="site-footer">
   <div class="footer-top">
     <a class="footer-wordmark" href="/">OKK<span>WORKS</span></a>
-    <p>Digital products that work.</p>
+    <p>Цифрові продукти, що працюють.</p>
   </div>
   <div class="footer-grid">
     <div>
-      <p class="eyebrow">Start a conversation</p>
+      <p class="eyebrow">Почати розмову</p>
       <a class="footer-email" href={`mailto:${site.email}`}>{site.email}<Icon name="arrow" /></a>
     </div>
     <nav aria-label="Footer navigation">
-      <a href="/work/">Work</a>
-      <a href="/#services">Services</a>
-      <a href="/contact/">Contact</a>
+      <a href="/work/">Роботи</a>
+      <a href="/#services">Послуги</a>
+      <a href="/contact/">Контакт</a>
     </nav>
     <div class="footer-socials">
-      {site.telegram ? <a href={site.telegram} rel="noreferrer" target="_blank">Telegram <span>-&gt;</span></a> : <span>Telegram <small>link pending</small></span>}
-      {site.github ? <a href={site.github} rel="noreferrer" target="_blank">GitHub <span>-&gt;</span></a> : <span>GitHub <small>link pending</small></span>}
+      {site.telegram ? <a href={site.telegram} rel="noreferrer" target="_blank">Telegram <span>-&gt;</span></a> : <span>Telegram <small>посилання очікується</small></span>}
+      {site.github ? <a href={site.github} rel="noreferrer" target="_blank">GitHub <span>-&gt;</span></a> : <span>GitHub <small>посилання очікується</small></span>}
     </div>
   </div>
   <div class="footer-bottom">
     <span>&copy; {year} OKK Works</span>
-    <span>Independent studio</span>
-    <a href="/privacy/">Privacy</a>
+    <span>Незалежна студія</span>
+    <a href="/privacy/">Приватність</a>
   </div>
 </footer>

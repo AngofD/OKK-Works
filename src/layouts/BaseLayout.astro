@@ -12,12 +12,12 @@ interface Props {
 }
 
 const {
-  title = 'Digital products that work',
+  title = 'Цифрові продукти, що працюють',
   description = site.description,
   image = '/og-cover.png',
   noFooter = false,
 } = Astro.props;
-const fullTitle = title === 'Digital products that work' ? `${site.name} - ${title}` : `${title} - ${site.name}`;
+const fullTitle = title === 'Цифрові продукти, що працюють' ? `${site.name} - ${title}` : `${title} - ${site.name}`;
 const canonical = new URL(Astro.url.pathname, site.url);
 const structuredData = {
   '@context': 'https://schema.org',
@@ -26,12 +26,12 @@ const structuredData = {
   url: site.url,
   description: site.description,
   email: site.email,
-  knowsAbout: ['Web development', 'Telegram bot development', 'Business automation'],
+  knowsAbout: ['Розробка сайтів', 'Розробка Telegram-ботів', 'Бізнес-автоматизація'],
 };
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="uk">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -51,7 +51,7 @@ const structuredData = {
     <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to content</a>
+    <a class="skip-link" href="#main">Перейти до контенту</a>
     <div class="page-progress" aria-hidden="true"><span data-progress></span></div>
     <Header />
     <main id="main"><slot /></main>

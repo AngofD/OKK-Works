@@ -16,8 +16,8 @@ const { project, large = false } = Astro.props;
   </div>
   {project.theme === 'acid' && (
     <div class="visual-acid">
-      <p>Digital products</p>
-      <strong>that work.</strong>
+      <p>Цифрові продукти</p>
+      <strong>що працюють.</strong>
       <div class="acid-orbit"><i></i></div>
       <span>{project.visualLabel}</span>
     </div>
@@ -26,29 +26,29 @@ const { project, large = false } = Astro.props;
     <div class="visual-paper">
       <span class="paper-index">02-24</span>
       <div class="paper-image"><span></span></div>
-      <p>Focused digital<br/>experiences</p>
-      <b>PROJECT<br/>ARCHIVE</b>
+      <p>Сфокусовані digital<br/>досвіди</p>
+      <b>АРХІВ<br/>ПРОЄКТІВ</b>
     </div>
   )}
   {project.theme === 'signal' && (
     <div class="visual-signal">
       <div class="phone-shell">
-        <div class="phone-head"><span>&lt;</span><b>Service bot</b><span>...</span></div>
-        <div class="message message-a">Choose what you need.</div>
-        <div class="message message-b">Request received.<br/>We will take it from here.</div>
-        <div class="bot-actions"><span>New request</span><span>My status</span></div>
+        <div class="phone-head"><span>&lt;</span><b>Бот сервісу</b><span>...</span></div>
+        <div class="message message-a">Оберіть, що вам потрібно.</div>
+        <div class="message message-b">Запит отримано.<br/>Ми візьмемо все далі на себе.</div>
+        <div class="bot-actions"><span>Нова заявка</span><span>Мій статус</span></div>
       </div>
-      <p>ONE TAP<br/><b>FORWARD</b></p>
+      <p>ОДИН ТАП<br/><b>УПЕРЕД</b></p>
       <span class="signal-code">{project.visualLabel}</span>
     </div>
   )}
   {project.theme === 'cobalt' && (
     <div class="visual-cobalt">
-      <p>OPERATIONS / FLOW</p>
+      <p>ОПЕРАЦІЇ / ПОТІК</p>
       <div class="flow-map">
-        <span class="node n1">Input</span><i></i><span class="node n2">Logic</span><i></i><span class="node n3">Done</span>
+        <span class="node n1">Вхід</span><i></i><span class="node n2">Логіка</span><i></i><span class="node n3">Готово</span>
       </div>
-      <strong>AUTOMATE<br/>THE ROUTINE</strong>
+      <strong>АВТОМАТИЗУЙТЕ<br/>РУТИНУ</strong>
     </div>
   )}
   <div class="visual-noise"></div>

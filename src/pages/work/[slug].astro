@@ -11,10 +11,10 @@ export function getStaticPaths() {
 interface Props { project: Project; }
 const { project } = Astro.props;
 const next = getNextProject(project.slug);
-const externalLabel = project.category === 'Telegram Bots' ? 'Open Telegram Bot' : 'View Live Project';
+const externalLabel = project.category === 'Telegram-боти' ? 'Відкрити Telegram-бот' : 'Переглянути проєкт онлайн';
 ---
 
-<BaseLayout title={`${project.title} case study`} description={project.summary}>
+<BaseLayout title={`${project.title} кейс`} description={project.summary}>
   <article>
     <header class="case-hero">
       <div class="case-topline"><span>{project.visualLabel}</span><div><span>{project.category}</span><span>{project.year}</span><span>{project.status}</span></div></div>
@@ -22,21 +22,21 @@ const externalLabel = project.category === 'Telegram Bots' ? 'Open Telegram Bot'
     </header>
     <div class="case-preview"><ProjectVisual project={project} large /></div>
     <section class="case-overview">
-      <div class="overview-lead reveal"><p class="eyebrow">Overview</p><p>{project.overview}</p></div>
+      <div class="overview-lead reveal"><p class="eyebrow">Огляд</p><p>{project.overview}</p></div>
       <div class="case-columns">
-        <div class="case-block reveal"><p class="eyebrow">The challenge</p><h2>What needed to change.</h2><p>{project.challenge}</p></div>
-        <div class="case-block reveal"><p class="eyebrow">The solution</p><h2>How we approached it.</h2><p>{project.solution}</p></div>
+        <div class="case-block reveal"><p class="eyebrow">Задача</p><h2>Що потрібно було змінити.</h2><p>{project.challenge}</p></div>
+        <div class="case-block reveal"><p class="eyebrow">Рішення</p><h2>Як ми підійшли до роботи.</h2><p>{project.solution}</p></div>
       </div>
-      <div class="deliverables reveal"><h2>What we built.</h2><ul class="deliverables-grid">{project.built.map((item, index) => <li><span>0{index + 1}</span>{item}</li>)}</ul></div>
+      <div class="deliverables reveal"><h2>Що було зроблено.</h2><ul class="deliverables-grid">{project.built.map((item, index) => <li><span>0{index + 1}</span>{item}</li>)}</ul></div>
     </section>
-    <section class="case-gallery" aria-label="Project presentation">
+    <section class="case-gallery" aria-label="Презентація проєкту">
       <div class="gallery-frame reveal"><ProjectVisual project={project} large /></div>
-      <div class="gallery-detail reveal"><span>System / Detail</span><p>Built as one coherent experience.</p></div>
-      <div class="capabilities-panel reveal"><h2>Capabilities</h2><ul>{project.capabilities.map((item, index) => <li><span>{item}</span><small>0{index + 1}</small></li>)}</ul></div>
+      <div class="gallery-detail reveal"><span>Система / Деталь</span><p>Зібрано як один цілісний досвід.</p></div>
+      <div class="capabilities-panel reveal"><h2>Компетенції</h2><ul>{project.capabilities.map((item, index) => <li><span>{item}</span><small>0{index + 1}</small></li>)}</ul></div>
     </section>
     <section class="case-outcome">
-      <div class="outcome-grid"><p class="eyebrow">Outcome</p><div class="outcome-content reveal"><p>{project.outcome}</p><div class="outcome-actions">{project.liveUrl && <a class="button" href={project.liveUrl} target="_blank" rel="noreferrer">{externalLabel} <Icon name="arrow" /></a>}{project.githubUrl && <a class="button" href={project.githubUrl} target="_blank" rel="noreferrer">GitHub <Icon name="arrow" /></a>}{!project.liveUrl && <span class="pending-label">External link pending real project data</span>}</div></div></div>
+      <div class="outcome-grid"><p class="eyebrow">Результат</p><div class="outcome-content reveal"><p>{project.outcome}</p><div class="outcome-actions">{project.liveUrl && <a class="button" href={project.liveUrl} target="_blank" rel="noreferrer">{externalLabel} <Icon name="arrow" /></a>}{project.githubUrl && <a class="button" href={project.githubUrl} target="_blank" rel="noreferrer">GitHub <Icon name="arrow" /></a>}{!project.liveUrl && <span class="pending-label">Зовнішнє посилання очікує реальні дані проєкту</span>}</div></div></div>
     </section>
   </article>
-  <a class="next-project" href={`/work/${next.slug}/`}><span>Next project</span><div><h2>{next.title}</h2><Icon name="arrow" size={70} /></div></a>
+  <a class="next-project" href={`/work/${next.slug}/`}><span>Наступний проєкт</span><div><h2>{next.title}</h2><Icon name="arrow" size={70} /></div></a>
 </BaseLayout>

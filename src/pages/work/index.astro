@@ -4,14 +4,14 @@ import ProjectCard from '@/components/ProjectCard.astro';
 import { categories, projects } from '@/content/projects';
 ---
 
-<BaseLayout title="Work" description="Selected websites, Telegram bots, and business automation by OKK Works.">
+<BaseLayout title="Роботи" description="Вибрані сайти, Telegram-боти та системи автоматизації від OKK Works.">
   <section class="page-hero">
-    <p class="eyebrow">Selected projects / Archive</p>
-    <h1>Work made<br/>to work.</h1>
-    <div class="page-hero-bottom"><p>Products shaped around a real job: communicate clearly, remove friction, or make a process run better.</p><p>{projects.length.toString().padStart(2, '0')} projects / Growing archive</p></div>
+    <p class="eyebrow">Вибрані проєкти / Архів</p>
+    <h1>Роботи, що<br/>працюють.</h1>
+    <div class="page-hero-bottom"><p>Продукти, створені під реальну задачу: пояснити пропозицію, прибрати тертя або зробити процес кращим.</p><p>{projects.length.toString().padStart(2, '0')} проєкти / Архів зростає</p></div>
   </section>
   <section class="work-index">
-    <div class="filters" role="group" aria-label="Filter projects" data-filters>
+    <div class="filters" role="group" aria-label="Фільтрувати проєкти" data-filters>
       {categories.map((category, index) => <button class:list={['filter-button', { active: index === 0 }]} type="button" data-filter={category} aria-pressed={index === 0 ? 'true' : 'false'}>{category}</button>)}
     </div>
     <div aria-live="polite" data-project-list>

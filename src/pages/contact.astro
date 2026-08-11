@@ -4,21 +4,21 @@ import Icon from '@/components/Icon.astro';
 import { site } from '@/content/site';
 ---
 
-<BaseLayout title="Start a project" description="Tell OKK Works about your website, Telegram bot, or business automation project.">
+<BaseLayout title="Обговорити проєкт" description="Розкажіть OKK Works про сайт, Telegram-бот або систему автоматизації для вашого бізнесу.">
   <section class="contact-page">
-    <h1>Let's make<span>it work.</span></h1>
+    <h1>Зробімо так,<span>щоб працювало.</span></h1>
     <div class="contact-grid">
       <div class="contact-direct">
-        <p class="eyebrow">Prefer email?</p>
+        <p class="eyebrow">Зручніше email?</p>
         <a href={`mailto:${site.email}`}>{site.email}<Icon name="arrow" /></a>
-        <p class="contact-note">Share the context, not a perfect brief. The problem, current situation, and desired outcome are enough to start.</p>
+        <p class="contact-note">Не потрібен ідеальний бриф. Достатньо описати проблему, поточну ситуацію та бажаний результат.</p>
       </div>
       <form class="inquiry-form" data-inquiry-form>
-        <div class="form-row"><div class="field"><label for="name">Your name</label><input id="name" name="name" autocomplete="name" required /></div><div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required /></div></div>
-        <div class="form-row"><div class="field"><label for="service">What do you need?</label><select id="service" name="service" required><option value="">Choose a service</option><option>Website</option><option>Telegram Bot</option><option>Business Automation</option><option>Not sure yet</option></select></div><div class="field"><label for="budget">Indicative budget</label><select id="budget" name="budget"><option value="">Prefer not to say</option><option>Under $2,000</option><option>$2,000-$5,000</option><option>$5,000-$10,000</option><option>$10,000+</option></select></div></div>
-        <div class="field"><label for="message">Project context</label><textarea id="message" name="message" placeholder="What needs to work better?" required></textarea></div>
+        <div class="form-row"><div class="field"><label for="name">Ваше ім’я</label><input id="name" name="name" autocomplete="name" required /></div><div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required /></div></div>
+        <div class="form-row"><div class="field"><label for="service">Що потрібно?</label><select id="service" name="service" required><option value="">Оберіть послугу</option><option>Сайт</option><option>Telegram-бот</option><option>Бізнес-автоматизація</option><option>Поки не впевнений / не впевнена</option></select></div><div class="field"><label for="budget">Орієнтовний бюджет</label><select id="budget" name="budget"><option value="">Не хочу вказувати</option><option>До $2,000</option><option>$2,000-$5,000</option><option>$5,000-$10,000</option><option>$10,000+</option></select></div></div>
+        <div class="field"><label for="message">Контекст проєкту</label><textarea id="message" name="message" placeholder="Що має працювати краще?" required></textarea></div>
         <div class="form-status" role="status" aria-live="polite" data-form-status></div>
-        <button class="button button-dark" type="submit">Prepare email <Icon name="arrow" /></button>
+        <button class="button button-primary" type="submit">Підготувати email <Icon name="arrow" /></button>
       </form>
     </div>
   </section>

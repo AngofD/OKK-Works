@@ -4,11 +4,11 @@ import Icon from './Icon.astro';
 const path = Astro.url.pathname;
 const home = path === '/';
 const links = [
-  { label: 'Work', href: '/work/' },
-  { label: 'Services', href: home ? '#services' : '/#services' },
-  { label: 'Process', href: home ? '#process' : '/#process' },
-  { label: 'About', href: home ? '#about' : '/#about' },
-  { label: 'Contact', href: '/contact/' },
+  { label: 'Роботи', href: '/work/' },
+  { label: 'Послуги', href: home ? '#services' : '/#services' },
+  { label: 'Процес', href: home ? '#process' : '/#process' },
+  { label: 'Про нас', href: home ? '#about' : '/#about' },
+  { label: 'Контакт', href: '/contact/' },
 ];
 ---
 
@@ -22,9 +22,9 @@ const links = [
     ))}
   </nav>
   <a class="header-cta magnetic" href="/contact/">
-    Start a project <Icon name="arrow" size={17} />
+    Обговорити проєкт <Icon name="arrow" size={17} />
   </a>
-  <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
+  <button class="menu-toggle" type="button" aria-label="Відкрити навігацію" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
     <span class="menu-open"><Icon name="menu" /></span>
     <span class="menu-close"><Icon name="close" /></span>
   </button>
@@ -32,6 +32,6 @@ const links = [
     <nav aria-label="Mobile navigation">
       {links.map((link, index) => <a href={link.href}><span>0{index + 1}</span>{link.label}</a>)}
     </nav>
-    <a class="button button-light" href="/contact/">Start a project <Icon name="arrow" /></a>
+    <a class="button button-primary" href="/contact/">Обговорити проєкт <Icon name="arrow" /></a>
   </div>
 </header>

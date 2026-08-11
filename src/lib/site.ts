@@ -8,11 +8,19 @@ function initHeader() {
   const menu = document.querySelector<HTMLElement>('[data-mobile-menu]');
   if (!header) return;
   let lastY = window.scrollY;
-  window.addEventListener('scroll', () => {
+  let ticking = false;
+  const updateHeader = () => {
     const currentY = window.scrollY;
     header.classList.toggle('is-scrolled', currentY > 30);
     header.classList.toggle('is-hidden', currentY > lastY && currentY > 180 && !document.body.classList.contains('menu-open'));
-    lastY = currentY;
+    lastY = Math.max(currentY, 0);
+    ticking = false;
+  };
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(updateHeader);
+      ticking = true;
+    }
   }, { passive: true });
   const close = () => {
     if (!toggle || !menu) return;
@@ -35,6 +43,10 @@ function initHeader() {
   });
   menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', close));
   document.addEventListener('keydown', (event) => { if (event.key === 'Escape') close(); });
+  window.addEventListener('resize', () => {
+    if (window.matchMedia('(min-width: 901px)').matches) close();
+  });
+  updateHeader();
 }
 
 function initProgress() {
@@ -98,7 +110,11 @@ function initFilters() {
       item.classList.toggle('active', active);
       item.setAttribute('aria-pressed', String(active));
     });
-    cards.forEach((card) => { card.hidden = !(value === 'All' || card.dataset.category === value); });
+    cards.forEach((card) => {
+      const visible = value === 'All' || card.dataset.category === value;
+      card.hidden = !visible;
+      card.toggleAttribute('aria-hidden', !visible);
+    });
   }));
 }
 
@@ -135,11 +151,11 @@ function initInquiry() {
   form.addEventListener('submit', (event) => {
     event.preventDefault();
     const data = new FormData(form);
-    const name = String(data.get('name') ?? '');
-    const email = String(data.get('email') ?? '');
-    const serviceName = String(data.get('service') ?? 'Project');
-    const budget = String(data.get('budget') || 'Not specified');
-    const message = String(data.get('message') ?? '');
+    const name = String(data.get('name') ?? '').trim();
+    const email = String(data.get('email') ?? '').trim();
+    const serviceName = String(data.get('service') ?? 'Project').trim() || 'Project';
+    const budget = String(data.get('budget') || 'Not specified').trim() || 'Not specified';
+    const message = String(data.get('message') ?? '').trim();
     const subject = encodeURIComponent(`Project inquiry: ${serviceName}`);
     const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nService: ${serviceName}\nBudget: ${budget}\n\nProject context:\n${message}`);
     if (status) status.textContent = 'Opening your email application...';
