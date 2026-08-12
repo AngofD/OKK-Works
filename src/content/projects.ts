@@ -20,6 +20,9 @@ export interface Project {
   year: string;
   status: ProjectStatus;
   displayUrl: string;
+  portfolioTitle?: string;
+  portfolioStatement?: string;
+  portfolioDescription?: string;
   headline: string;
   summary: string;
   overview: string;
@@ -50,6 +53,8 @@ export const projects: Project[] = [
     year: '2026',
     status: 'Опубліковано',
     displayUrl: 'okk.works',
+    portfolioStatement: 'Сайт студії цифрової розробки.',
+    portfolioDescription: 'Показує, як студія пояснює послуги, демонструє роботи й веде зацікавлену людину до предметної розмови про проєкт.',
     headline: 'Нова цифрова присутність для незалежної студії розробки.',
     summary: 'Комерційний сайт студії із чіткою пропозицією, інтерактивним поясненням послуг і системою кейсів.',
     overview: 'OKK Works потрібен був цілісний сайт, який за кілька секунд пояснює послуги, швидко веде до реальних робіт і перетворює зацікавлення на предметну розмову про проєкт.',
@@ -73,6 +78,9 @@ export const projects: Project[] = [
     year: '2026',
     status: 'Концепт-проєкт',
     displayUrl: 'mova.demo',
+    portfolioTitle: 'MOVA Beauty',
+    portfolioStatement: 'Сайт premium beauty studio.',
+    portfolioDescription: 'Демонстраційний сайт для сервісного бізнесу: атмосфера бренду, послуги, галерея й зрозумілий шлях до запису.',
     headline: 'Showcase-сайт fictional beauty studio з editorial mood, каталогом послуг і demo-записом.',
     summary: 'Концепт-проєкт premium beauty studio: артдирекшн, каталог послуг, галерея робіт і покроковий booking UX без фальшивого live URL.',
     overview: 'MOVA створений як окремий showcase-проєкт, щоб показати, як може виглядати сильний beauty-сайт із чітким сервісним сценарієм. Це не сайт реального клієнта, а демонстрація підходу до бренду, структури й інтерфейсу.',

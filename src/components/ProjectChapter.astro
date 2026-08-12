@@ -1,0 +1,49 @@
+---
+import type { Project } from '@/content/projects';
+import Icon from './Icon.astro';
+import ProjectVisual from './ProjectVisual.astro';
+import { withBase } from '@/lib/paths';
+
+interface Props {
+  project: Project;
+  index: number;
+}
+
+const { project, index } = Astro.props;
+const number = String(index + 1).padStart(2, '0');
+const title = project.portfolioTitle ?? project.title;
+const category = project.category === 'Вебсайти' ? 'Вебсайт' : project.category;
+const statement = project.portfolioStatement ?? project.headline;
+const description = project.portfolioDescription ?? project.summary;
+---
+
+<article class="project-chapter" data-category={project.category}>
+  <div class="chapter-divider reveal" aria-hidden="true">
+    <span>{number}</span>
+  </div>
+
+  <header class="chapter-intro reveal">
+    <div class="chapter-kicker">
+      <span>{number}</span>
+      <span>{category}</span>
+    </div>
+    <div class="chapter-copy">
+      <h2>{title}</h2>
+      <p class="chapter-statement">{statement}</p>
+      <p class="chapter-description">{description}</p>
+    </div>
+  </header>
+
+  <div class="chapter-preview reveal">
+    <ProjectVisual project={project} large />
+  </div>
+
+  <div class="chapter-actions reveal">
+    <a class="text-link dark" href={withBase(`/work/${project.slug}/`)}>Переглянути кейс <Icon name="arrow" size={15} /></a>
+    {project.liveUrl && <a class="text-link dark" href={project.liveUrl} target="_blank" rel="noreferrer">Відкрити сайт <Icon name="arrow" size={15} /></a>}
+  </div>
+
+  <div class="chapter-end reveal" aria-hidden="true">
+    <span>{number} / завершено</span>
+  </div>
+</article>
