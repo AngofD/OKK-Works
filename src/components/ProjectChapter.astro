@@ -15,6 +15,7 @@ const title = project.portfolioTitle ?? project.title;
 const category = project.category === 'Вебсайти' ? 'Вебсайт' : project.category;
 const statement = project.portfolioStatement ?? project.headline;
 const description = project.portfolioDescription ?? project.summary;
+const liveLabel = project.category === 'Вебсайти' ? 'Відкрити сайт ↗' : 'Відкрити проєкт ↗';
 ---
 
 <article class="project-chapter" data-category={project.category}>
@@ -40,7 +41,7 @@ const description = project.portfolioDescription ?? project.summary;
 
   <div class="chapter-actions reveal">
     <a class="text-link dark" href={withBase(`/work/${project.slug}/`)}>Переглянути кейс <Icon name="arrow" size={15} /></a>
-    {project.liveUrl && <a class="text-link dark" href={project.liveUrl} target="_blank" rel="noreferrer">Відкрити сайт <Icon name="arrow" size={15} /></a>}
+    {project.liveUrl && <a class="text-link dark" href={project.liveUrl} target="_blank" rel="noopener noreferrer">{liveLabel}</a>}
   </div>
 
   <div class="chapter-end reveal" aria-hidden="true">

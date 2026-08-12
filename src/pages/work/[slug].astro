@@ -13,7 +13,7 @@ interface Props { project: Project; }
 const { project } = Astro.props;
 const next = getNextProject(project.slug);
 const hasDistinctNext = projects.length > 1 && next.slug !== project.slug;
-const externalLabel = project.category === 'Telegram' ? 'Відкрити Telegram-бота' : 'Переглянути проєкт онлайн';
+const externalLabel = project.category === 'Telegram' ? 'Відкрити Telegram-бота ↗' : 'Відкрити сайт ↗';
 ---
 
 <BaseLayout title={`${project.title} - кейс`} description={project.summary} image={project.coverImage}>
@@ -73,7 +73,7 @@ const externalLabel = project.category === 'Telegram' ? 'Відкрити Telegr
     </section>
 
     <section class="case-outcome">
-      <div class="outcome-grid"><p class="eyebrow">Результат</p><div class="outcome-content reveal"><p>{project.outcome}</p><div class="outcome-actions">{project.liveUrl && <a class="button button-dark" href={project.liveUrl} target="_blank" rel="noreferrer">{externalLabel} <Icon name="arrow" /></a>}{project.githubUrl && <a class="button button-dark" href={project.githubUrl} target="_blank" rel="noreferrer">GitHub <Icon name="arrow" /></a>}</div></div></div>
+      <div class="outcome-grid"><p class="eyebrow">Результат</p><div class="outcome-content reveal"><p>{project.outcome}</p><div class="outcome-actions">{project.liveUrl && <a class="button button-dark" href={project.liveUrl} target="_blank" rel="noopener noreferrer">{externalLabel}</a>}{project.githubUrl && <a class="button button-dark" href={project.githubUrl} target="_blank" rel="noopener noreferrer">GitHub <Icon name="arrow" /></a>}</div></div></div>
     </section>
   </article>
   {hasDistinctNext ? <a class="next-project" href={withBase(`/work/${next.slug}/`)}><span>Наступний проєкт</span><div><h2>{next.title}</h2><Icon name="arrow" size={70} /></div></a> : <a class="next-project" href={withBase('/contact/')}><span>Наступний проєкт може бути вашим</span><div><h2>Обговорімо задачу</h2><Icon name="arrow" size={70} /></div></a>}

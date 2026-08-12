@@ -121,6 +121,7 @@ export const projects: Project[] = [
         height: 844,
       },
     ],
+    liveUrl: 'https://beauty-site.daniilpaieta7.workers.dev',
     featured: true,
   },
   {
@@ -189,6 +190,7 @@ export const projects: Project[] = [
         height: 844,
       },
     ],
+    liveUrl: 'https://hotel-site.daniilpaieta7.workers.dev',
     featured: true,
   },
 ];
