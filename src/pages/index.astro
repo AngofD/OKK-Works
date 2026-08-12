@@ -2,6 +2,7 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Icon from '@/components/Icon.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
+import ProjectVisual from '@/components/ProjectVisual.astro';
 import SectionHeading from '@/components/SectionHeading.astro';
 import { processSteps, services, trustPoints } from '@/content/home';
 import { projects } from '@/content/projects';
@@ -63,7 +64,10 @@ const featured = projects.filter((project) => project.featured);
 
     <div class="service-panels">
       {services.map((service, index) => {
-        const related = service.projectSlugs.map((slug) => projects.find((project) => project.slug === slug)).filter(Boolean);
+        const related = service.projectSlugs
+          .map((slug) => projects.find((project) => project.slug === slug))
+          .filter((project): project is (typeof projects)[number] => Boolean(project));
+        const visualProject = related[0];
         return (
           <article
             class:list={['service-panel', `service-${service.key}`, { active: index === 0 }]}
@@ -83,7 +87,7 @@ const featured = projects.filter((project) => project.featured);
               <a class="button button-primary" href={withBase(`/contact/?service=${service.key}`)}>{service.cta} <Icon name="arrow" /></a>
             </div>
             <div class="service-visual" aria-hidden="true">
-              {service.key === 'websites' && <div class="web-scene"><div class="scene-browser"><span></span><span></span><span></span><div><small>OKK / WEB</small><strong>Зрозуміло.<br/>Швидко.<br/><em>Впевнено.</em></strong></div></div><div class="scene-mobile"><i></i><b>Ваш бізнес<br/>завжди поруч.</b></div></div>}
+              {service.key === 'websites' && visualProject && <div class="web-scene website-project-scene"><ProjectVisual project={visualProject} /></div>}
               {service.key === 'telegram' && <div class="telegram-scene"><div class="telegram-phone"><div class="telegram-head"><i></i><span>Сервіс-бот</span><b>•••</b></div><p>Вітаємо! Що бажаєте зробити?</p><div class="telegram-choice">Забронювати послугу</div><div class="telegram-reply">Оберіть зручний день</div><div class="telegram-days"><span>Ср, 12</span><span>Чт, 13</span></div></div><p>Один чат.<br/><em>Менше кроків.</em></p></div>}
               {service.key === 'automation' && <div class="automation-scene"><p>Робочий процес</p><div class="automation-flow"><span>Заявка<small>01</small></span><i></i><span>Перевірка<small>02</small></span><i></i><span>Сповіщення<small>03</small></span><i></i><span>Готово<small>04</small></span></div><strong>Рутина рухається<br/><em>без ручного контролю.</em></strong></div>}
               {service.key === 'support' && <div class="support-scene"><div class="release-card"><p>Запуск продукту</p><ul><li><span>Домен і SSL</span><b>Готово</b></li><li><span>Production</span><b>Готово</b></li><li><span>Аналітика</span><b>Готово</b></li><li><span>Моніторинг</span><b>Активний</b></li></ul><div><i></i>Система працює стабільно</div></div><strong>Запустили.<br/><em>Залишаємося поруч.</em></strong></div>}

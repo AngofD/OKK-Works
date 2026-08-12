@@ -24,7 +24,7 @@ export const services: Service[] = [
     value: 'Чітка пропозиція, впевнена цифрова присутність і коротший шлях клієнта до звернення.',
     capabilities: ['Лендінги та бізнес-сайти', 'UX/UI дизайн', 'Мобільна адаптація', 'Швидкість і SEO'],
     cta: 'Обговорити вебсайт',
-    projectSlugs: ['beauty-site', 'okk-works'],
+    projectSlugs: ['carpathian-retreat', 'beauty-site'],
   },
   {
     key: 'telegram',
@@ -60,7 +60,7 @@ export const services: Service[] = [
     value: 'Передбачуваний реліз, надійна технічна основа й зрозумілий контакт для наступних змін.',
     capabilities: ['Деплой і хостинг', 'Домени та аналітика', 'Технічна підтримка', 'Розвиток після запуску'],
     cta: 'Обговорити запуск',
-    projectSlugs: ['okk-works'],
+    projectSlugs: [],
   },
 ];
 
