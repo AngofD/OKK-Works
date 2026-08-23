@@ -1,5 +1,5 @@
 export type ProjectCategory = 'Вебсайти' | 'Telegram' | 'Автоматизація';
-export type ProjectStatus = 'Опубліковано' | 'Концепт-проєкт';
+export type ProjectStatus = 'Опубліковано' | 'Концепт-проєкт' | 'Особистий продукт';
 
 export interface ProjectCaseNote {
   title: string;
@@ -46,6 +46,53 @@ export interface Project {
 // Public portfolio contains only confirmed work. New projects should be added
 // after their content, links and visuals are ready for publication.
 export const projects: Project[] = [
+  {
+    slug: 'booking-bot',
+    title: 'Booking Bot',
+    category: 'Telegram',
+    year: '2026',
+    status: 'Особистий продукт',
+    displayUrl: '@trytobookbot',
+    portfolioTitle: 'Booking Bot',
+    portfolioStatement: 'Запис клієнтів у Telegram без зайвої переписки.',
+    portfolioDescription: 'Робочий особистий продукт для сценарію запису: послуга, спеціаліст, дата, вільний час і керування бронюваннями в одному чаті.',
+    headline: 'Telegram-бот для запису клієнтів із послідовним сценарієм бронювання та нагадуваннями.',
+    summary: 'Робочий booking-продукт: вибір послуги, спеціаліста, дати й вільного слоту прямо в Telegram.',
+    overview: 'Booking Bot створений як практичний продукт для салонів, барбершопів та інших сервісних бізнесів. Він переносить основний шлях запису в знайомий клієнту Telegram і зменшує кількість ручних дій у переписці.',
+    challenge: 'Побудувати зрозумілий запис без довгого діалогу: клієнт має швидко обрати потрібні параметри, а команда - бачити бронювання, статуси та наступні дії в одному робочому просторі.',
+    solution: 'Сценарій розбитий на короткі кроки з reply-кнопками: послуга, спеціаліст, дата та час. Окремі дії дають змогу переглядати записи, відкривати деталі, скасовувати бронювання та отримувати нагадування.',
+    built: ['Меню сервісного бота в Telegram', 'Вибір послуги та тривалості', 'Вибір спеціаліста', 'Календар доступних дат', 'Список вільних часових слотів', 'Підтвердження, нагадування та скасування запису'],
+    capabilities: ['Booking UX', 'Telegram Bot API', 'Розклад і доступні слоти', 'Статуси та скасування', 'Нагадування клієнтам', 'Сценарії для сервісного бізнесу'],
+    technologies: ['Python', 'Telegram Bot API', 'Backend-логіка', 'Збереження бронювань', 'Reply-клавіатури Telegram'],
+    outcome: 'Робочий особистий продукт, який демонструє практичний підхід OKK Works до Telegram-ботів: короткий шлях клієнта, зрозуміла логіка запису та інструменти, потрібні адміністратору для щоденної роботи. Бізнес-метрики не вигадувалися, оскільки це власний продукт, а не кейс із зовнішнім клієнтом.',
+    coverImage: '/assets/projects/booking-bot/booking-bot-cover.png',
+    coverThumb: '/assets/projects/booking-bot/booking-bot-cover.png',
+    mobileImage: '/assets/projects/booking-bot/booking-bot-mobile.png',
+    mobileThumb: '/assets/projects/booking-bot/booking-bot-mobile.png',
+    caseNotes: [
+      {
+        title: 'Контекст',
+        copy: 'Проєкт зроблений як власний working product і відкритий для демонстрації. Він показує не вигаданий moodboard, а конкретний сценарій сервісного бізнесу, який можна адаптувати під салон, барбершоп або студію.',
+      },
+      {
+        title: 'Booking flow',
+        copy: 'Клієнт проходить короткий маршрут: відкриває меню, обирає послугу, спеціаліста, дату та доступний час. Кожен крок має окремий стан і зрозумілу дію без ручного узгодження в чаті.',
+      },
+      {
+        title: 'Для команди',
+        copy: 'Бот зберігає контекст бронювання, показує записи, дає переглядати деталі та скасовувати бронювання. Це основа для подальших ролей адміністратора, аналітики та інтеграцій.',
+      },
+    ],
+    caseScreenshots: [
+      { src: '/assets/projects/booking-bot/booking-bot-menu.png', alt: 'Головне меню Booking Bot у Telegram із діями запису, послуг, контактів і клієнтів', width: 494, height: 268 },
+      { src: '/assets/projects/booking-bot/booking-bot-specialist.png', alt: 'Крок Booking Bot із вибором спеціаліста', width: 824, height: 348 },
+      { src: '/assets/projects/booking-bot/booking-bot-date.png', alt: 'Крок Booking Bot із календарем доступних дат', width: 824, height: 528 },
+      { src: '/assets/projects/booking-bot/booking-bot-time.png', alt: 'Крок Booking Bot із доступними часовими слотами', width: 824, height: 398 },
+    ],
+    liveUrl: 'https://t.me/trytobookbot',
+    githubUrl: 'https://github.com/AngofD/booking-bot',
+    featured: true,
+  },
   {
     slug: 'beauty-site',
     title: 'MOVA Beauty',

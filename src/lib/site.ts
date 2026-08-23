@@ -100,13 +100,13 @@ function initHero() {
   }, { passive: true });
 }
 
-function initServices() {
-  const tabs = [...document.querySelectorAll<HTMLButtonElement>('[data-service-tab]')];
-  const panels = [...document.querySelectorAll<HTMLElement>('[data-service-panel]')];
+function initTabGroup(tabSelector: string, panelSelector: string, tabKey: string, panelKey: string, offset = 12) {
+  const tabs = [...document.querySelectorAll<HTMLButtonElement>(tabSelector)];
+  const panels = [...document.querySelectorAll<HTMLElement>(panelSelector)];
   if (!tabs.length || !panels.length) return;
 
   const activate = (tab: HTMLButtonElement, moveFocus = false) => {
-    const key = tab.dataset.serviceTab;
+    const key = tab.getAttribute(tabKey);
     tabs.forEach((item) => {
       const active = item === tab;
       item.classList.toggle('active', active);
@@ -114,12 +114,12 @@ function initServices() {
       item.tabIndex = active ? 0 : -1;
     });
     panels.forEach((panel) => {
-      const active = panel.dataset.servicePanel === key;
+      const active = panel.getAttribute(panelKey) === key;
       panel.hidden = !active;
       panel.classList.toggle('active', active);
       if (active && !reducedMotion) {
         panel.animate([
-          { opacity: 0, transform: 'translateY(12px)' },
+          { opacity: 0, transform: `translateY(${offset}px)` },
           { opacity: 1, transform: 'translateY(0)' },
         ], { duration: 420, easing: 'cubic-bezier(.16, 1, .3, 1)' });
       }
@@ -142,6 +142,10 @@ function initServices() {
   });
 }
 
+function initServices() {
+  initTabGroup('[data-service-tab]', '[data-service-panel]', 'data-service-tab', 'data-service-panel');
+}
+
 function initFilters() {
   const filters = [...document.querySelectorAll<HTMLButtonElement>('[data-filter]')];
   const cards = [...document.querySelectorAll<HTMLElement>('[data-category]')];
@@ -158,6 +162,10 @@ function initFilters() {
       card.toggleAttribute('aria-hidden', !visible);
     });
   }));
+}
+
+function initPortfolioExamples() {
+  initTabGroup('[data-portfolio-tab]', '[data-portfolio-panel]', 'data-portfolio-tab', 'data-portfolio-panel', 14);
 }
 
 function initProcess() {
@@ -212,5 +220,6 @@ initReveal();
 initHero();
 initServices();
 initFilters();
+initPortfolioExamples();
 initProcess();
 initInquiry();

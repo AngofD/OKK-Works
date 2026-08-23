@@ -4,6 +4,8 @@ import ProjectChapter from '@/components/ProjectChapter.astro';
 import { categories, projects } from '@/content/projects';
 
 const availableCategories = categories.filter((category) => category === 'Усі' || projects.some((project) => project.category === category));
+const conceptCount = projects.filter((project) => project.status === 'Концепт-проєкт').length;
+const personalCount = projects.filter((project) => project.status === 'Особистий продукт').length;
 ---
 
 <BaseLayout title="Роботи" description="Опубліковані сайти, showcase-проєкти та цифрові системи, підготовлені OKK Works.">
@@ -14,17 +16,17 @@ const availableCategories = categories.filter((category) => category === 'Усі
       <h1>Наші роботи</h1>
       <div class="page-hero-bottom">
         <p>Нижче зібрані приклади сайтів і цифрових продуктів, які показують підхід OKK Works до структури, дизайну й запуску.</p>
-        <p><span>{projects.length.toString().padStart(2, '0')}</span> {projects.length === 1 ? 'опублікований кейс' : 'опубліковані кейси'}</p>
+        <p><span>{projects.length.toString().padStart(2, '0')}</span> проєкти в портфоліо</p>
       </div>
     </div>
   </header>
   <section class="work-index">
-    {availableCategories.length > 2 && <div class="filters" role="group" aria-label="Фільтрувати проєкти" data-filters>
-      {availableCategories.map((category, index) => <button class:list={['filter-button', { active: index === 0 }]} type="button" data-filter={category} aria-pressed={index === 0 ? 'true' : 'false'}>{category}</button>)}
-    </div>}
+    {availableCategories.length > 2 && <div class="work-filter-wrap reveal"><div><p class="eyebrow">Навігація по роботах</p><h2>Який продукт вам потрібен?</h2><p>Оберіть категорію, щоб залишити на екрані лише релевантні приклади. Це не змінює сторінку - лише звужує добірку.</p></div><div class="filters" role="group" aria-label="Оберіть тип продукту" data-filters>
+      {availableCategories.map((category, index) => { const count = category === 'Усі' ? projects.length : projects.filter((project) => project.category === category).length; const description = category === 'Усі' ? 'Усі формати' : category === 'Вебсайти' ? 'Сайти для бізнесу' : 'Боти та чат-сценарії'; return <button class:list={['filter-button', { active: index === 0 }]} type="button" data-filter={category} aria-pressed={index === 0 ? 'true' : 'false'}><span><em>{description}</em>{category}</span><small>{count.toString().padStart(2, '0')} проєкти</small><b aria-hidden="true">↗</b></button>; })}
+    </div></div>}
     <div class="work-projects" aria-live="polite" data-project-list>
       {projects.map((project, index) => <ProjectChapter project={project} index={index} />)}
     </div>
-    <div class="archive-note reveal"><p class="eyebrow">Архів зростає</p><p>Наступні кейси з’являться тут після підготовки реального контенту, візуалів і зовнішніх посилань.</p></div>
+    <div class="archive-note reveal"><p class="eyebrow">Чесно про портфоліо</p><p>{personalCount} особистий продукт і {conceptCount} концепт-кейси показують підхід OKK Works до UX, дизайну й frontend-реалізації. Реальні клієнтські кейси додаватимемо з контекстом задачі, результатами та зовнішніми посиланнями.</p><a class="text-link dark" href="/contact/">Поговорити про вашу задачу <span aria-hidden="true">↗</span></a></div>
   </section>
 </BaseLayout>

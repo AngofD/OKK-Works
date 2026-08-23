@@ -55,7 +55,15 @@ const externalLabel = project.category === 'Telegram' ? 'Відкрити Telegr
     <section class="case-gallery" aria-label="Вигляд проєкту на різних екранах">
       <figure class="gallery-desktop reveal"><img src={withBase(project.coverImage)} width="1440" height="900" alt={`Головна сторінка ${project.title} на комп’ютері`} loading="lazy" decoding="async" /></figure>
       <div class="gallery-caption reveal"><p class="eyebrow">Адаптивний досвід</p><p>Ієрархія, навігація й ключові дії спроєктовані окремо для великого та малого екрана.</p></div>
-      <figure class="gallery-mobile reveal"><img src={withBase(project.mobileImage)} width="390" height="844" alt={`Головна сторінка ${project.title} на мобільному пристрої`} loading="lazy" decoding="async" /></figure>
+      <figure class="gallery-mobile reveal">
+        <div class="gallery-phone device-frame">
+          <span class="phone-side-button phone-side-button-top" aria-hidden="true"></span>
+          <span class="phone-side-button phone-side-button-middle" aria-hidden="true"></span>
+          <span class="phone-side-button phone-side-button-bottom" aria-hidden="true"></span>
+          <div class="phone-sensor"></div>
+          <div class="phone-screen"><img src={withBase(project.mobileImage)} width="390" height="844" alt={`Головна сторінка ${project.title} на мобільному пристрої`} loading="lazy" decoding="async" /></div>
+        </div>
+      </figure>
       {project.caseScreenshots?.length ? (
         <div class="case-screenshot-grid">
           {project.caseScreenshots.map((shot) => (

@@ -24,18 +24,23 @@ const { project, large = false } = Astro.props;
       decoding="async"
     />
   </div>
-  <div class="project-phone">
+  <div class="project-phone device-frame">
+    <span class="phone-side-button phone-side-button-top" aria-hidden="true"></span>
+    <span class="phone-side-button phone-side-button-middle" aria-hidden="true"></span>
+    <span class="phone-side-button phone-side-button-bottom" aria-hidden="true"></span>
     <div class="phone-sensor"></div>
-    <img
-      src={withBase(project.mobileImage)}
-      srcset={!large ? `${withBase(project.mobileThumb)} 260w, ${withBase(project.mobileImage)} 390w` : undefined}
-      sizes={!large ? '(max-width: 700px) 40vw, 22vw' : undefined}
-      alt=""
-      width="390"
-      height="844"
-      loading="lazy"
-      decoding="async"
-    />
+    <div class="phone-screen">
+      <img
+        src={withBase(project.mobileImage)}
+        srcset={!large ? `${withBase(project.mobileThumb)} 260w, ${withBase(project.mobileImage)} 390w` : undefined}
+        sizes={!large ? '(max-width: 700px) 40vw, 22vw' : undefined}
+        alt=""
+        width="390"
+        height="844"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
   </div>
   <p class="project-stamp">{project.category} / {project.year}</p>
 </div>

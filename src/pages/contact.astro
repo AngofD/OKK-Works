@@ -24,7 +24,8 @@ import { site } from '@/content/site';
         <div class="form-row"><div class="field"><label for="service">Що потрібно?</label><select id="service" name="service" required><option value="">Оберіть послугу</option><option value="websites">Вебсайт</option><option value="telegram">Telegram-бот</option><option value="automation">Автоматизація</option><option value="support">Запуск і підтримка</option><option value="unsure">Поки не впевнений / не впевнена</option></select></div><div class="field"><label for="budget">Орієнтовний бюджет</label><select id="budget" name="budget"><option value="">Не хочу вказувати</option><option>До $2 000</option><option>$2 000-$5 000</option><option>$5 000-$10 000</option><option>$10 000+</option></select></div></div>
         <div class="field"><label for="message">Контекст проєкту</label><textarea id="message" name="message" placeholder="Що має працювати краще?" required></textarea></div>
         <div class="form-status" role="status" aria-live="polite" data-form-status></div>
-        <button class="button button-primary" type="submit">Підготувати лист <Icon name="arrow" /></button>
+        <p class="form-note">Після натискання відкриється ваш поштовий застосунок із підготовленим листом.</p>
+        <button class="button button-primary" type="submit">Сформувати лист <Icon name="arrow" /></button>
       </form>
     </div>
   </section>
