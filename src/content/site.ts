@@ -1,7 +1,7 @@
 export const site = {
   name: 'OKK Works',
   url: 'https://okkworks.com',
-  email: 'okkworks.contact@gmail.com',
+  email: 'contact@okkworks.com',
   telegram: '', // TODO: add the public Telegram URL.
   github: '', // TODO: add the public GitHub URL.
   language: 'uk',
