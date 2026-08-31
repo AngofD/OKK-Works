@@ -5,9 +5,10 @@ import { withBase } from '@/lib/paths';
 interface Props {
   project: Project;
   large?: boolean;
+  priority?: boolean;
 }
 
-const { project, large = false } = Astro.props;
+const { project, large = false, priority = false } = Astro.props;
 ---
 
 <div class:list={['project-visual', { large }]} aria-hidden="true">
@@ -20,7 +21,8 @@ const { project, large = false } = Astro.props;
       alt=""
       width="1440"
       height="900"
-      loading={large ? 'eager' : 'lazy'}
+      loading={priority ? 'eager' : 'lazy'}
+      fetchpriority={priority ? 'high' : 'auto'}
       decoding="async"
     />
   </div>

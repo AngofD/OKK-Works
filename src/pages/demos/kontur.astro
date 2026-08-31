@@ -1,0 +1,36 @@
+---
+import DemoLayout from '@/layouts/DemoLayout.astro';
+---
+
+<DemoLayout title="MAISON 17 Barber House" description="Концепція цифрового barber club з живим меню послуг і персональним записом." theme="maison">
+  <div class="maison-shell">
+    <header class="maison-topbar">
+      <a class="maison-mark" href="#top" data-scroll-link aria-label="MAISON 17 на головну"><span>MAISON</span><strong>17</strong></a>
+      <div class="maison-open"><i></i> відкрито сьогодні <span>до 21:00</span></div>
+      <nav aria-label="Навігація MAISON 17"><a href="#menu" data-scroll-link>Меню</a><a href="#house" data-scroll-link>Підхід</a><a href="#team" data-scroll-link>Команда</a></nav>
+      <button class="maison-book-link" type="button" data-booking-trigger>Знайти час <span>↗</span></button>
+    </header>
+
+    <main id="top">
+      <section class="maison-hero">
+        <div class="maison-hero-copy demo-reveal"><p class="maison-eyebrow">Barber club / Kyiv</p><h1>Не просто<br /><span>стрижка.</span></h1><p class="maison-hero-lede">Місце для тих, хто цінує хороший діалог, точну форму і годину без зайвого шуму.</p><a class="maison-arrow-link" href="#menu" data-scroll-link>Подивитися, що сьогодні <span>↓</span></a></div>
+        <div class="maison-stage demo-reveal"><div class="maison-stage-photo"></div><div class="maison-stage-orbit">CUT<br /><span>with intent</span></div><div class="maison-stage-index">17<br /><small>KYIV</small></div><div class="maison-stage-caption"><span>House portrait / 2026</span><strong>Форма<br />має значення.</strong></div></div>
+        <div class="maison-hero-note"><span>01</span><p>Ритуал починається<br />ще до крісла.</p><span class="maison-scroll-cue">scroll ↘</span></div>
+      </section>
+
+      <section class="maison-board" id="menu"><div class="maison-board-head demo-reveal"><div><p class="maison-eyebrow">Today at 17</p><h2>Оберіть свій<br /><em>ритм.</em></h2></div><p>Не знаєте, що обрати? Напишіть нам — підкажемо формат під ваш запит і волосся.</p></div><div class="maison-board-grid"><article class="maison-now demo-reveal"><div class="maison-card-top"><span>NOW PLAYING</span><span>75 MIN</span></div><div><p class="maison-card-label">signature service</p><h3>House cut</h3><p class="maison-card-copy">Консультація, миття, форма, styling і короткі рекомендації для дому.</p></div><div class="maison-now-bottom"><strong>900 <small>₴</small></strong><button type="button" data-booking-trigger>Обрати <span>↗</span></button></div></article><div class="maison-slots"><article class="maison-slot demo-reveal"><span>10:30 — 11:15</span><h3>Quiet cut</h3><p>Чиста форма<br />без поспіху</p><strong>700 ₴</strong><button type="button" data-booking-trigger aria-label="Записатися на Quiet cut о 10:30">+</button></article><article class="maison-slot maison-slot-hot demo-reveal"><span>12:00 — 12:30</span><h3>Beard service</h3><p>Контури + гарячий<br />рушник</p><strong>500 ₴</strong><button type="button" data-booking-trigger aria-label="Записатися на Beard service о 12:00">+</button></article><article class="maison-slot demo-reveal"><span>18:30 — 20:15</span><h3>Full house</h3><p>Волосся, борода<br />і повний reset</p><strong>1 250 ₴</strong><button type="button" data-booking-trigger aria-label="Записатися на Full house о 18:30">+</button></article></div></div></section>
+
+      <section class="maison-film demo-reveal"><div class="maison-film-word">NO<br /><span>RUSH</span></div><div class="maison-film-image maison-film-image-one"></div><div class="maison-film-quote"><p class="maison-eyebrow">Our way of working</p><blockquote>«Спочатку слухаємо. Потім створюємо форму, яка працює для вас.»</blockquote><span>— команда MAISON 17</span></div><div class="maison-film-image maison-film-image-two"></div></section>
+
+      <section class="maison-process" id="house"><div class="maison-process-intro demo-reveal"><p class="maison-eyebrow">The house rules</p><h2>Три прості<br /><em>дії.</em></h2><p>Ви приходите за формою. Залишаєтесь за відчуттям.</p></div><div class="maison-process-list"><article class="maison-process-item demo-reveal"><span>ARRIVE</span><h3>Прийти<br />вчасно.</h3><p>Кава, вода, п’ять хвилин видихнути перед початком.</p></article><article class="maison-process-item demo-reveal"><span>SIT</span><h3>Сісти<br />зручно.</h3><p>Ми поговоримо про бажаний результат, а не покажемо випадкову картинку.</p></article><article class="maison-process-item demo-reveal"><span>LEAVE</span><h3>Вийти<br />собою.</h3><p>Форма, яку легко повторити вдома наступного ранку.</p></article></div></section>
+
+      <section class="maison-team" id="team"><div class="maison-team-head demo-reveal"><p class="maison-eyebrow">People behind the chairs</p><h2>Свій почерк.<br /><em>Свій майстер.</em></h2></div><div class="maison-team-grid"><article class="maison-profile maison-profile-main demo-reveal"><div class="maison-profile-photo"></div><div class="maison-profile-meta"><span>FOUNDER / 01</span><h3>Олексій<br />Ворон</h3><p>classic shape / conversation</p></div></article><article class="maison-profile maison-profile-small demo-reveal"><div class="maison-profile-photo"></div><div class="maison-profile-meta"><span>BARBER / 02</span><h3>Ілля<br />Марчук</h3><p>texture / beard</p></div></article><div class="maison-team-aside demo-reveal"><span>✦</span><p>Кожна зустріч — не конвеєр. Ми залишаємо місце для людини.</p><a href="#menu" data-scroll-link>Обрати послугу <b>↗</b></a></div></div></section>
+
+      <section class="maison-final demo-reveal"><div><p class="maison-eyebrow">Your hour is yours</p><h2>Зустрінемось<br /><em>у MAISON 17.</em></h2></div><div class="maison-final-action"><p>Київ / Ярославська, 17<br />Пн — Нд / 10:00 — 21:00</p><button class="maison-final-button" type="button" data-booking-trigger>Знайти вільний час <span>↗</span></button></div></section>
+    </main>
+
+    <footer class="maison-footer"><a class="maison-mark" href="#top" data-scroll-link><span>MAISON</span><strong>17</strong></a><a href="#menu" data-scroll-link>послуги ↗</a><a href="#team" data-scroll-link>instagram ↗</a><span>© 2026</span></footer>
+  </div>
+
+  <dialog class="demo-dialog maison-dialog" data-booking-dialog aria-labelledby="maison-booking-title"><div class="demo-dialog-inner"><div class="demo-dialog-top"><h2 id="maison-booking-title">Збережемо<br />вашу годину.</h2><button class="demo-dialog-close" type="button" aria-label="Закрити" data-booking-close>×</button></div><form class="demo-form" data-booking-form><label>Ім’я<input required name="name" placeholder="Як до вас звертатися?" /></label><label>Послуга<select name="service"><option>House cut</option><option>Quiet cut</option><option>Beard service</option><option>Full house</option></select></label><label>Бажаний час<input required name="time" type="datetime-local" /></label><button class="demo-button" type="submit">Підтвердити запит <span>↗</span></button></form><p class="demo-status" data-booking-status hidden>Дякуємо. Адміністратор напише вам для підтвердження візиту.</p></div></dialog>
+</DemoLayout>

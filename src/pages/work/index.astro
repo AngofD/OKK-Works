@@ -2,13 +2,14 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import ProjectChapter from '@/components/ProjectChapter.astro';
 import { categories, projects } from '@/content/projects';
+import { withBase } from '@/lib/paths';
 
 const availableCategories = categories.filter((category) => category === 'Усі' || projects.some((project) => project.category === category));
 const conceptCount = projects.filter((project) => project.status === 'Концепт-проєкт').length;
 const personalCount = projects.filter((project) => project.status === 'Особистий продукт').length;
 ---
 
-<BaseLayout title="Роботи" description="Опубліковані сайти, showcase-проєкти та цифрові системи, підготовлені OKK Works.">
+<BaseLayout title="Портфоліо сайтів і Telegram-ботів" description="Кейси OKK Works: вебсайти для бізнесу, Telegram-бот для запису та цифрові концепти з продуманими UX-сценаріями." pageType="CollectionPage">
   <header class="page-hero work-hero">
     <div class="page-hero-shade" aria-hidden="true"></div>
     <div class="page-hero-content">
@@ -27,6 +28,25 @@ const personalCount = projects.filter((project) => project.status === 'Особ�
     <div class="work-projects" aria-live="polite" data-project-list>
       {projects.map((project, index) => <ProjectChapter project={project} index={index} />)}
     </div>
-    <div class="archive-note reveal"><p class="eyebrow">Чесно про портфоліо</p><p>{personalCount} особистий продукт і {conceptCount} концепт-кейси показують підхід OKK Works до UX, дизайну й frontend-реалізації. Реальні клієнтські кейси додаватимемо з контекстом задачі, результатами та зовнішніми посиланнями.</p><a class="text-link dark" href="/contact/">Поговорити про вашу задачу <span aria-hidden="true">↗</span></a></div>
+    <section class="demo-lab reveal" aria-labelledby="demo-lab-title">
+      <div><p class="eyebrow">Профільна добірка</p><h2 id="demo-lab-title">Два демо-сайти<br/><em>для барбершопів.</em></h2><p>Готові концепції, які можна показувати бізнесу як приклад дизайну, структури та booking UX.</p></div>
+      <div class="demo-lab-links"><a href={withBase('/demos/ritual/')}><span>01 / dark booking-first</span><strong>RITUAL ↗</strong></a><a href={withBase('/demos/kontur/')}><span>02 / private grooming house</span><strong>MAISON 17 ↗</strong></a></div>
+    </section>
+    <div class="archive-note reveal"><p class="eyebrow">Чесно про портфоліо</p><p>{personalCount} особистий продукт і {conceptCount} концепт-кейси показують підхід OKK Works до UX, дизайну й frontend-реалізації. Реальні клієнтські кейси додаватимемо з контекстом задачі, результатами та зовнішніми посиланнями.</p><a class="text-link dark" href={withBase('/contact/')}>Поговорити про вашу задачу <span aria-hidden="true">↗</span></a></div>
   </section>
 </BaseLayout>
+
+<style is:global>
+  .demo-lab { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(30px, 7vw, 110px); align-items: end; margin-top: 100px; padding: 52px 0; border-block: 1px solid var(--line-dark); color: var(--ink); }
+  .demo-lab h2 { margin: 16px 0; font: 500 clamp(42px, 5.5vw, 76px)/.9 var(--font-display); letter-spacing: -.08em; }
+  .demo-lab h2 em { color: #a55231; font-style: normal; }
+  .demo-lab p:last-child { max-width: 390px; color: var(--muted-dark); font-size: 14px; }
+  .demo-lab-links { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .demo-lab-links a { min-height: 190px; display: flex; flex-direction: column; justify-content: space-between; padding: 19px; color: #f4f0e7; background: #171d22; transition: transform .2s, background .2s; }
+  .demo-lab-links a:last-child { color: #17232a; background: #dce778; }
+  .demo-lab-links a:hover { transform: translateY(-5px); background: #a55231; }
+  .demo-lab-links a:last-child:hover { background: #2449db; color: #f4f0e7; }
+  .demo-lab-links span { font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+  .demo-lab-links strong { font: 500 clamp(29px, 4vw, 54px)/.9 var(--font-display); letter-spacing: -.08em; }
+  @media (max-width: 760px) { .demo-lab { grid-template-columns: 1fr; margin-top: 72px; } .demo-lab-links { grid-template-columns: 1fr; } }
+</style>

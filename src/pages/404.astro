@@ -3,7 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Icon from '@/components/Icon.astro';
 import { withBase } from '@/lib/paths';
 ---
-<BaseLayout title="Сторінку не знайдено">
+<BaseLayout title="Сторінку не знайдено" description="Запитана сторінка OKK Works не існує або була переміщена." noindex>
   <section class="not-found">
     <div class="not-found-shade" aria-hidden="true"></div>
     <div class="not-found-content"><p class="eyebrow">Помилка / 404</p><h1>Не той<br/><em>поворот.</em></h1><p>Сторінка не існує або була переміщена. Поверніться на головну чи одразу перейдіть до робіт.</p><div><a class="button button-primary" href={withBase('/')}>На головну <Icon name="arrow" /></a><a class="button button-ghost" href={withBase('/work/')}>Переглянути роботи <Icon name="arrow" /></a></div></div>
