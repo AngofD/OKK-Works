@@ -1,6 +1,7 @@
 ---
 import type { Project } from '@/content/projects';
 import Icon from './Icon.astro';
+import MovaPortfolioPreview from './MovaPortfolioPreview.astro';
 import ProjectVisual from './ProjectVisual.astro';
 import { withBase } from '@/lib/paths';
 
@@ -16,13 +17,17 @@ const category = project.category === 'Вебсайти' ? 'Вебсайт' : pr
 const statement = project.portfolioStatement ?? project.headline;
 const description = project.portfolioDescription ?? project.summary;
 const liveLabel = project.category === 'Вебсайти' ? 'Відкрити сайт ↗' : 'Відкрити проєкт ↗';
+const isMova = project.slug === 'beauty-site';
 ---
 
-<article class="project-chapter" data-category={project.category}>
+<article class:list={['project-chapter', { 'project-chapter-mova': isMova }]} data-category={project.category}>
   <div class="chapter-divider reveal" aria-hidden="true">
     <span>{number}</span>
   </div>
 
+  {isMova ? (
+    <div class="reveal"><MovaPortfolioPreview project={project} large /></div>
+  ) : <>
   <header class="chapter-intro reveal">
     <div class="chapter-kicker">
       <span>{number}</span>
@@ -43,6 +48,7 @@ const liveLabel = project.category === 'Вебсайти' ? 'Відкрити с
     <a class="text-link dark" href={withBase(`/work/${project.slug}/`)}>Переглянути кейс <Icon name="arrow" size={15} /></a>
     {project.liveUrl && <a class="text-link dark" href={project.liveUrl} target="_blank" rel="noopener noreferrer">{liveLabel}</a>}
   </div>
+  </>}
 
   <div class="chapter-end reveal" aria-hidden="true">
     <span>{number} / завершено</span>

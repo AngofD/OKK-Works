@@ -1,14 +1,21 @@
 ---
 import type { Project } from '@/content/projects';
 import Icon from './Icon.astro';
+import MovaPortfolioPreview from './MovaPortfolioPreview.astro';
 import ProjectVisual from './ProjectVisual.astro';
 import { withBase } from '@/lib/paths';
 
 interface Props { project: Project; index: number; }
 const { project, index } = Astro.props;
 const liveLabel = project.category === 'Вебсайти' ? 'Відкрити сайт ↗' : 'Відкрити проєкт ↗';
+const isMova = project.slug === 'beauty-site';
 ---
 
+{isMova ? (
+  <article class="project-card project-card-mova reveal" data-category={project.category}>
+    <MovaPortfolioPreview project={project} />
+  </article>
+) : (
 <article class="project-card reveal" data-category={project.category}>
   <a class="project-media" href={withBase(`/work/${project.slug}/`)} aria-label={`Відкрити кейс ${project.title}`}>
     <ProjectVisual project={project} />
@@ -30,3 +37,4 @@ const liveLabel = project.category === 'Вебсайти' ? 'Відкрити с
     </div>
   </div>
 </article>
+)}
