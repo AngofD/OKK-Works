@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Icon from '@/components/Icon.astro';
+import MovaCase from '@/components/MovaCase.astro';
 import ProjectVisual from '@/components/ProjectVisual.astro';
 import { getNextProject, projects, type Project } from '@/content/projects';
 import { withBase } from '@/lib/paths';
@@ -46,7 +47,7 @@ const projectSchemas: JsonLd[] = [
 ---
 
 <BaseLayout title={caseTitle} description={project.summary} image={project.coverImage} imageAlt={`${project.title} — кейс OKK Works`} imageWidth={1440} imageHeight={900} schemas={projectSchemas}>
-  <article class="case-study">
+  {project.slug === 'beauty-site' ? <MovaCase project={project} /> : <article class="case-study">
     <header class="case-hero">
       <div class="case-topline"><a href={withBase('/work/')}>← Усі роботи</a><div><span>{project.category}</span><span>{project.year}</span><span>{project.status}</span></div></div>
       <h1>{project.title}</h1>
@@ -112,6 +113,6 @@ const projectSchemas: JsonLd[] = [
     <section class="case-outcome">
       <div class="outcome-grid"><p class="eyebrow">Результат</p><div class="outcome-content reveal"><p>{project.outcome}</p><div class="outcome-actions">{project.liveUrl && <a class="button button-dark" href={project.liveUrl} target="_blank" rel="noopener noreferrer">{externalLabel}</a>}{project.githubUrl && <a class="button button-dark" href={project.githubUrl} target="_blank" rel="noopener noreferrer">GitHub <Icon name="arrow" /></a>}</div></div></div>
     </section>
-  </article>
+  </article>}
   {hasDistinctNext ? <a class="next-project" href={withBase(`/work/${next.slug}/`)}><span>Наступний проєкт</span><div><h2>{next.title}</h2><Icon name="arrow" size={70} /></div></a> : <a class="next-project" href={withBase('/contact/')}><span>Наступний проєкт може бути вашим</span><div><h2>Обговорімо задачу</h2><Icon name="arrow" size={70} /></div></a>}
 </BaseLayout>
