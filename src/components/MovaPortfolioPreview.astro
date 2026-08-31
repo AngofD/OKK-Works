@@ -10,29 +10,51 @@ interface Props {
 }
 
 const { project, large = false } = Astro.props;
+const presentations = {
+  'beauty-site': {
+    theme: 'theme-mova', mark: 'M', eyebrow: 'Beauty studio / website concept', first: 'MOVA', second: 'Beauty',
+    statement: 'Сайт premium beauty studio.',
+    description: 'Атмосфера бренду, послуги, галерея та зрозумілий шлях до запису — в одному digital-просторі.',
+    caption: 'Desktop + mobile / booking experience',
+  },
+  'carpathian-retreat': {
+    theme: 'theme-obrys', mark: 'О', eyebrow: 'Mountain retreat / hospitality concept', first: 'ОБРИС', second: 'Retreat',
+    statement: 'Cinematic сайт для гірського retreat.',
+    description: 'Простори, архітектура, атмосфера Карпат і шлях до вибору дат — в одному спокійному досвіді.',
+    caption: 'Hospitality / stay planner / responsive',
+  },
+  'booking-bot': {
+    theme: 'theme-booking', mark: 'B', eyebrow: 'Telegram / service product', first: 'Booking', second: 'Bot',
+    statement: 'Запис клієнтів без зайвої переписки.',
+    description: 'Послуга, спеціаліст, дата, вільний час і керування бронюваннями — у знайомому клієнту Telegram.',
+    caption: 'Telegram flow / booking / admin tools',
+  },
+} as const;
+const presentation = presentations[project.slug as keyof typeof presentations] ?? presentations['beauty-site'];
+const liveLabel = project.category === 'Telegram' ? 'Відкрити бота ↗' : 'Відкрити сайт ↗';
 ---
 
-<section class:list={['mova-portfolio-preview', { large }]} aria-labelledby={`mova-preview-title-${large ? 'large' : 'compact'}`}>
+<section class:list={['mova-portfolio-preview', presentation.theme, { large }]} data-mark={presentation.mark} aria-labelledby={`project-preview-title-${project.slug}-${large ? 'large' : 'compact'}`}>
   <div class="mova-preview-topline">
-    <span>Beauty studio / website concept</span>
-    <span>2026 · responsive</span>
+    <span>{presentation.eyebrow}</span>
+    <span>{project.year} · responsive</span>
   </div>
 
   <div class="mova-preview-grid">
     <div class="mova-preview-copy">
       <p class="mova-preview-kicker">Selected work</p>
-      <h2 id={`mova-preview-title-${large ? 'large' : 'compact'}`}><span>MOVA</span><em>Beauty</em></h2>
-      <p class="mova-preview-statement">Сайт premium beauty studio.</p>
-      <p class="mova-preview-description">Атмосфера бренду, послуги, галерея та зрозумілий шлях до запису — в одному digital-просторі.</p>
+      <h2 id={`project-preview-title-${project.slug}-${large ? 'large' : 'compact'}`}><span>{presentation.first}</span><em>{presentation.second}</em></h2>
+      <p class="mova-preview-statement">{presentation.statement}</p>
+      <p class="mova-preview-description">{presentation.description}</p>
       <div class="mova-preview-actions">
         <a href={withBase(`/work/${project.slug}/`)}>Переглянути кейс <Icon name="arrow" size={15} /></a>
-        {project.liveUrl && <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">Відкрити сайт ↗</a>}
+        {project.liveUrl && <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">{liveLabel}</a>}
       </div>
     </div>
 
     <a class="mova-preview-media" href={withBase(`/work/${project.slug}/`)} aria-label={`Відкрити кейс ${project.title}`}>
       <ProjectVisual project={project} large={large} />
-      <span class="mova-preview-caption">Desktop + mobile / booking experience</span>
+      <span class="mova-preview-caption">{presentation.caption}</span>
     </a>
   </div>
 </section>
@@ -57,7 +79,7 @@ const { project, large = false } = Astro.props;
     isolation: isolate;
   }
   .mova-portfolio-preview::after {
-    content: 'M';
+    content: attr(data-mark);
     position: absolute;
     z-index: -1;
     left: -1.5vw;
@@ -67,6 +89,20 @@ const { project, large = false } = Astro.props;
     font-size: clamp(280px, 42vw, 680px);
     line-height: .72;
     pointer-events: none;
+  }
+  .theme-obrys {
+    --mova-shell: #26312d;
+    --mova-deep: #111916;
+    --mova-paper: #edf0e8;
+    --mova-blush: #b8c7aa;
+    --mova-muted: #a9b0a9;
+  }
+  .theme-booking {
+    --mova-shell: #1b3345;
+    --mova-deep: #0b1822;
+    --mova-paper: #edf5f8;
+    --mova-blush: #75b8dc;
+    --mova-muted: #a7bac5;
   }
   .mova-preview-topline {
     display: flex;
@@ -166,6 +202,10 @@ const { project, large = false } = Astro.props;
     aspect-ratio: auto;
     background: linear-gradient(145deg, #d3c1b7, #86736e);
   }
+  .theme-obrys .mova-preview-media { background: #a9b1a0; }
+  .theme-obrys .mova-preview-media :global(.project-visual) { background: linear-gradient(145deg, #b9bcae, #657168); }
+  .theme-booking .mova-preview-media { background: #9ebfd0; }
+  .theme-booking .mova-preview-media :global(.project-visual) { background: linear-gradient(145deg, #b6d2df, #567c94); }
   .mova-preview-media :global(.project-browser) {
     top: 8%;
     left: 5%;

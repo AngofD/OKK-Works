@@ -1,9 +1,6 @@
 ---
 import type { Project } from '@/content/projects';
-import Icon from './Icon.astro';
 import MovaPortfolioPreview from './MovaPortfolioPreview.astro';
-import ProjectVisual from './ProjectVisual.astro';
-import { withBase } from '@/lib/paths';
 
 interface Props {
   project: Project;
@@ -12,43 +9,14 @@ interface Props {
 
 const { project, index } = Astro.props;
 const number = String(index + 1).padStart(2, '0');
-const title = project.portfolioTitle ?? project.title;
-const category = project.category === 'Вебсайти' ? 'Вебсайт' : project.category;
-const statement = project.portfolioStatement ?? project.headline;
-const description = project.portfolioDescription ?? project.summary;
-const liveLabel = project.category === 'Вебсайти' ? 'Відкрити сайт ↗' : 'Відкрити проєкт ↗';
-const isMova = project.slug === 'beauty-site';
 ---
 
-<article class:list={['project-chapter', { 'project-chapter-mova': isMova }]} data-category={project.category}>
+<article class="project-chapter project-chapter-showcase" data-category={project.category}>
   <div class="chapter-divider reveal" aria-hidden="true">
     <span>{number}</span>
   </div>
 
-  {isMova ? (
-    <div class="reveal"><MovaPortfolioPreview project={project} large /></div>
-  ) : <>
-  <header class="chapter-intro reveal">
-    <div class="chapter-kicker">
-      <span>{number}</span>
-      <span>{category}</span>
-    </div>
-    <div class="chapter-copy">
-      <h2>{title}</h2>
-      <p class="chapter-statement">{statement}</p>
-      <p class="chapter-description">{description}</p>
-    </div>
-  </header>
-
-  <div class="chapter-preview reveal">
-    <ProjectVisual project={project} large />
-  </div>
-
-  <div class="chapter-actions reveal">
-    <a class="text-link dark" href={withBase(`/work/${project.slug}/`)}>Переглянути кейс <Icon name="arrow" size={15} /></a>
-    {project.liveUrl && <a class="text-link dark" href={project.liveUrl} target="_blank" rel="noopener noreferrer">{liveLabel}</a>}
-  </div>
-  </>}
+  <div class="reveal"><MovaPortfolioPreview project={project} large /></div>
 
   <div class="chapter-end reveal" aria-hidden="true">
     <span>{number} / завершено</span>
