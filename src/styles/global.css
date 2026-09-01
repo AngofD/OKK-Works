@@ -789,6 +789,25 @@ em { font-weight: 430; }
 .device-frame::before { content: ''; position: absolute; z-index: 1; inset: 4px; border: 1px solid rgba(255, 255, 255, .15); border-radius: 34px; pointer-events: none; }
 .project-media:hover .project-phone { transform: rotate(1deg) translateY(-8px); }
 .device-frame .phone-screen { position: relative; z-index: 0; width: 100%; height: 100%; overflow: hidden; border-radius: 34px; background: #101820; }
+.booking-phone-collage {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: repeat(4, minmax(0, 1fr));
+  gap: 3px;
+  padding: 3px;
+  box-sizing: border-box;
+  background: #12091a;
+}
+.booking-phone-collage img {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  background: #09070d;
+}
 .device-frame .phone-sensor { position: absolute; z-index: 2; top: 10px; left: 50%; width: 40%; height: 12px; border-radius: 999px; background: #07080a; transform: translateX(-50%); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08); }
 .device-frame .phone-sensor::after { content: ''; position: absolute; top: 4px; right: 5px; width: 4px; height: 4px; border-radius: 50%; background: #1b2b39; }
 .device-frame img { width: 100%; height: 100%; object-fit: cover; object-position: top; background: #101820; }

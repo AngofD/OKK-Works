@@ -32,16 +32,22 @@ const { project, large = false, priority = false } = Astro.props;
     <span class="phone-side-button phone-side-button-bottom" aria-hidden="true"></span>
     <div class="phone-sensor"></div>
     <div class="phone-screen">
-      <img
-        src={withBase(project.mobileImage)}
-        srcset={!large ? `${withBase(project.mobileThumb)} 260w, ${withBase(project.mobileImage)} 390w` : undefined}
-        sizes={!large ? '(max-width: 700px) 40vw, 22vw' : undefined}
-        alt=""
-        width="390"
-        height="844"
-        loading="lazy"
-        decoding="async"
-      />
+      {project.slug === 'booking-bot' && project.caseScreenshots?.length ? (
+        <div class="booking-phone-collage">
+          {project.caseScreenshots.slice(0, 4).map((shot) => <img src={withBase(shot.src)} alt="" width={shot.width} height={shot.height} loading="lazy" decoding="async" />)}
+        </div>
+      ) : (
+        <img
+          src={withBase(project.mobileImage)}
+          srcset={!large ? `${withBase(project.mobileThumb)} 260w, ${withBase(project.mobileImage)} 390w` : undefined}
+          sizes={!large ? '(max-width: 700px) 40vw, 22vw' : undefined}
+          alt=""
+          width="390"
+          height="844"
+          loading="lazy"
+          decoding="async"
+        />
+      )}
     </div>
   </div>
   <p class="project-stamp">{project.category} / {project.year}</p>

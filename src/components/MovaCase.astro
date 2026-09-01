@@ -31,7 +31,10 @@ const screenshots = project.caseScreenshots ?? [];
         <p class="mova-label">Коротко про проєкт</p>
         <p class="mova-statement">{project.portfolioStatement}</p>
         <p class="mova-description">{project.portfolioDescription}</p>
-        <a class="mova-text-link" href="#mova-details">Дивитися рішення <Icon name="arrow" size={15} /></a>
+        <div class="mova-intro-actions">
+          {project.liveUrl && <a class="mova-live-action" href={project.liveUrl} target="_blank" rel="noopener noreferrer"><span>Відкрити сайт</span><Icon name="arrow" size={17} /></a>}
+          <a class="mova-text-link" href="#mova-details">Дивитися рішення <Icon name="arrow" size={15} /></a>
+        </div>
       </div>
     </div>
 
@@ -101,7 +104,12 @@ const screenshots = project.caseScreenshots ?? [];
   .mova-brief { max-width: 360px; padding-bottom: 4px; }
   .mova-statement { margin-top: 22px; color: var(--mova-cream); font-family: var(--font-display); font-size: clamp(27px, 3vw, 42px); letter-spacing: -.045em; line-height: 1.02; }
   .mova-description { margin-top: 18px; color: var(--mova-muted); font-size: 13px; line-height: 1.55; }
-  .mova-text-link { display: inline-flex; align-items: center; gap: 12px; margin-top: 30px; padding-bottom: 7px; border-bottom: 1px solid var(--mova-blush); color: var(--mova-cream); font-size: 11px; font-weight: 720; }
+  .mova-intro-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; margin-top: 30px; }
+  .mova-live-action { display: inline-flex; align-items: center; gap: 17px; padding: 14px 17px 14px 19px; border: 1px solid var(--mova-blush); border-radius: 999px; color: var(--mova-deep); background: var(--mova-blush); font-size: 10px; font-weight: 760; letter-spacing: .08em; text-transform: uppercase; transition: background var(--fast) var(--ease), color var(--fast) var(--ease), transform var(--fast) var(--ease); }
+  .mova-live-action:hover { color: var(--mova-cream); background: transparent; transform: translateY(-2px); }
+  .mova-live-action svg { transition: transform var(--fast) var(--ease-out); }
+  .mova-live-action:hover svg { transform: translate(3px, -3px); }
+  .mova-text-link { display: inline-flex; align-items: center; gap: 12px; padding-bottom: 7px; border-bottom: 1px solid var(--mova-blush); color: var(--mova-cream); font-size: 11px; font-weight: 720; }
   .mova-text-link svg, .mova-demo-link svg, .mova-final-link svg { transition: transform var(--fast) var(--ease); }
   .mova-text-link:hover svg, .mova-demo-link:hover svg, .mova-final-link:hover svg { transform: translate(4px, -4px); }
   .mova-stage { width: min(100%, 1440px); margin: 0 auto; }
@@ -159,6 +167,7 @@ const screenshots = project.caseScreenshots ?? [];
     .mova-intro { gap: 55px; padding-block: 100px 76px; }
     .mova-title-block h1 { font-size: clamp(70px, 20vw, 130px); }
     .mova-brief { max-width: 500px; }
+    .mova-intro-actions { align-items: flex-start; flex-direction: column; }
     .mova-stage-grid { grid-template-columns: 1fr; }
     .mova-stage-visual .project-visual { height: min(122vw, 560px); }
     .mova-stage-visual .project-browser { width: 86%; height: 75%; }

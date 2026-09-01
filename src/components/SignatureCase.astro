@@ -87,7 +87,10 @@ const config = isBooking
         <p class="signature-label">{config.introLabel}</p>
         <p class="signature-statement">{project.portfolioStatement}</p>
         <p>{project.portfolioDescription}</p>
-        <a href="#signature-details">Дивитися рішення <Icon name="arrow" size={15} /></a>
+        <div class="signature-intro-actions">
+          {project.liveUrl && <a class="signature-live-action" href={project.liveUrl} target="_blank" rel="noopener noreferrer"><span>{isBooking ? 'Запустити демо-бота' : 'Відкрити сайт'}</span><Icon name="arrow" size={17} /></a>}
+          <a class="signature-text-link" href="#signature-details">Дивитися рішення <Icon name="arrow" size={15} /></a>
+        </div>
       </aside>
     </div>
 
@@ -180,9 +183,14 @@ const config = isBooking
   .signature-statement { margin-top: 22px; color: var(--case-paper) !important; font-family: var(--font-display); font-size: clamp(28px, 3vw, 43px) !important; letter-spacing: -.045em; line-height: 1.02 !important; }
   .is-booking .signature-statement { font-family: var(--font-ui); font-weight: 650; letter-spacing: -.04em; }
   .signature-brief > p:nth-of-type(3) { margin-top: 18px; color: var(--case-muted); font-size: 13px; line-height: 1.6; }
-  .signature-brief > a { display: inline-flex; align-items: center; gap: 12px; margin-top: 30px; padding-bottom: 7px; border-bottom: 1px solid var(--case-accent); font-size: 11px; font-weight: 720; }
-  .signature-brief > a svg, .signature-stage-aside > a svg, .signature-final-link svg { transition: transform var(--fast) var(--ease); }
-  .signature-brief > a:hover svg, .signature-stage-aside > a:hover svg, .signature-final-link:hover svg { transform: translate(4px, -4px); }
+  .signature-intro-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; margin-top: 30px; }
+  .signature-live-action { display: inline-flex; align-items: center; gap: 17px; padding: 14px 17px 14px 19px; border: 1px solid var(--case-accent); border-radius: 999px; color: var(--case-ink); background: var(--case-accent); font-size: 10px; font-weight: 760; letter-spacing: .08em; text-transform: uppercase; transition: background var(--fast) var(--ease), color var(--fast) var(--ease), transform var(--fast) var(--ease); }
+  .signature-live-action:hover { color: var(--case-paper); background: transparent; transform: translateY(-2px); }
+  .signature-live-action svg { transition: transform var(--fast) var(--ease-out); }
+  .signature-live-action:hover svg { transform: translate(3px, -3px); }
+  .signature-text-link { display: inline-flex; align-items: center; gap: 12px; padding-bottom: 7px; border-bottom: 1px solid var(--case-accent); font-size: 11px; font-weight: 720; }
+  .signature-text-link svg, .signature-stage-aside > a svg, .signature-final-link svg { transition: transform var(--fast) var(--ease); }
+  .signature-text-link:hover svg, .signature-stage-aside > a:hover svg, .signature-final-link:hover svg { transform: translate(4px, -4px); }
   .signature-route { width: min(100%, 1440px); display: grid; grid-template-columns: repeat(4, 1fr); margin: 0 auto clamp(74px, 9vw, 126px); border-block: 1px solid color-mix(in srgb, var(--case-paper) 16%, transparent); }
   .signature-route li { position: relative; min-height: 92px; display: flex; align-items: flex-end; gap: 12px; padding: 18px 16px; border-right: 1px solid color-mix(in srgb, var(--case-paper) 16%, transparent); }
   .signature-route li:last-child { border-right: 0; }
@@ -253,6 +261,7 @@ const config = isBooking
     .signature-intro { gap: 54px; padding-block: 96px 72px; }
     .signature-title h1 { font-size: clamp(68px, 20vw, 128px); }
     .signature-brief { max-width: 540px; }
+    .signature-intro-actions { align-items: flex-start; flex-direction: column; }
     .signature-route { grid-template-columns: 1fr 1fr; }
     .signature-route li:nth-child(2) { border-right: 0; }
     .signature-route li:nth-child(-n + 2) { border-bottom: 1px solid color-mix(in srgb, var(--case-paper) 16%, transparent); }
