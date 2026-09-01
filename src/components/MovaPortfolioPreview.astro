@@ -1,0 +1,278 @@
+---
+import Icon from './Icon.astro';
+import ProjectVisual from './ProjectVisual.astro';
+import type { Project } from '@/content/projects';
+import { withBase } from '@/lib/paths';
+
+interface Props {
+  project: Project;
+  large?: boolean;
+}
+
+const { project, large = false } = Astro.props;
+const presentations = {
+  'beauty-site': {
+    theme: 'theme-mova', mark: 'M', eyebrow: 'Beauty studio / website concept', first: 'MOVA', second: 'Beauty',
+    statement: 'Сайт premium beauty studio.',
+    description: 'Атмосфера бренду, послуги, галерея та зрозумілий шлях до запису — в одному digital-просторі.',
+    caption: 'Desktop + mobile / booking experience',
+  },
+  'carpathian-retreat': {
+    theme: 'theme-obrys', mark: 'О', eyebrow: 'Mountain retreat / hospitality concept', first: 'ОБРИС', second: 'Retreat',
+    statement: 'Cinematic сайт для гірського retreat.',
+    description: 'Простори, архітектура, атмосфера Карпат і шлях до вибору дат — в одному спокійному досвіді.',
+    caption: 'Hospitality / stay planner / responsive',
+  },
+  'booking-bot': {
+    theme: 'theme-booking', mark: 'B', eyebrow: 'Telegram / service product', first: 'Booking', second: 'Bot',
+    statement: 'Запис клієнтів без зайвої переписки.',
+    description: 'Послуга, спеціаліст, дата, вільний час і керування бронюваннями — у знайомому клієнту Telegram.',
+    caption: 'Telegram flow / booking / admin tools',
+  },
+} as const;
+const presentation = presentations[project.slug as keyof typeof presentations] ?? presentations['beauty-site'];
+const liveLabel = project.category === 'Telegram' ? 'Відкрити бота ↗' : 'Відкрити сайт ↗';
+---
+
+<section class:list={['mova-portfolio-preview', presentation.theme, { large }]} data-mark={presentation.mark} aria-labelledby={`project-preview-title-${project.slug}-${large ? 'large' : 'compact'}`}>
+  <div class="mova-preview-topline">
+    <span>{presentation.eyebrow}</span>
+    <span>{project.year} · responsive</span>
+  </div>
+
+  <div class="mova-preview-grid">
+    <div class="mova-preview-copy">
+      <p class="mova-preview-kicker">Selected work</p>
+      <h2 id={`project-preview-title-${project.slug}-${large ? 'large' : 'compact'}`}><span>{presentation.first}</span><em>{presentation.second}</em></h2>
+      <p class="mova-preview-statement">{presentation.statement}</p>
+      <p class="mova-preview-description">{presentation.description}</p>
+      <div class="mova-preview-actions">
+        <a href={withBase(`/work/${project.slug}/`)}>Переглянути кейс <Icon name="arrow" size={15} /></a>
+        {project.liveUrl && <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">{liveLabel}</a>}
+      </div>
+    </div>
+
+    <a class="mova-preview-media" href={withBase(`/work/${project.slug}/`)} aria-label={`Відкрити кейс ${project.title}`}>
+      <ProjectVisual project={project} large={large} />
+      <span class="mova-preview-caption">{presentation.caption}</span>
+    </a>
+  </div>
+</section>
+
+<style>
+  .mova-portfolio-preview {
+    --mova-shell: #17242d;
+    --mova-deep: #0e171e;
+    --mova-paper: #f0e4db;
+    --mova-blush: #d9a088;
+    --mova-muted: #aeb4b5;
+    position: relative;
+    width: 100%;
+    padding: clamp(18px, 2vw, 28px);
+    overflow: hidden;
+    border-radius: clamp(24px, 3vw, 40px);
+    color: var(--mova-paper);
+    background:
+      radial-gradient(circle at 18% 10%, rgba(217, 160, 136, .12), transparent 25rem),
+      linear-gradient(140deg, var(--mova-deep), var(--mova-shell));
+    box-shadow: 0 36px 110px rgba(16, 24, 32, .24);
+    isolation: isolate;
+  }
+  .mova-portfolio-preview::after {
+    content: attr(data-mark);
+    position: absolute;
+    z-index: -1;
+    left: -1.5vw;
+    bottom: -12vw;
+    color: rgba(240, 228, 219, .025);
+    font-family: var(--font-display);
+    font-size: clamp(280px, 42vw, 680px);
+    line-height: .72;
+    pointer-events: none;
+  }
+  .theme-obrys {
+    --mova-shell: #26312d;
+    --mova-deep: #111916;
+    --mova-paper: #edf0e8;
+    --mova-blush: #b8c7aa;
+    --mova-muted: #a9b0a9;
+  }
+  .theme-booking {
+    --mova-shell: #1b3345;
+    --mova-deep: #0b1822;
+    --mova-paper: #edf5f8;
+    --mova-blush: #75b8dc;
+    --mova-muted: #a7bac5;
+  }
+  .mova-preview-topline {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(240, 228, 219, .16);
+    color: var(--mova-muted);
+    font-size: 8px;
+    font-weight: 720;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+  }
+  .mova-preview-grid {
+    display: grid;
+    grid-template-columns: minmax(250px, .58fr) minmax(0, 1.42fr);
+    gap: clamp(20px, 3vw, 48px);
+    align-items: stretch;
+    padding-top: clamp(22px, 2.5vw, 38px);
+  }
+  .mova-preview-copy {
+    min-height: 470px;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(18px, 2.4vw, 34px) 0 clamp(8px, 1vw, 16px) clamp(4px, 1.2vw, 18px);
+  }
+  .mova-preview-kicker {
+    color: var(--mova-blush);
+    font-size: 9px;
+    font-weight: 720;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  .mova-preview-copy h2 {
+    display: grid;
+    margin-top: clamp(28px, 4vw, 58px);
+    color: var(--mova-paper);
+    font-family: var(--font-display);
+    font-size: clamp(60px, 8vw, 118px);
+    font-weight: 450;
+    letter-spacing: -.09em;
+    line-height: .74;
+  }
+  .mova-preview-copy h2 em {
+    color: var(--mova-blush);
+    font-style: italic;
+    font-weight: 430;
+  }
+  .mova-preview-statement {
+    max-width: 340px;
+    margin-top: clamp(40px, 5vw, 74px);
+    font-family: var(--font-display);
+    font-size: clamp(24px, 2.5vw, 37px);
+    letter-spacing: -.045em;
+    line-height: 1;
+  }
+  .mova-preview-description {
+    max-width: 350px;
+    margin-top: 16px;
+    color: var(--mova-muted);
+    font-size: 12px;
+    line-height: 1.55;
+  }
+  .mova-preview-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 30px;
+  }
+  .mova-preview-actions a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 46px;
+    padding: 0 18px;
+    border: 1px solid rgba(240, 228, 219, .3);
+    border-radius: 999px;
+    color: var(--mova-paper);
+    background: rgba(240, 228, 219, .06);
+    font-size: 11px;
+    font-weight: 720;
+    transition: color var(--fast), background var(--fast), border-color var(--fast), transform var(--fast) var(--ease);
+  }
+  .mova-preview-actions a:first-child { color: var(--mova-deep); border-color: var(--mova-paper); background: var(--mova-paper); }
+  .mova-preview-actions a:hover { color: var(--mova-deep); border-color: var(--mova-blush); background: var(--mova-blush); transform: translateY(-2px); }
+  .mova-preview-actions svg { transition: transform var(--fast) var(--ease); }
+  .mova-preview-actions a:hover svg { transform: translate(3px, -3px); }
+  .mova-preview-media {
+    position: relative;
+    min-width: 0;
+    min-height: 520px;
+    overflow: hidden;
+    border-radius: clamp(16px, 2vw, 26px);
+    background: #c9b7af;
+  }
+  .mova-preview-media :global(.project-visual) {
+    width: 100%;
+    height: 100%;
+    min-height: 520px;
+    aspect-ratio: auto;
+    background: linear-gradient(145deg, #d3c1b7, #86736e);
+  }
+  .theme-obrys .mova-preview-media { background: #a9b1a0; }
+  .theme-obrys .mova-preview-media :global(.project-visual) { background: linear-gradient(145deg, #b9bcae, #657168); }
+  .theme-booking .mova-preview-media { background: #9ebfd0; }
+  .theme-booking .mova-preview-media :global(.project-visual) { background: linear-gradient(145deg, #b6d2df, #567c94); }
+  .mova-preview-media :global(.project-browser) {
+    top: 8%;
+    left: 5%;
+    width: 84%;
+    height: 80%;
+    border-color: rgba(14, 23, 30, .26);
+    box-shadow: 0 32px 70px rgba(50, 33, 34, .34);
+    transform: rotate(-.8deg);
+  }
+  .mova-preview-media :global(.project-phone) {
+    right: 4%;
+    bottom: -5%;
+    width: 21%;
+    transform: rotate(3deg);
+  }
+  .mova-preview-media :global(.project-stamp) { display: none; }
+  .mova-preview-media:hover :global(.project-browser) { transform: rotate(0) translateY(-4px); }
+  .mova-preview-media:hover :global(.project-phone) { transform: rotate(1deg) translateY(-6px); }
+  .mova-preview-caption {
+    position: absolute;
+    z-index: 4;
+    right: 18px;
+    bottom: 16px;
+    padding: 8px 11px;
+    border: 1px solid rgba(240, 228, 219, .18);
+    border-radius: 999px;
+    color: rgba(240, 228, 219, .76);
+    background: rgba(14, 23, 30, .6);
+    backdrop-filter: blur(10px);
+    font-size: 7px;
+    font-weight: 720;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+  }
+  .mova-portfolio-preview.large .mova-preview-copy,
+  .mova-portfolio-preview.large .mova-preview-media,
+  .mova-portfolio-preview.large .mova-preview-media :global(.project-visual) { min-height: clamp(560px, 52vw, 760px); }
+  @media (max-width: 900px) {
+    .mova-preview-grid { grid-template-columns: minmax(220px, .7fr) minmax(0, 1.3fr); }
+    .mova-preview-copy { min-height: 470px; }
+    .mova-preview-copy h2 { font-size: clamp(56px, 8vw, 82px); }
+  }
+  @media (max-width: 700px) {
+    .mova-portfolio-preview { padding: 14px; border-radius: 25px; }
+    .mova-preview-topline span:last-child { display: none; }
+    .mova-preview-grid { grid-template-columns: 1fr; gap: 30px; padding-top: 12px; }
+    .mova-preview-copy,
+    .mova-portfolio-preview.large .mova-preview-copy { min-height: 0; padding: 24px 6px 0; }
+    .mova-preview-copy h2 { margin-top: 30px; font-size: clamp(58px, 20vw, 86px); }
+    .mova-preview-statement { margin-top: 42px; font-size: 28px; }
+    .mova-preview-actions { margin-top: 30px; }
+    .mova-preview-actions a { min-height: 48px; padding-inline: 17px; }
+    .mova-preview-media,
+    .mova-preview-media :global(.project-visual),
+    .mova-portfolio-preview.large .mova-preview-media,
+    .mova-portfolio-preview.large .mova-preview-media :global(.project-visual) { min-height: 490px; }
+    .mova-preview-media :global(.project-browser) { top: 7%; left: 5%; width: 89%; height: 72%; }
+    .mova-preview-media :global(.project-phone) { right: 4%; width: 36%; }
+    .mova-preview-caption { right: 10px; bottom: 10px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mova-preview-media :global(.project-browser),
+    .mova-preview-media :global(.project-phone) { transition: none; }
+  }
+</style>

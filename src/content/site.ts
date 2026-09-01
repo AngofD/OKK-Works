@@ -1,8 +1,11 @@
 export const site = {
   name: 'OKK Works',
-  url: 'https://okk.works',
-  email: 'hello@okk.works', // TODO: confirm production inbox.
+  url: 'https://okkworks.com',
+  email: 'contact@okkworks.com',
   telegram: '', // TODO: add the public Telegram URL.
   github: '', // TODO: add the public GitHub URL.
-  description: 'Independent digital product and development studio building websites, Telegram bots, and business automation.',
+  language: 'uk',
+  locale: 'uk_UA',
+  ogImage: '/og-cover.png',
+  description: 'OKK Works створює швидкі вебсайти, Telegram-боти та автоматизацію для українського бізнесу — від структури й дизайну до запуску та підтримки.',
 } as const;

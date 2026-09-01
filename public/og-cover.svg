@@ -1,8 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
-  <rect width="1200" height="630" fill="#11110f"/>
-  <path d="M0 520h1200M780 0v630" stroke="#33332f"/>
-  <circle cx="1040" cy="120" r="220" fill="#e6ff3f" opacity=".9"/>
-  <text x="72" y="135" fill="#f3f0e8" font-family="Arial,sans-serif" font-weight="700" font-size="42">OKK WORKS</text>
-  <text x="72" y="390" fill="#f3f0e8" font-family="Arial,sans-serif" font-weight="700" font-size="104">Digital products</text>
-  <text x="72" y="500" fill="#f3f0e8" font-family="Arial,sans-serif" font-weight="700" font-size="104">that work.</text>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#08131d"/>
+      <stop offset=".68" stop-color="#1f303d"/>
+      <stop offset="1" stop-color="#b58a59"/>
+    </linearGradient>
+    <linearGradient id="shade" x1="0" y1="0" x2="1" y2="0">
+      <stop stop-color="#081018" stop-opacity=".92"/>
+      <stop offset=".75" stop-color="#081018" stop-opacity=".24"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#sky)"/>
+  <path d="M0 438 150 368l142 50 178-92 153 87 183-118 170 106 224-69v298H0Z" fill="#111c25" opacity=".78"/>
+  <path d="M0 508 175 434l148 71 208-124 180 116 194-89 295 115v107H0Z" fill="#071019"/>
+  <rect width="1200" height="630" fill="url(#shade)"/>
+  <text x="64" y="112" fill="#d7b67f" font-family="sans-serif" font-weight="700" font-size="18" letter-spacing="4">СТУДІЯ ЦИФРОВОЇ РОЗРОБКИ</text>
+  <text x="58" y="315" fill="#f8f4ea" font-family="Georgia,serif" font-size="142" letter-spacing="-9">OKK Works</text>
+  <text x="66" y="405" fill="#f8f4ea" font-family="Georgia,serif" font-size="42">Вебсайти · Telegram-боти · Автоматизація</text>
 </svg>

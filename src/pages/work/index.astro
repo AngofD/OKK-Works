@@ -1,21 +1,94 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import ProjectCard from '@/components/ProjectCard.astro';
+import ProjectChapter from '@/components/ProjectChapter.astro';
 import { categories, projects } from '@/content/projects';
+import { withBase } from '@/lib/paths';
+
+const availableCategories = categories.filter((category) => category === 'Усі' || projects.some((project) => project.category === category));
+const conceptCount = projects.filter((project) => project.status === 'Концепт-проєкт').length;
+const personalCount = projects.filter((project) => project.status === 'Особистий продукт').length;
+const categoryOrder: Record<string, number> = { 'Вебсайти': 0, Telegram: 1, 'Автоматизація': 2 };
+const orderedProjects = [...projects].sort((first, second) => (categoryOrder[first.category] ?? 99) - (categoryOrder[second.category] ?? 99));
 ---
 
-<BaseLayout title="Work" description="Selected websites, Telegram bots, and business automation by OKK Works.">
-  <section class="page-hero">
-    <p class="eyebrow">Selected projects / Archive</p>
-    <h1>Work made<br/>to work.</h1>
-    <div class="page-hero-bottom"><p>Products shaped around a real job: communicate clearly, remove friction, or make a process run better.</p><p>{projects.length.toString().padStart(2, '0')} projects / Growing archive</p></div>
-  </section>
+<BaseLayout title="Портфоліо сайтів і Telegram-ботів" description="Кейси OKK Works: вебсайти для бізнесу, Telegram-бот для запису та цифрові концепти з продуманими UX-сценаріями." pageType="CollectionPage">
+  <header class="page-hero work-hero">
+    <div class="page-hero-shade" aria-hidden="true"></div>
+    <div class="page-hero-content">
+      <p class="eyebrow">Портфоліо</p>
+      <h1>Наші роботи</h1>
+      <div class="page-hero-bottom">
+        <p>Нижче зібрані приклади сайтів і цифрових продуктів, які показують підхід OKK Works до структури, дизайну й запуску.</p>
+        <p><span>{projects.length.toString().padStart(2, '0')}</span> проєкти в портфоліо</p>
+      </div>
+    </div>
+  </header>
   <section class="work-index">
-    <div class="filters" role="group" aria-label="Filter projects" data-filters>
-      {categories.map((category, index) => <button class:list={['filter-button', { active: index === 0 }]} type="button" data-filter={category} aria-pressed={index === 0 ? 'true' : 'false'}>{category}</button>)}
+    {availableCategories.length > 2 && <div class="work-filter-wrap reveal"><div><p class="eyebrow">Навігація по роботах</p><h2>Який продукт вам потрібен?</h2><p>Оберіть категорію, щоб залишити на екрані лише релевантні приклади. Це не змінює сторінку - лише звужує добірку.</p></div><div class="filters" role="group" aria-label="Оберіть тип продукту" data-filters>
+      {availableCategories.map((category, index) => { const count = category === 'Усі' ? projects.length : projects.filter((project) => project.category === category).length; const description = category === 'Усі' ? 'Усі формати' : category === 'Вебсайти' ? 'Сайти для бізнесу' : 'Боти та чат-сценарії'; return <button class:list={['filter-button', { active: index === 0 }]} type="button" data-filter={category} aria-pressed={index === 0 ? 'true' : 'false'}><span><em>{description}</em>{category}</span><small>{count.toString().padStart(2, '0')} проєкти</small><b aria-hidden="true">↗</b></button>; })}
+    </div></div>}
+    <div class="work-projects" aria-live="polite" data-project-list>
+      {orderedProjects.map((project, index) => <ProjectChapter project={project} index={index} />)}
     </div>
-    <div aria-live="polite" data-project-list>
-      {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
-    </div>
+    <section class="demo-lab reveal" aria-labelledby="demo-lab-title">
+      <div class="demo-lab-intro">
+        <div class="demo-lab-kicker"><span>Профільна добірка</span><b>02 / сайти</b></div>
+        <p class="eyebrow">Демо-сайти / Барбершопи</p>
+        <h2 id="demo-lab-title">Приклади сайтів<br/><em>для барбершопів.</em></h2>
+        <p>Дві демонстраційні концепції, щоб побачити, як може виглядати сайт вашого барбершопу: різна атмосфера, зрозумілі послуги та короткий шлях до запису.</p>
+        <div class="demo-lab-note"><span>01</span><p>Не готові шаблони, а напрямки для індивідуального сайту під конкретний бренд і формат роботи.</p></div>
+        <a href={withBase('/demos/')}>Переглянути всю добірку <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="demo-lab-links">
+        <a class="demo-card ritual-card" href={withBase('/demos/ritual/')}>
+          <span class="demo-card-meta"><b>01</b><i>Сайт барбершопу · dark / booking-first</i></span>
+          <span class="demo-card-scene" aria-hidden="true"><i>R</i><small>Концепція сайту</small><b>RITUAL</b><span>Твоя форма.<br/>Наш ритуал.</span></span>
+          <span class="demo-card-footer"><strong>RITUAL</strong><b>Відкрити сайт ↗</b></span>
+        </a>
+        <a class="demo-card maison-card" href={withBase('/demos/kontur/')}>
+          <span class="demo-card-meta"><b>02</b><i>Сайт барбершопу · private grooming</i></span>
+          <span class="demo-card-scene" aria-hidden="true"><i>M17</i><small>Концепція сайту</small><b>MAISON<br/>SEVENTEEN</b><span>Private grooming<br/>in Kyiv</span></span>
+          <span class="demo-card-footer"><strong>MAISON 17</strong><b>Відкрити сайт ↗</b></span>
+        </a>
+      </div>
+    </section>
+    <div class="archive-note reveal"><p class="eyebrow">Чесно про портфоліо</p><p>{personalCount} особистий продукт і {conceptCount} концепт-кейси показують підхід OKK Works до UX, дизайну й frontend-реалізації. Реальні клієнтські кейси додаватимемо з контекстом задачі, результатами та зовнішніми посиланнями.</p><a class="text-link dark" href={withBase('/contact/')}>Поговорити про вашу задачу <span aria-hidden="true">↗</span></a></div>
   </section>
 </BaseLayout>
+
+<style is:global>
+  .demo-lab { display: grid; grid-template-columns: .72fr 1.28fr; gap: clamp(36px, 6vw, 96px); align-items: stretch; margin-top: 100px; padding: 86px 0 78px; border-block: 1px solid var(--line-dark); color: var(--ink); }
+  .demo-lab-intro { display: flex; flex-direction: column; }
+  .demo-lab-kicker { display: flex; justify-content: space-between; gap: 20px; padding-bottom: 18px; border-bottom: 1px solid var(--line-dark); color: var(--muted-dark); font-size: 8px; font-weight: 760; letter-spacing: .13em; text-transform: uppercase; }
+  .demo-lab-kicker b { color: var(--sand-dark); }
+  .demo-lab-intro > .eyebrow { margin-top: 38px; }
+  .demo-lab h2 { margin: 16px 0 28px; font: 500 clamp(46px, 5.5vw, 78px)/.9 var(--font-display); letter-spacing: -.08em; }
+  .demo-lab h2 em { color: #a55231; font-style: normal; }
+  .demo-lab-intro > p:not(.eyebrow) { max-width: 410px; color: var(--muted-dark); font-size: 14px; line-height: 1.6; }
+  .demo-lab-note { display: grid; grid-template-columns: 28px 1fr; gap: 12px; max-width: 420px; margin-top: 34px; padding-top: 15px; border-top: 1px solid var(--line-dark); color: var(--ink); }
+  .demo-lab-note > span { color: var(--sand-dark); font-size: 9px; font-weight: 760; letter-spacing: .1em; }
+  .demo-lab-note p { font-size: 11px; line-height: 1.5; }
+  .demo-lab-intro > a { display: inline-flex; gap: 12px; margin-top: 28px; padding-bottom: 7px; border-bottom: 1px solid currentColor; color: var(--ink); font-size: 11px; font-weight: 760; }
+  .demo-lab-links { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .demo-card { position: relative; min-width: 0; min-height: 500px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; padding: 18px; border-radius: 26px; transition: transform .28s var(--ease), box-shadow .28s; }
+  .demo-card:hover { transform: translateY(-7px); box-shadow: 0 28px 70px rgba(12, 18, 22, .2); }
+  .demo-card::after { content: ''; position: absolute; right: -20%; bottom: -28%; width: 80%; aspect-ratio: 1; border: 1px solid currentColor; border-radius: 50%; opacity: .14; pointer-events: none; }
+  .ritual-card { color: #f0ede4; background: #111; }
+  .maison-card { color: #17232a; background: #dfe975; }
+  .demo-card-meta, .demo-card-footer { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+  .demo-card-meta { padding-bottom: 13px; border-bottom: 1px solid currentColor; font-size: 8px; letter-spacing: .12em; text-transform: uppercase; }
+  .demo-card-meta i { opacity: .66; font-style: normal; }
+  .demo-card-scene { position: relative; min-height: 330px; display: flex; flex-direction: column; justify-content: center; padding: 22px; overflow: hidden; }
+  .demo-card-scene > i { position: absolute; right: -10px; bottom: -34px; opacity: .07; font: 500 190px/.8 var(--font-display); letter-spacing: -.12em; }
+  .demo-card-scene > b, .demo-card-scene > small, .demo-card-scene > span { position: relative; z-index: 1; }
+  .demo-card-scene > b { margin-top: 11px; font: 500 clamp(38px, 4vw, 65px)/.78 var(--font-display); letter-spacing: -.09em; }
+  .demo-card-scene > small { opacity: .7; font-size: 8px; font-weight: 760; letter-spacing: .13em; text-transform: uppercase; }
+  .demo-card-scene > span { margin-top: 24px; opacity: .72; font-size: 11px; font-weight: 650; line-height: 1.45; }
+  .ritual-card .demo-card-scene > b { color: #ff5a32; }
+  .maison-card .demo-card-scene > b { font-family: var(--font-ui); font-weight: 850; letter-spacing: -.08em; }
+  .demo-card-footer { padding-top: 13px; border-top: 1px solid currentColor; }
+  .demo-card-footer strong { font-size: 12px; letter-spacing: -.03em; }
+  .demo-card-footer > b { opacity: .72; font-size: 9px; letter-spacing: .09em; text-transform: uppercase; }
+  @media (max-width: 900px) { .demo-lab { grid-template-columns: 1fr; } }
+  @media (max-width: 620px) { .demo-lab { margin-top: 72px; padding-block: 58px; } .demo-lab-kicker { margin-bottom: 0; } .demo-lab-intro > .eyebrow { margin-top: 30px; } .demo-lab-links { grid-template-columns: 1fr; gap: 14px; } .demo-card { min-height: 390px; } .demo-card-scene { min-height: 250px; } }
+</style>

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://okk.works/sitemap.xml
+Sitemap: https://okkworks.com/sitemap.xml

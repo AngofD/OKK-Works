@@ -1,0 +1,34 @@
+---
+import DemoLayout from '@/layouts/DemoLayout.astro';
+---
+
+<DemoLayout title="Barbershop demos" description="Дві демонстраційні концепції сайтів для барбершопів від OKK Works." theme="ritual">
+  <div class="demo-hub">
+    <header class="demo-hub-header"><a href="/" class="demo-hub-brand">OKK Works</a><span>BARBERSHOP DEMOS / 2026</span></header>
+    <section class="demo-hub-hero"><p class="ritual-kicker">Профільна добірка для outreach</p><h1>Два способи<br /><em>показати рівень.</em></h1><p>Готові демонстраційні сайти для барбершопів: різна атмосфера, одна вимога — клієнту має бути легко обрати послугу й записатися.</p></section>
+    <div class="demo-hub-grid"><a class="demo-hub-card hub-ritual" href="/demos/ritual/"><span>01 / dark booking-first</span><strong>RITUAL</strong><i>Твоя форма. Наш ритуал. ↗</i></a><a class="demo-hub-card hub-kontur" href="/demos/kontur/"><span>02 / private grooming house</span><strong>MAISON 17</strong><i>Час для себе. ↗</i></a></div>
+    <footer class="demo-hub-footer"><span>Демо-концепції OKK Works</span><a href="mailto:contact@okkworks.com">Обговорити свій сайт ↗</a></footer>
+  </div>
+</DemoLayout>
+
+<style is:global>
+  .demo-hub { min-height: 100vh; padding: 24px clamp(20px, 5vw, 80px); color: #eee9dc; background: #101010; }
+  .demo-hub-header { display: flex; justify-content: space-between; padding-bottom: 24px; border-bottom: 1px solid rgba(238,233,220,.2); color: #9b9a91; font-size: 10px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+  .demo-hub-brand { color: #eee9dc; font-size: 17px; letter-spacing: -.07em; text-transform: none; }
+  .demo-hub-hero { max-width: 760px; padding: 118px 0 96px; }
+  .demo-hub-hero .ritual-kicker { color: #ff5a32; font-size: 10px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+  .demo-hub-hero h1 { margin: 22px 0 28px; font: 500 clamp(62px, 10vw, 148px)/.82 'Lora Variable', serif; letter-spacing: -.1em; }
+  .demo-hub-hero h1 em { color: #ff5a32; font-style: normal; }
+  .demo-hub-hero > p:last-child { max-width: 440px; color: #9b9a91; font-size: 15px; }
+  .demo-hub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .demo-hub-card { min-height: 330px; display: flex; flex-direction: column; justify-content: space-between; padding: 22px; transition: transform .25s; }
+  .demo-hub-card:hover { transform: translateY(-6px); }
+  .demo-hub-card span { font-size: 10px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+  .demo-hub-card strong { font: 500 clamp(56px, 9vw, 120px)/.8 'Lora Variable', serif; letter-spacing: -.1em; }
+  .demo-hub-card i { font-size: 12px; font-style: normal; font-weight: 700; }
+  .hub-ritual { color: #101010; background: #ff5a32; }
+  .hub-kontur { color: #17232a; background: #e5ef73; }
+  .demo-hub-footer { display: flex; justify-content: space-between; gap: 20px; padding-top: 26px; color: #9b9a91; font-size: 11px; }
+  .demo-hub-footer a { color: #eee9dc; }
+  @media (max-width: 700px) { .demo-hub { padding-inline: 20px; } .demo-hub-header span { display: none; } .demo-hub-hero { padding-block: 95px 70px; } .demo-hub-grid { grid-template-columns: 1fr; } .demo-hub-card { min-height: 250px; } .demo-hub-footer { display: grid; } }
+</style>

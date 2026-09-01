@@ -1,8 +1,11 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Icon from '@/components/Icon.astro';
-import ProjectVisual from '@/components/ProjectVisual.astro';
+import MovaCase from '@/components/MovaCase.astro';
+import SignatureCase from '@/components/SignatureCase.astro';
 import { getNextProject, projects, type Project } from '@/content/projects';
+import { withBase } from '@/lib/paths';
+import { absoluteUrl, type JsonLd } from '@/lib/seo';
 
 export function getStaticPaths() {
   return projects.map((project) => ({ params: { slug: project.slug }, props: { project } }));
@@ -11,32 +14,38 @@ export function getStaticPaths() {
 interface Props { project: Project; }
 const { project } = Astro.props;
 const next = getNextProject(project.slug);
-const externalLabel = project.category === 'Telegram Bots' ? 'Open Telegram Bot' : 'View Live Project';
+const hasDistinctNext = projects.length > 1 && next.slug !== project.slug;
+const caseTitle = project.category === 'Telegram'
+  ? `${project.title}: кейс Telegram-бота`
+  : `${project.title}: кейс вебсайту`;
+const projectUrl = absoluteUrl(`/work/${project.slug}/`);
+const projectSchemas: JsonLd[] = [
+  {
+    '@type': 'CreativeWork',
+    '@id': `${projectUrl}#project`,
+    url: projectUrl,
+    name: project.title,
+    headline: project.headline,
+    description: project.summary,
+    image: [absoluteUrl(project.coverImage), absoluteUrl(project.mobileImage)],
+    dateCreated: project.year,
+    inLanguage: 'uk',
+    genre: project.category,
+    creator: { '@id': absoluteUrl('/#organization') },
+    ...(project.liveUrl ? { sameAs: project.liveUrl } : {}),
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Головна', item: absoluteUrl('/') },
+      { '@type': 'ListItem', position: 2, name: 'Роботи', item: absoluteUrl('/work/') },
+      { '@type': 'ListItem', position: 3, name: project.title, item: projectUrl },
+    ],
+  },
+];
 ---
 
-<BaseLayout title={`${project.title} case study`} description={project.summary}>
-  <article>
-    <header class="case-hero">
-      <div class="case-topline"><span>{project.visualLabel}</span><div><span>{project.category}</span><span>{project.year}</span><span>{project.status}</span></div></div>
-      <h1>{project.title}<span>{project.headline}</span></h1>
-    </header>
-    <div class="case-preview"><ProjectVisual project={project} large /></div>
-    <section class="case-overview">
-      <div class="overview-lead reveal"><p class="eyebrow">Overview</p><p>{project.overview}</p></div>
-      <div class="case-columns">
-        <div class="case-block reveal"><p class="eyebrow">The challenge</p><h2>What needed to change.</h2><p>{project.challenge}</p></div>
-        <div class="case-block reveal"><p class="eyebrow">The solution</p><h2>How we approached it.</h2><p>{project.solution}</p></div>
-      </div>
-      <div class="deliverables reveal"><h2>What we built.</h2><ul class="deliverables-grid">{project.built.map((item, index) => <li><span>0{index + 1}</span>{item}</li>)}</ul></div>
-    </section>
-    <section class="case-gallery" aria-label="Project presentation">
-      <div class="gallery-frame reveal"><ProjectVisual project={project} large /></div>
-      <div class="gallery-detail reveal"><span>System / Detail</span><p>Built as one coherent experience.</p></div>
-      <div class="capabilities-panel reveal"><h2>Capabilities</h2><ul>{project.capabilities.map((item, index) => <li><span>{item}</span><small>0{index + 1}</small></li>)}</ul></div>
-    </section>
-    <section class="case-outcome">
-      <div class="outcome-grid"><p class="eyebrow">Outcome</p><div class="outcome-content reveal"><p>{project.outcome}</p><div class="outcome-actions">{project.liveUrl && <a class="button" href={project.liveUrl} target="_blank" rel="noreferrer">{externalLabel} <Icon name="arrow" /></a>}{project.githubUrl && <a class="button" href={project.githubUrl} target="_blank" rel="noreferrer">GitHub <Icon name="arrow" /></a>}{!project.liveUrl && <span class="pending-label">External link pending real project data</span>}</div></div></div>
-    </section>
-  </article>
-  <a class="next-project" href={`/work/${next.slug}/`}><span>Next project</span><div><h2>{next.title}</h2><Icon name="arrow" size={70} /></div></a>
+<BaseLayout title={caseTitle} description={project.summary} image={project.coverImage} imageAlt={`${project.title} — кейс OKK Works`} imageWidth={1440} imageHeight={900} schemas={projectSchemas}>
+  {project.slug === 'beauty-site' ? <MovaCase project={project} /> : <SignatureCase project={project} />}
+  {hasDistinctNext ? <a class="next-project" href={withBase(`/work/${next.slug}/`)}><span>Наступний проєкт</span><div><h2>{next.title}</h2><Icon name="arrow" size={70} /></div></a> : <a class="next-project" href={withBase('/contact/')}><span>Наступний проєкт може бути вашим</span><div><h2>Обговорімо задачу</h2><Icon name="arrow" size={70} /></div></a>}
 </BaseLayout>

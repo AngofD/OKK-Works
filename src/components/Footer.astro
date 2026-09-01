@@ -1,33 +1,32 @@
 ---
 import { site } from '@/content/site';
+import { withBase } from '@/lib/paths';
 import Icon from './Icon.astro';
 
 const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
-  <div class="footer-top">
-    <a class="footer-wordmark" href="/">OKK<span>WORKS</span></a>
-    <p>Digital products that work.</p>
+  <div class="footer-lead">
+    <a class="footer-wordmark" href={withBase('/')}>OKK Works</a>
+    <p>Незалежна студія цифрової розробки для українського бізнесу.</p>
   </div>
-  <div class="footer-grid">
-    <div>
-      <p class="eyebrow">Start a conversation</p>
-      <a class="footer-email" href={`mailto:${site.email}`}>{site.email}<Icon name="arrow" /></a>
+  <div class="footer-main">
+    <div class="footer-contact">
+      <p class="eyebrow">Почати розмову</p>
+      <a href={`mailto:${site.email}`}>{site.email}<Icon name="arrow" /></a>
     </div>
-    <nav aria-label="Footer navigation">
-      <a href="/work/">Work</a>
-      <a href="/#services">Services</a>
-      <a href="/contact/">Contact</a>
+    <nav aria-label="Навігація у футері">
+      <a href={withBase('/#services')}>Послуги</a>
+      <a href={withBase('/work/')}>Роботи</a>
+      <a href={withBase('/#process')}>Процес</a>
+      <a href={withBase('/contact/')}>Контакти</a>
     </nav>
-    <div class="footer-socials">
-      {site.telegram ? <a href={site.telegram} rel="noreferrer" target="_blank">Telegram <span>-&gt;</span></a> : <span>Telegram <small>link pending</small></span>}
-      {site.github ? <a href={site.github} rel="noreferrer" target="_blank">GitHub <span>-&gt;</span></a> : <span>GitHub <small>link pending</small></span>}
-    </div>
+    {site.telegram && <div class="footer-external"><a href={site.telegram} rel="noreferrer" target="_blank">Telegram <Icon name="arrow" size={15} /></a></div>}
   </div>
   <div class="footer-bottom">
     <span>&copy; {year} OKK Works</span>
-    <span>Independent studio</span>
-    <a href="/privacy/">Privacy</a>
+    <span>Україна / Працюємо дистанційно</span>
+    <a href={withBase('/privacy/')}>Приватність</a>
   </div>
 </footer>

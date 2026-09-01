@@ -1,0 +1,56 @@
+---
+import DemoLayout from '@/layouts/DemoLayout.astro';
+---
+
+<DemoLayout title="RITUAL Barber Studio" description="Концепт барбершопу з booking-first UX, послугами, майстрами та швидким записом." theme="ritual">
+  <div class="ritual-wrap">
+    <header class="ritual-nav">
+      <a class="ritual-logo" href="#top" data-scroll-link>RITUAL <small>barber studio</small></a>
+      <nav aria-label="Навігація RITUAL"><a href="#services" data-scroll-link>Послуги</a><a href="#team" data-scroll-link>Майстри</a><a href="#contact" data-scroll-link>Контакти</a></nav>
+      <button class="demo-button" type="button" data-booking-trigger>Записатися <span>↗</span></button>
+    </header>
+
+    <section class="ritual-hero" id="top">
+      <div class="ritual-hero-copy demo-reveal">
+        <p class="ritual-kicker">Київ / щодня 10:00 — 21:00</p>
+        <h1>Твоя форма.<br /><em>Наш ритуал.</em></h1>
+        <p class="ritual-lede">Барбершоп для тих, хто цінує точність, добру розмову і час, який не треба витрачати даремно.</p>
+        <div class="ritual-actions"><button class="demo-button" type="button" data-booking-trigger>Обрати час <span>↗</span></button><a class="demo-button" href="#services" data-scroll-link>Подивитися послуги <span>↓</span></a></div>
+        <div class="ritual-meta"><div><strong>4.9</strong>рейтинг гостей</div><div><strong>8 років</strong>у формі</div><div><strong>15 хв</strong>до найближчого слоту</div></div>
+      </div>
+      <div class="ritual-hero-visual demo-reveal">
+        <div class="ritual-photo"><span class="ritual-photo-tag">Hands / steel / craft</span></div>
+        <div class="ritual-coordinate"><strong>01:15</strong><span>Наступний<br />вільний слот</span></div>
+        <div class="ritual-orbit">RITUAL<br /><span>always in shape</span></div>
+      </div>
+    </section>
+
+    <div class="ritual-marquee" aria-label="Переваги RITUAL"><span>точна стрижка</span><span>кава після 10:00</span><span>без поспіху</span><span>чіткий запис</span><span>точна стрижка</span></div>
+
+    <section class="ritual-section" id="services">
+      <div class="ritual-section-head demo-reveal"><p class="ritual-label">Послуги / без зайвого</p><h2>Обери свій <em>ритуал.</em></h2></div>
+      <div class="ritual-services">
+        <article class="ritual-service demo-reveal"><b>01</b><div><h3>Classic cut</h3><p>Стрижка ножицями та машинкою</p></div><time>45 хв<br />650 ₴</time></article>
+        <article class="ritual-service demo-reveal"><b>02</b><div><h3>Beard reset</h3><p>Форма, контури та гаряче рушник</p></div><time>30 хв<br />450 ₴</time></article>
+        <article class="ritual-service demo-reveal"><b>03</b><div><h3>Full ritual</h3><p>Стрижка + борода + styling</p></div><time>75 хв<br />950 ₴</time></article>
+        <article class="ritual-service demo-reveal"><b>04</b><div><h3>Kids cut</h3><p>Спокійна перша стрижка без стресу</p></div><time>35 хв<br />500 ₴</time></article>
+      </div>
+    </section>
+
+    <section class="ritual-booking-band demo-reveal" id="contact">
+      <h2>Сьогодні ще є<br /><em>три вікна.</em></h2>
+      <div class="ritual-slots"><button class="ritual-slot" type="button" data-booking-trigger><small>сьогодні / 16:30</small><strong>Артем</strong><span>Classic cut ↗</span></button><button class="ritual-slot" type="button" data-booking-trigger><small>сьогодні / 18:00</small><strong>Софія</strong><span>Full ritual ↗</span></button><button class="ritual-slot" type="button" data-booking-trigger><small>завтра / 11:30</small><strong>Марк</strong><span>Beard reset ↗</span></button></div>
+    </section>
+
+    <section class="ritual-section" id="team">
+      <div class="ritual-section-head demo-reveal"><p class="ritual-label">Команда / 03</p><h2>Люди, які<br /><em>бачать деталі.</em></h2></div>
+      <div class="ritual-team"><article class="ritual-person demo-reveal"><div><h3>Артем Лев</h3><p>Fade / classic / 8 років</p></div></article><article class="ritual-person demo-reveal"><div><h3>Софія К.</h3><p>Texture / colour / 6 років</p></div></article><article class="ritual-person demo-reveal"><div><h3>Марк Вовк</h3><p>Beard / shape / 11 років</p></div></article></div>
+    </section>
+
+    <footer class="ritual-footer"><strong>RITUAL — barber studio</strong><span>вул. Велика Васильківська, 42 / Київ</span><span>Instagram ↗</span></footer>
+  </div>
+
+  <dialog class="demo-dialog" data-booking-dialog aria-labelledby="ritual-booking-title">
+    <div class="demo-dialog-inner"><div class="demo-dialog-top"><h2 id="ritual-booking-title">Знайдемо твій час.</h2><button class="demo-dialog-close" type="button" aria-label="Закрити" data-booking-close>×</button></div><form class="demo-form" data-booking-form><label>Ім’я<input required name="name" placeholder="Як до вас звертатися?" /></label><label>Послуга<select name="service"><option>Classic cut</option><option>Beard reset</option><option>Full ritual</option></select></label><label>Бажаний час<input required name="time" type="datetime-local" /></label><button class="demo-button" type="submit">Надіслати запит <span>↗</span></button></form><p class="demo-status" data-booking-status hidden>Запит прийнято. Адміністратор напише вам для підтвердження.</p></div>
+  </dialog>
+</DemoLayout>
