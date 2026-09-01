@@ -169,22 +169,27 @@ const liveLabel = project.category === 'Telegram' ? 'Відкрити бота �
   .mova-preview-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px 22px;
+    gap: 10px;
     margin-top: auto;
     padding-top: 30px;
   }
   .mova-preview-actions a {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
-    padding-bottom: 7px;
-    border-bottom: 1px solid rgba(240, 228, 219, .32);
+    min-height: 46px;
+    padding: 0 18px;
+    border: 1px solid rgba(240, 228, 219, .3);
+    border-radius: 999px;
     color: var(--mova-paper);
-    font-size: 10px;
+    background: rgba(240, 228, 219, .06);
+    font-size: 11px;
     font-weight: 720;
-    transition: color var(--fast), border-color var(--fast);
+    transition: color var(--fast), background var(--fast), border-color var(--fast), transform var(--fast) var(--ease);
   }
-  .mova-preview-actions a:hover { color: var(--mova-blush); border-color: var(--mova-blush); }
+  .mova-preview-actions a:first-child { color: var(--mova-deep); border-color: var(--mova-paper); background: var(--mova-paper); }
+  .mova-preview-actions a:hover { color: var(--mova-deep); border-color: var(--mova-blush); background: var(--mova-blush); transform: translateY(-2px); }
   .mova-preview-actions svg { transition: transform var(--fast) var(--ease); }
   .mova-preview-actions a:hover svg { transform: translate(3px, -3px); }
   .mova-preview-media {
@@ -257,7 +262,7 @@ const liveLabel = project.category === 'Telegram' ? 'Відкрити бота �
     .mova-preview-copy h2 { margin-top: 30px; font-size: clamp(58px, 20vw, 86px); }
     .mova-preview-statement { margin-top: 42px; font-size: 28px; }
     .mova-preview-actions { margin-top: 30px; }
-    .mova-preview-actions a { min-height: 38px; }
+    .mova-preview-actions a { min-height: 48px; padding-inline: 17px; }
     .mova-preview-media,
     .mova-preview-media :global(.project-visual),
     .mova-portfolio-preview.large .mova-preview-media,

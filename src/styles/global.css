@@ -722,6 +722,7 @@ em { font-weight: 430; }
 .portfolio-panel-label i { width: 44px; height: 1px; background: var(--line-dark); }
 .portfolio-panel-label span:last-child { margin-left: auto; color: var(--sand-dark); }
 .project-card { width: min(100%, 1360px); margin: 0 auto; }
+.project-card + .project-card { margin-top: clamp(24px, 3.5vw, 52px); }
 .project-card[hidden] { display: none; }
 .project-media {
   position: relative;
