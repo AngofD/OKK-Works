@@ -1,0 +1,22 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import MetalSculpture from '@/components/MetalSculpture.astro';
+import StudioIcon from '@/components/StudioIcon.astro';
+import ContactInvitation from '@/components/ContactInvitation.astro';
+const steps = [
+  ['chat', 'Обговорення', 'Слухаємо, уточнюємо, домовляємось.', 'Визначаємо задачу, аудиторію, потрібні функції та обмеження. Узгоджуємо обсяг, вартість і порядок оплати.'],
+  ['file', 'Прототип', 'Спочатку — логіка.', 'Показуємо структуру сторінок або сценарій бота. Перевіряємо, чи легко користувачеві дійти до потрібної дії.'],
+  ['design', 'Дизайн', 'Ваша ідентичність. Зручний інтерфейс.', 'Узгоджуємо візуальний напрям, ключові екрани та адаптацію до телефона.'],
+  ['code', 'Розробка', 'Перетворюємо задум на продукт.', 'Реалізуємо погоджені функції. Показуємо проміжний результат і вносимо правки в межах домовленого обсягу.'],
+  ['check', 'Тестування', 'Перевіряємо справжні сценарії.', 'Проходимо форми, переходи та основні дії. Перевіряємо мобільну версію, доступність і швидкість.'],
+  ['launch', 'Запуск', 'Усе готово до першого відвідувача.', 'Підключаємо домен і HTTPS, перевіряємо робочу версію. Передаємо доступи та пояснюємо, як користуватися.'],
+  ['support', 'Підтримка', 'Залишаємо простір для розвитку.', 'За потреби домовляємось про оновлення, технічну підтримку й нові функції. Умови погоджуємо окремо.'],
+];
+---
+<BaseLayout title="Процес роботи — від ідеї до запуску" description="Як OKK Works створює цифрові продукти: обговорення, прототип, дизайн, розробка, перевірка, запуск і підтримка.">
+  <div class="shell">
+    <header class="process-intro"><div><p class="eyebrow">Прозоро на кожному етапі</p><h1>Від ідеї<br/>до запуску.</h1><p>Ви розумієте, що ми робимо,<br/>що буде далі та коли потрібен ваш відгук.</p></div><MetalSculpture id="process-metal" compact/></header>
+    <ol class="process-route">{steps.map(([icon, title, lead, copy], index) => <li class="route-step reveal"><span class="route-number mono">0{index + 1}</span><div class="route-title"><StudioIcon name={icon} size={28}/><h2>{title}</h2></div><div class="route-copy"><h3>{lead}</h3><p>{copy}</p></div></li>)}</ol>
+  </div>
+  <ContactInvitation/>
+</BaseLayout>

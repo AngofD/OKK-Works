@@ -6,6 +6,6 @@ export const site = {
   github: '', // TODO: add the public GitHub URL.
   language: 'uk',
   locale: 'uk_UA',
-  ogImage: '/og-cover.png',
+  ogImage: '/okk-works-preview.webp',
   description: 'OKK Works створює швидкі вебсайти, Telegram-боти та автоматизацію для українського бізнесу — від структури й дизайну до запуску та підтримки.',
 } as const;

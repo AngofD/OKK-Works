@@ -1,0 +1,19 @@
+---
+import { studioServices } from '@/content/studio';
+import { withBase } from '@/lib/paths';
+import StudioIcon from './StudioIcon.astro';
+import ServiceDiagram from './ServiceDiagram.astro';
+interface Props { expanded?: boolean; }
+const { expanded = false } = Astro.props;
+---
+<div class="service-accordion" data-accordion>
+  {studioServices.map((service, index) => <details class="service-item" open={index === 0} id={`service-${service.key}`}>
+    <summary><span class="service-number mono">{String(index + 1).padStart(2, '0')}</span><span class="service-icon"><StudioIcon name={service.icon} size={28} /></span><span class="service-title"><strong>{service.title}</strong><span>{service.summary}</span></span><span class="service-chevron"><StudioIcon name="chevron" /></span></summary>
+    <div class="service-content"><div class="service-body"><ServiceDiagram kind={service.key} /><div class="service-features">
+      {expanded && <p class="service-detail">{service.detail}</p>}
+      <ul>{service.features.map(([icon, title, copy]) => <li><StudioIcon name={icon} /><div><h3>{title}</h3><p>{copy}</p></div></li>)}</ul>
+      <a class="button button-primary" href={withBase(`/contact/?service=${service.key}`)}>{service.cta}<StudioIcon name="arrow" size={19} /></a>
+      <p class="service-note">{service.note}</p>
+    </div></div></div>
+  </details>)}
+</div>

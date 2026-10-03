@@ -1,0 +1,12 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ServiceAccordion from '@/components/ServiceAccordion.astro';
+import ContactInvitation from '@/components/ContactInvitation.astro';
+---
+<BaseLayout title="Послуги: вебсайти, Telegram-боти й автоматизація" description="Розробка сайтів, Telegram-ботів, інтеграцій та онлайн-запису. OKK Works — від першої задачі до запуску та підтримки.">
+  <div class="shell">
+    <header class="page-intro"><p class="eyebrow">Від задачі до рішення</p><div><h1>Послуги.</h1><p>Те, що потрібно вашому бізнесу.<br/>Без зайвих функцій і складних кроків.</p></div></header>
+    <section class="services-page" aria-label="Напрями роботи"><ServiceAccordion expanded/></section>
+  </div>
+  <ContactInvitation/>
+</BaseLayout>

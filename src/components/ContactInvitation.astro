@@ -1,0 +1,9 @@
+---
+import MetalSculpture from './MetalSculpture.astro';
+import StudioIcon from './StudioIcon.astro';
+import { site } from '@/content/site';
+import { withBase } from '@/lib/paths';
+---
+<section class="contact-invitation" aria-labelledby="invitation-title" id="about">
+  <div class="shell invitation-inner reveal"><div class="invitation-copy"><h2 id="invitation-title">ОБГОВОРИМО<br/>ВАШ ПРОЄКТ?</h2><p>Напишіть, що хочете створити.<br/>Разом визначимо наступний крок.</p><div class="invitation-actions"><a class="email-link" href={`mailto:${site.email}`}><StudioIcon name="mail" size={28}/>{site.email}</a><a class="button button-outline" href={withBase('/contact/')}>Написати нам<StudioIcon name="arrow"/></a></div></div><MetalSculpture id="contact-metal" compact /></div>
+</section>

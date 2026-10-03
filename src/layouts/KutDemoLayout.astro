@@ -1,0 +1,61 @@
+---
+import '@fontsource/barlow-condensed/500.css';
+import '@fontsource/barlow-condensed/600.css';
+import '@fontsource/barlow-condensed/700.css';
+import '@fontsource-variable/ibm-plex-sans';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import '@/styles/kut-01.css';
+import { absoluteUrl } from '@/lib/seo';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const canonical = absoluteUrl(Astro.url.pathname);
+const image = absoluteUrl('/assets/demos/kut-01/workshop.webp');
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Barbershop',
+  name: 'KUT/01 Barber Club — демонстраційна концепція',
+  description,
+  url: canonical,
+  image,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'вул. Нижній Вал, 00',
+    addressLocality: 'Київ',
+    addressCountry: 'UA',
+  },
+  openingHours: 'Mo-Su 10:00-21:00',
+  priceRange: '₴₴',
+  additionalType: 'https://schema.org/DemoApplication',
+};
+---
+
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#111315" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:url" content={canonical} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" as="image" href="/assets/demos/kut-01/workshop.webp" fetchpriority="high" />
+    <title>{title}</title>
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </head>
+  <body class="kut-page">
+    <a class="kut-skip" href="#main">Перейти до основного вмісту</a>
+    <slot />
+  </body>
+</html>

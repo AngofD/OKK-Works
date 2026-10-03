@@ -1,0 +1,434 @@
+---
+import KutDemoLayout from '@/layouts/KutDemoLayout.astro';
+
+const services = [
+  { id: 'author', name: 'Авторська стрижка', detail: 'Консультація, стрижка, укладання', duration: '60 хв', price: '900 ₴', slot: 'Сьогодні · 18:30' },
+  { id: 'combo', name: 'Стрижка + борода', detail: 'Форма, контури, догляд', duration: '90 хв', price: '1 300 ₴', slot: 'Завтра · 11:00' },
+  { id: 'beard', name: 'Оформлення бороди', detail: 'Форма, контури, гарячий рушник', duration: '45 хв', price: '650 ₴', slot: 'Сьогодні · 19:15' },
+  { id: 'buzz', name: 'Buzz cut', detail: 'Машинка, контури, укладання', duration: '35 хв', price: '600 ₴', slot: 'Завтра · 10:30' },
+  { id: 'gray', name: 'Камуфляж сивини', detail: 'Підбір тону та нанесення', duration: '40 хв', price: '700 ₴', slot: 'За запитом' },
+];
+
+const barbers = [
+  { id: 'artem', name: 'Артем', specialty: 'Класичні форми · ножиці', note: 'Будує форму з урахуванням росту волосся, щоб стрижку було легко вкладати вдома.', slot: 'Сьогодні · 18:30', services: 'Стрижки · довге волосся', position: 'left' },
+  { id: 'marko', name: 'Марко', specialty: 'Текстура · короткі стрижки', note: 'Працює з короткими формами, переходами й природною текстурою без перевантаження.', slot: 'Завтра · 11:00', services: 'Fade · buzz cut · текстура', position: 'center' },
+  { id: 'danylo', name: 'Данило', specialty: 'Борода · точні контури', note: 'Підбирає контур під риси обличчя та пояснює простий домашній догляд.', slot: 'Завтра · 13:40', services: 'Борода · комплекс', position: 'right' },
+];
+---
+
+<KutDemoLayout
+  title="KUT/01 Barber Club — демонстраційний сайт барбершопу"
+  description="Концепція сучасного барбершопу KUT/01: послуги, прозорі ціни, майстри та інтерактивний запис на зручний час."
+>
+  <header class="kut-header" data-header>
+    <a class="kut-logo" href="#top" aria-label="KUT/01 — на початок сторінки">KUT<span>/01</span></a>
+    <p class="kut-header-place">Київ · Поділ</p>
+    <p class="kut-header-hours">Щодня <span>10:00–21:00</span></p>
+    <nav class="kut-nav" aria-label="Головна навігація">
+      <a href="#services">Послуги</a>
+      <a href="#barbers">Майстри</a>
+      <a href="#space">Простір</a>
+      <a href="#contacts">Контакти</a>
+    </nav>
+    <a class="kut-header-cta" href="#booking">Записатися <span aria-hidden="true">↘</span></a>
+  </header>
+
+  <main id="main" data-services={JSON.stringify(services)} data-barbers={JSON.stringify(barbers)}>
+    <section class="kut-hero" id="top" aria-labelledby="kut-title">
+      <aside class="kut-hero-status kut-load kut-load-a" aria-label="Інформація про заклад">
+        <div class="kut-status-line"><span class="kut-status-dot"></span> Сьогодні працюємо</div>
+        <dl>
+          <div><dt>Локація</dt><dd>Нижній Вал, 00<br />Київ · Поділ</dd></div>
+          <div><dt>Графік</dt><dd>10:00–21:00<br />без вихідних</dd></div>
+          <div><dt>Найближче вікно</dt><dd class="kut-alert">18:30 · сьогодні</dd></div>
+        </dl>
+        <a href="#services">Переглянути прайс <span aria-hidden="true">↓</span></a>
+      </aside>
+
+      <div class="kut-mirror kut-load kut-load-b">
+        <img src="/assets/demos/kut-01/workshop.webp" width="1536" height="1024" alt="Робоче місце сучасної барберської майстерні з великим дзеркалом і шкіряним кріслом" fetchpriority="high" />
+        <div class="kut-mirror-shutter" aria-hidden="true"></div>
+        <div class="kut-wordmark">
+          <p>Barber Club · Kyiv</p>
+          <h1 id="kut-title">KUT<span>/01</span></h1>
+        </div>
+        <div class="kut-hero-statement">
+          <strong>Точна форма.<br />Спокійний процес.</strong>
+          <p>Стрижки, оформлення бороди та догляд без зайвої метушні.</p>
+        </div>
+      </div>
+
+      <div class="kut-rail kut-load kut-load-c" data-hero-rail>
+        <div class="kut-rail-head">
+          <span>Precision booking rail</span>
+          <b>01/05</b>
+        </div>
+        <p class="kut-rail-label">Оберіть послугу</p>
+        <div class="kut-rail-options" role="group" aria-label="Швидкий вибір послуги">
+          {services.slice(0, 4).map((service) => (
+            <button type="button" data-select-service={service.id} aria-pressed="false">
+              <span>{service.name}</span>
+              <small>{service.duration} · {service.price}</small>
+            </button>
+          ))}
+        </div>
+        <div class="kut-rail-foot">
+          <span data-rail-choice>Послугу не обрано</span>
+          <a href="#booking">Обрати послугу <span aria-hidden="true">↘</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="kut-ledger" id="services" aria-labelledby="services-title">
+      <div class="kut-section-intro">
+        <p class="kut-overline">Прайс / час / запис</p>
+        <h2 id="services-title">Усе видно<br />до запису.</h2>
+        <p>Оберіть рядок — вартість і тривалість одразу перейдуть до вашого запису.</p>
+      </div>
+      <div class="kut-ledger-table" role="table" aria-label="Послуги, тривалість, ціна та найближчий вільний час">
+        <div class="kut-ledger-row kut-ledger-header" role="row">
+          <span role="columnheader">Послуга</span><span role="columnheader">Що входить</span><span role="columnheader">Тривалість</span><span role="columnheader">Вартість</span><span role="columnheader">Найближчий час</span><span role="columnheader">Дія</span>
+        </div>
+        {services.map((service) => (
+          <div class="kut-ledger-row" role="row" data-service-row={service.id}>
+            <strong role="cell">{service.name}</strong>
+            <span role="cell">{service.detail}</span>
+            <span class="kut-mono" role="cell">{service.duration}</span>
+            <span class="kut-mono kut-price" role="cell">{service.price}</span>
+            <span class:list={['kut-mono', { 'kut-alert': service.slot !== 'За запитом' }]} role="cell"><small>Найближчий час</small>{service.slot}</span>
+            <button type="button" data-select-service={service.id} aria-pressed="false">Обрати <span aria-hidden="true">→</span></button>
+          </div>
+        ))}
+      </div>
+      <p class="kut-disclaimer">Ціни та доступний час — демонстраційний контент концепції.</p>
+    </section>
+
+    <section class="kut-booking" id="booking" aria-labelledby="booking-title" data-booking>
+      <div class="kut-booking-top">
+        <div>
+          <p class="kut-overline">Запис без листування</p>
+          <h2 id="booking-title">Зберіть свій візит.</h2>
+        </div>
+        <p>П’ять коротких кроків. Дані нікуди не надсилаються — це демонстрація сценарію.</p>
+      </div>
+
+      <div class="kut-booking-grid">
+        <nav class="kut-step-nav" aria-label="Етапи запису">
+          {['Послуга', 'Майстер', 'День', 'Час', 'Контакт'].map((label, index) => (
+            <button type="button" data-step-nav={index} disabled={index !== 0} aria-current={index === 0 ? 'step' : undefined}>
+              <span>0{index + 1}</span>{label}
+            </button>
+          ))}
+        </nav>
+
+        <div class="kut-step-stage">
+          <section class="kut-step-panel" data-step="0" aria-labelledby="step-service-title">
+            <p class="kut-step-count">01 / 05</p>
+            <h3 id="step-service-title" tabindex="-1">Що робимо?</h3>
+            <div class="kut-choice-list">
+              {services.map((service) => (
+                <button type="button" data-select-service={service.id} aria-pressed="false">
+                  <span><strong>{service.name}</strong><small>{service.detail}</small></span>
+                  <b>{service.duration}<br />{service.price}</b>
+                </button>
+              ))}
+            </div>
+            <button class="kut-next" type="button" data-next disabled>Продовжити <span aria-hidden="true">→</span></button>
+          </section>
+
+          <section class="kut-step-panel" data-step="1" aria-labelledby="step-barber-title" hidden>
+            <p class="kut-step-count">02 / 05</p>
+            <h3 id="step-barber-title" tabindex="-1">Оберіть майстра.</h3>
+            <div class="kut-choice-list kut-barber-choices">
+              {barbers.map((barber) => (
+                <button type="button" data-select-barber={barber.id} aria-pressed="false">
+                  <span><strong>{barber.name}</strong><small>{barber.specialty}</small></span><b>{barber.slot}</b>
+                </button>
+              ))}
+            </div>
+            <div class="kut-step-actions"><button type="button" data-back>Повернутися</button><button class="kut-next" type="button" data-next disabled>Продовжити <span aria-hidden="true">→</span></button></div>
+          </section>
+
+          <section class="kut-step-panel" data-step="2" aria-labelledby="step-day-title" hidden>
+            <p class="kut-step-count">03 / 05</p>
+            <h3 id="step-day-title" tabindex="-1">Коли зручно?</h3>
+            <div class="kut-date-list" role="group" aria-label="Оберіть день">
+              <button type="button" data-select-day="Сьогодні" aria-pressed="false"><small>Сьогодні</small><strong>05</strong><span>Сб</span></button>
+              <button type="button" data-select-day="Завтра" aria-pressed="false"><small>Завтра</small><strong>06</strong><span>Нд</span></button>
+              <button type="button" data-select-day="Понеділок" aria-pressed="false"><small>Післязавтра</small><strong>07</strong><span>Пн</span></button>
+            </div>
+            <div class="kut-step-actions"><button type="button" data-back>Повернутися</button><button class="kut-next" type="button" data-next disabled>Продовжити <span aria-hidden="true">→</span></button></div>
+          </section>
+
+          <section class="kut-step-panel" data-step="3" aria-labelledby="step-time-title" hidden>
+            <p class="kut-step-count">04 / 05</p>
+            <h3 id="step-time-title" tabindex="-1">Вільний час.</h3>
+            <div class="kut-time-list" role="group" aria-label="Оберіть час">
+              <button type="button" disabled><span>10:00</span><small>зайнято</small></button>
+              <button type="button" data-select-time="11:00" aria-pressed="false"><span>11:00</span><small>вільно</small></button>
+              <button type="button" data-select-time="13:40" aria-pressed="false"><span>13:40</span><small>вільно</small></button>
+              <button type="button" disabled><span>16:15</span><small>зайнято</small></button>
+              <button type="button" data-select-time="18:30" aria-pressed="false"><span>18:30</span><small>вільно</small></button>
+              <button type="button" data-select-time="19:15" aria-pressed="false"><span>19:15</span><small>вільно</small></button>
+            </div>
+            <div class="kut-step-actions"><button type="button" data-back>Повернутися</button><button class="kut-next" type="button" data-next disabled>Продовжити <span aria-hidden="true">→</span></button></div>
+          </section>
+
+          <section class="kut-step-panel" data-step="4" aria-labelledby="step-contact-title" hidden>
+            <p class="kut-step-count">05 / 05</p>
+            <h3 id="step-contact-title" tabindex="-1">Як із вами зв’язатися?</h3>
+            <form class="kut-contact-form" data-booking-form novalidate>
+              <label>Ім’я<input type="text" name="name" autocomplete="name" required minlength="2" placeholder="Ваше ім’я" /><span class="kut-error" data-error-for="name"></span></label>
+              <label>Телефон або Telegram<input type="text" name="contact" required minlength="5" placeholder="+380… або @username" /><span class="kut-error" data-error-for="contact"></span></label>
+              <label class="kut-consent"><input type="checkbox" name="consent" required /><span>Розумію, що це демонстрація і заявка нікуди не надсилається.</span></label>
+              <div class="kut-step-actions"><button type="button" data-back>Повернутися</button><button class="kut-next" type="submit">Завершити запис <span aria-hidden="true">→</span></button></div>
+            </form>
+          </section>
+
+          <section class="kut-success" data-booking-success hidden tabindex="-1" aria-live="polite">
+            <p class="kut-step-count">Готово / demo</p>
+            <h3>Демо-запис сформовано.</h3>
+            <p>У реальному проєкті адміністратор отримав би запис і підтвердив час.</p>
+            <button class="kut-next" type="button" data-reset>Почати заново <span aria-hidden="true">↺</span></button>
+          </section>
+        </div>
+
+        <aside class="kut-booking-summary" aria-label="Ваш поточний вибір" aria-live="polite">
+          <div class="kut-summary-ruler" aria-hidden="true"></div>
+          <p>Ваш вибір</p>
+          <dl>
+            <div><dt>Послуга</dt><dd data-summary-service>—</dd></div>
+            <div><dt>Майстер</dt><dd data-summary-barber>—</dd></div>
+            <div><dt>Дата</dt><dd data-summary-day>—</dd></div>
+            <div><dt>Час</dt><dd data-summary-time>—</dd></div>
+            <div><dt>Вартість</dt><dd data-summary-price>—</dd></div>
+          </dl>
+          <span data-summary-hint>Почніть із послуги — решту підкажемо.</span>
+        </aside>
+      </div>
+    </section>
+
+    <section class="kut-barbers" id="barbers" aria-labelledby="barbers-title">
+      <div class="kut-section-intro kut-section-intro-dark">
+        <p class="kut-overline">Три робочі станції</p>
+        <h2 id="barbers-title">Свій почерк.<br />Точний вибір.</h2>
+        <p>Перемикайте станції, щоб побачити спеціалізацію і найближчий вільний час.</p>
+      </div>
+      <div class="kut-stations" data-stations>
+        <div class="kut-station-image">
+          <img src="/assets/demos/kut-01/barbers.webp" width="1821" height="864" alt="Троє барберів працюють біля окремих дзеркал у сучасній майстерні" loading="lazy" />
+          <div class="kut-station-marker" aria-hidden="true"></div>
+        </div>
+        <div class="kut-station-info" aria-live="polite">
+          <p class="kut-mono">Станція <span data-station-number>01</span> / 03</p>
+          <h3 data-station-name>Артем</h3>
+          <strong data-station-specialty>Класичні форми · ножиці</strong>
+          <p data-station-note>Будує форму з урахуванням росту волосся, щоб стрижку було легко вкладати вдома.</p>
+          <dl><div><dt>Найближче вікно</dt><dd data-station-slot>Сьогодні · 18:30</dd></div><div><dt>Послуги</dt><dd data-station-services>Стрижки · довге волосся</dd></div></dl>
+          <button type="button" data-pick-featured-barber="artem">Обрати майстра <span aria-hidden="true">→</span></button>
+        </div>
+        <div class="kut-station-tabs" role="tablist" aria-label="Майстри">
+          {barbers.map((barber, index) => (
+            <button type="button" role="tab" aria-selected={index === 0 ? 'true' : 'false'} data-station-tab={barber.id}>
+              <span>0{index + 1}</span><strong>{barber.name}</strong><small>{barber.specialty}</small>
+            </button>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="kut-gallery" aria-labelledby="gallery-title">
+      <header><p class="kut-overline">Sequence of cuts</p><h2 id="gallery-title">Робота видно<br />в деталях.</h2></header>
+      <figure class="kut-gallery-a"><img src="/assets/demos/kut-01/barbers.webp" width="1821" height="864" alt="Барбер працює ножицями над класичною формою стрижки" loading="lazy" /><figcaption>01 · Форма ножицями</figcaption></figure>
+      <figure class="kut-gallery-b"><img src="/assets/demos/kut-01/workshop.webp" width="1536" height="1024" alt="Машинка, гребінець і інструменти на металевій робочій поверхні" loading="lazy" /><figcaption>02 · Інструмент / порядок</figcaption></figure>
+      <figure class="kut-gallery-c"><img src="/assets/demos/kut-01/barbers.webp" width="1821" height="864" alt="Точне оформлення бороди в робочому кріслі" loading="lazy" /><figcaption>03 · Контур бороди</figcaption></figure>
+      <figure class="kut-gallery-d"><img src="/assets/demos/kut-01/workshop.webp" width="1536" height="1024" alt="Велике дзеркало, робоче світло та шкіряне крісло в просторі KUT/01" loading="lazy" /><figcaption>04 · Простір / Поділ</figcaption></figure>
+    </section>
+
+    <section class="kut-approach" aria-labelledby="approach-title">
+      <div class="kut-approach-index" aria-hidden="true">±1</div>
+      <h2 id="approach-title">Менше шуму.<br />Більше точності.</h2>
+      <p>Ми починаємо з форми, враховуємо структуру волосся та спосіб, у який ви носите стрижку щодня. Пояснюємо процес, не нав’язуємо зайвого й залишаємо достатньо часу на кожну роботу.</p>
+      <div class="kut-tool-scale" aria-label="Принцип роботи"><span>форма</span><span>структура</span><span>деталь</span><span>догляд</span></div>
+    </section>
+
+    <section class="kut-location" id="space" aria-labelledby="location-title">
+      <div class="kut-map" aria-hidden="true">
+        <svg viewBox="0 0 720 520" role="img">
+          <path d="M-20 92H741M-20 284H741M176-20V540M506-20V540" />
+          <path class="kut-map-road" d="M-12 432C184 362 269 386 379 313S582 146 741 172" />
+          <path class="kut-map-road" d="M63-20C103 119 89 199 147 291s95 153 103 249" />
+          <circle cx="379" cy="313" r="12" />
+          <path class="kut-map-pin" d="M379 274v39h39" />
+        </svg>
+        <span class="kut-map-label kut-map-label-a">Нижній Вал</span><span class="kut-map-label kut-map-label-b">Контрактова</span><strong>KUT/01</strong>
+      </div>
+      <div class="kut-location-copy">
+        <p class="kut-overline">Місце / демонстраційна адреса</p>
+        <h2 id="location-title">Поділ.<br />За два повороти.</h2>
+        <address>Київ · вул. Нижній Вал, 00<br />Щодня · 10:00–21:00</address>
+        <button type="button" data-demo-contact>Побудувати маршрут <span aria-hidden="true">↗</span></button>
+        <p class="kut-demo-note" data-contact-status aria-live="polite">Адреса й контакти створені для демонстрації концепції.</p>
+      </div>
+    </section>
+
+    <section class="kut-final" id="contacts" aria-labelledby="final-title">
+      <div class="kut-final-mark"><span>KUT</span><b>/01</b></div>
+      <div>
+        <p class="kut-overline">Ваш запис</p>
+        <h2 id="final-title">Час для точної форми.</h2>
+        <p data-final-message>Почніть із послуги — решту підкажемо.</p>
+      </div>
+      <dl>
+        <div><dt>Послуга</dt><dd data-final-service>—</dd></div>
+        <div><dt>Майстер</dt><dd data-final-barber>—</dd></div>
+        <div><dt>Дата / час</dt><dd data-final-date>—</dd></div>
+        <div><dt>Вартість</dt><dd data-final-price>—</dd></div>
+      </dl>
+      <a class="kut-final-action" href="#booking">Обрати послугу <span aria-hidden="true">→</span></a>
+    </section>
+  </main>
+
+  <footer class="kut-footer">
+    <a class="kut-logo" href="#top">KUT<span>/01</span></a>
+    <p>Barber Club · Kyiv · Podil</p>
+    <div id="demo-contacts"><button type="button" data-demo-contact>Instagram</button><button type="button" data-demo-contact>Telegram</button><button type="button" data-demo-contact>WhatsApp</button></div>
+    <p>Щодня 10:00–21:00<br />Нижній Вал, 00</p>
+    <p>Демонстраційна концепція сайту барбершопу від <a href="https://okkworks.com/">OKK Works ↗</a></p>
+  </footer>
+
+  <div class="kut-mobile-rail" data-mobile-rail>
+    <div><small>Ваш вибір</small><strong data-mobile-choice>Послугу не обрано</strong></div>
+    <a href="#booking">Обрати час <span aria-hidden="true">→</span></a>
+  </div>
+
+  <script>
+    // @ts-nocheck — isolated demo interaction; state is validated through the UI flow.
+    const root = document.querySelector('#main');
+    const services = JSON.parse(root.dataset.services || '[]');
+    const barbers = JSON.parse(root.dataset.barbers || '[]');
+    const state = { service: null, barber: null, day: null, time: null, step: 0 };
+    const booking = document.querySelector('[data-booking]');
+    const panels = [...document.querySelectorAll('[data-step]')];
+    const stepNav = [...document.querySelectorAll('[data-step-nav]')];
+
+    const byId = (items, id) => items.find((item) => item.id === id);
+    const setText = (selector, value) => document.querySelectorAll(selector).forEach((node) => { node.textContent = value || '—'; });
+
+    function syncSummary() {
+      const service = byId(services, state.service);
+      const barber = byId(barbers, state.barber);
+      setText('[data-summary-service]', service?.name);
+      setText('[data-summary-price]', service?.price);
+      setText('[data-summary-barber]', barber?.name);
+      setText('[data-summary-day]', state.day);
+      setText('[data-summary-time]', state.time);
+      setText('[data-final-service]', service?.name);
+      setText('[data-final-price]', service?.price);
+      setText('[data-final-barber]', barber?.name);
+      setText('[data-final-date]', state.day && state.time ? `${state.day} · ${state.time}` : null);
+      setText('[data-rail-choice]', service ? `${service.name} · ${service.price}` : 'Послугу не обрано');
+      setText('[data-mobile-choice]', service ? `${service.name} · ${service.price}` : 'Послугу не обрано');
+      setText('[data-summary-hint]', service ? 'Вибір збережено. Продовжуйте запис.' : 'Почніть із послуги — решту підкажемо.');
+      setText('[data-final-message]', service ? 'Ваш вибір збережено — завершіть решту кроків.' : 'Почніть із послуги — решту підкажемо.');
+      document.querySelectorAll('[data-select-service]').forEach((button) => {
+        const selected = button.dataset.selectService === state.service;
+        button.setAttribute('aria-pressed', String(selected));
+      });
+      document.querySelectorAll('[data-service-row]').forEach((row) => row.classList.toggle('is-selected', row.dataset.serviceRow === state.service));
+      document.querySelectorAll('[data-select-barber]').forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.selectBarber === state.barber)));
+      document.querySelectorAll('[data-select-day]').forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.selectDay === state.day)));
+      document.querySelectorAll('[data-select-time]').forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.selectTime === state.time)));
+      const currentPanel = panels[state.step];
+      const next = currentPanel?.querySelector('[data-next]');
+      if (next && next.type !== 'submit') {
+        const ready = [state.service, state.barber, state.day, state.time][state.step];
+        next.disabled = !ready;
+      }
+    }
+
+    function showStep(nextStep, focus = true) {
+      state.step = Math.max(0, Math.min(4, nextStep));
+      panels.forEach((panel, index) => { panel.hidden = index !== state.step; });
+      stepNav.forEach((button, index) => {
+        button.disabled = index > state.step;
+        button.setAttribute('aria-current', index === state.step ? 'step' : 'false');
+      });
+      syncSummary();
+      if (focus) panels[state.step]?.querySelector('h3')?.focus?.({ preventScroll: true });
+    }
+
+    document.querySelectorAll('[data-select-service]').forEach((button) => button.addEventListener('click', () => {
+      state.service = button.dataset.selectService;
+      syncSummary();
+      if (button.closest('[data-hero-rail], [data-service-row]')) {
+        showStep(1, false);
+        booking?.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+      }
+    }));
+
+    document.querySelectorAll('[data-select-barber]').forEach((button) => button.addEventListener('click', () => { state.barber = button.dataset.selectBarber; syncSummary(); }));
+    document.querySelectorAll('[data-select-day]').forEach((button) => button.addEventListener('click', () => { state.day = button.dataset.selectDay; state.time = null; syncSummary(); }));
+    document.querySelectorAll('[data-select-time]').forEach((button) => button.addEventListener('click', () => { state.time = button.dataset.selectTime; syncSummary(); }));
+    document.querySelectorAll('[data-next]').forEach((button) => { if (button.type !== 'submit') button.addEventListener('click', () => showStep(state.step + 1)); });
+    document.querySelectorAll('[data-back]').forEach((button) => button.addEventListener('click', () => showStep(state.step - 1)));
+    stepNav.forEach((button) => button.addEventListener('click', () => { if (!button.disabled) showStep(Number(button.dataset.stepNav)); }));
+
+    const form = document.querySelector('[data-booking-form]');
+    form?.addEventListener('submit', (event) => {
+      event.preventDefault();
+      let valid = true;
+      form.querySelectorAll('input').forEach((input) => {
+        const error = form.querySelector(`[data-error-for="${input.name}"]`);
+        if (!input.checkValidity()) {
+          valid = false;
+          input.setAttribute('aria-invalid', 'true');
+          if (error) error.textContent = input.name === 'name' ? 'Вкажіть ім’я (щонайменше 2 символи).' : input.name === 'contact' ? 'Вкажіть телефон або Telegram.' : '';
+        } else {
+          input.removeAttribute('aria-invalid');
+          if (error) error.textContent = '';
+        }
+      });
+      if (!valid) { form.querySelector(':invalid')?.focus(); return; }
+      panels[4].hidden = true;
+      const success = document.querySelector('[data-booking-success]');
+      success.hidden = false;
+      success.focus();
+    });
+
+    document.querySelector('[data-reset]')?.addEventListener('click', () => {
+      state.service = state.barber = state.day = state.time = null;
+      form?.reset();
+      document.querySelector('[data-booking-success]').hidden = true;
+      panels[0].hidden = false;
+      showStep(0);
+    });
+
+    const stationData = Object.fromEntries(barbers.map((barber, index) => [barber.id, { ...barber, number: `0${index + 1}` }]));
+    document.querySelectorAll('[data-station-tab]').forEach((tab) => tab.addEventListener('click', () => {
+      const barber = stationData[tab.dataset.stationTab];
+      setText('[data-station-number]', barber.number);
+      setText('[data-station-name]', barber.name);
+      setText('[data-station-specialty]', barber.specialty);
+      setText('[data-station-note]', barber.note);
+      setText('[data-station-slot]', barber.slot);
+      setText('[data-station-services]', barber.services);
+      document.querySelector('[data-pick-featured-barber]').dataset.pickFeaturedBarber = barber.id;
+      document.querySelector('[data-stations]').dataset.active = barber.position;
+      document.querySelectorAll('[data-station-tab]').forEach((item) => item.setAttribute('aria-selected', String(item === tab)));
+    }));
+
+    document.querySelector('[data-pick-featured-barber]')?.addEventListener('click', (event) => {
+      state.barber = event.currentTarget.dataset.pickFeaturedBarber;
+      showStep(state.service ? 2 : 0, false);
+      syncSummary();
+      booking?.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    });
+
+    document.querySelectorAll('[data-demo-contact]').forEach((button) => button.addEventListener('click', () => {
+      setText('[data-contact-status]', 'Це демонстраційний контакт. У робочому сайті тут відкриється потрібний канал або маршрут.');
+    }));
+
+    syncSummary();
+  </script>
+</KutDemoLayout>

@@ -1,9 +1,9 @@
 import type { APIRoute } from 'astro';
-import { projects } from '@/content/projects';
+import { portfolio as projects } from '@/content/portfolio';
 import { site } from '@/content/site';
 import { withBase } from '@/lib/paths';
 
-const staticRoutes = ['', 'work/', 'contact/', 'privacy/'];
+const staticRoutes = ['', 'work/', 'services/', 'process/', 'contact/', 'privacy/'];
 
 const escapeXml = (value: string) => value
   .replaceAll('&', '&amp;')

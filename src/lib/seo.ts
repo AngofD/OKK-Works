@@ -31,9 +31,20 @@ export function buildBaseSchema({
       '@type': 'Organization',
       '@id': organizationId,
       name: site.name,
+      alternateName: 'OKKWorks',
       url: absoluteUrl('/'),
       description: site.description,
       email: site.email,
+      brand: {
+        '@type': 'Brand',
+        name: site.name,
+      },
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'customer support',
+        email: site.email,
+        availableLanguage: ['uk', 'ru'],
+      },
       logo: {
         '@type': 'ImageObject',
         url: absoluteUrl('/favicon.svg'),
@@ -60,6 +71,7 @@ export function buildBaseSchema({
       '@id': websiteId,
       url: absoluteUrl('/'),
       name: site.name,
+      alternateName: 'OKKWorks',
       description: site.description,
       inLanguage: site.language,
       publisher: { '@id': organizationId },

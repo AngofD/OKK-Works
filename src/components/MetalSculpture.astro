@@ -1,0 +1,35 @@
+---
+interface Props { id?: string; compact?: boolean; }
+const { id = 'metal', compact = false } = Astro.props;
+---
+<div class:list={['metal-sculpture', { 'metal-compact': compact }]} aria-hidden="true">
+  <svg viewBox="0 0 680 720" fill="none">
+    <defs>
+      <linearGradient id={`${id}-front`} x1="155" y1="100" x2="510" y2="480" gradientUnits="userSpaceOnUse"><stop stop-color="#d6d8d8"/><stop offset=".2" stop-color="#858b8f"/><stop offset=".53" stop-color="#3b4247"/><stop offset=".83" stop-color="#171c20"/><stop offset="1" stop-color="#555c62"/></linearGradient>
+      <linearGradient id={`${id}-bright`} x1="580" y1="235" x2="430" y2="430" gradientUnits="userSpaceOnUse"><stop stop-color="#d7dad9"/><stop offset=".48" stop-color="#8a9092"/><stop offset="1" stop-color="#252c30"/></linearGradient>
+      <linearGradient id={`${id}-dark`} x1="220" y1="310" x2="505" y2="540" gradientUnits="userSpaceOnUse"><stop stop-color="#070b0e"/><stop offset=".5" stop-color="#242b31"/><stop offset="1" stop-color="#07090b"/></linearGradient>
+      <linearGradient id={`${id}-edge`} x1="300" y1="405" x2="450" y2="320" gradientUnits="userSpaceOnUse"><stop stop-color="#484259"/><stop offset=".5" stop-color="#b7a7f2"/><stop offset="1" stop-color="#8170d8"/></linearGradient>
+      <pattern id={`${id}-brush`} width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(-39)"><path d="M0 0v5M3 0v5" stroke="#e5e9ec" stroke-opacity=".075" stroke-width=".5"/></pattern>
+      <filter id={`${id}-glow`} x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
+    </defs>
+    <g stroke="#727e85" stroke-width=".65" opacity=".22">
+      <path d="M90 0v720M210 0v720M330 0v720M450 0v720M570 0v720M660 0v720M0 160h680M0 340h680M0 520h680M0 700h680M0 0l680 510M0 180l680 510M0 490 650 0M70 720 680 265"/>
+    </g>
+    <path d="m195 52 255 180v181L195 233Z" fill={`url(#${id}-front)`} stroke="#b4bbbd" stroke-opacity=".45"/>
+    <path d="m195 52 255 180v181L195 233Z" fill={`url(#${id}-brush)`}/>
+    <path d="m450 232 66-47v179l-66 49Z" fill="#11191d" stroke="#899496" stroke-opacity=".4"/>
+    <path d="m450 232 66-47-63-44-64 47Z" fill="#717a7e" stroke="#b1b9bb" stroke-opacity=".45"/>
+    <path d="m516 185 128 92-194 137V232Z" fill={`url(#${id}-bright)`} stroke="#aab3b5" stroke-opacity=".55"/>
+    <path d="m516 185 128 92-194 137V232Z" fill={`url(#${id}-brush)`}/>
+    <path d="m450 414 65 47V280l-65-48Z" fill="#adb5b8" opacity=".13"/>
+    <path d="m450 414-154 110-139-99 154-110Z" fill={`url(#${id}-dark)`} stroke="#768086" stroke-opacity=".35"/>
+    <path d="m296 524 154-110v195L296 719Z" fill={`url(#${id}-front)`} stroke="#899496" stroke-opacity=".5"/>
+    <path d="m296 524 154-110v195L296 719Z" fill={`url(#${id}-brush)`}/>
+    <path d="m157 425 139 99v195L157 620Z" fill={`url(#${id}-dark)`} stroke="#727c85" stroke-opacity=".32"/>
+    <path d="m450 414 65 47v196l-65-48Z" fill="#10171b" stroke="#aab3b5" stroke-opacity=".4"/>
+    <path d="m296 524 154-110" stroke="#9d80ff" stroke-width="7" filter={`url(#${id}-glow)`} opacity=".65"/>
+    <path d="m296 524 154-110" stroke={`url(#${id}-edge)`} stroke-width="1.6"/>
+    <path d="M195 52 450 232M516 185 644 277" stroke="#e1e5e5" stroke-opacity=".65"/>
+    <g fill="#939b9f" font-size="9" font-family="monospace" letter-spacing="1.6"><text x="572" y="112">ІДЕЯ</text><text x="572" y="129">ФОРМА</text><text x="572" y="146">ФУНКЦІЯ</text><text x="555" y="680">OKK / W</text></g>
+  </svg>
+</div>

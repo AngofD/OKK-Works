@@ -1,0 +1,18 @@
+---
+import type { Project } from '@/content/projects';
+import { projectLabel } from '@/content/portfolio';
+import { withBase } from '@/lib/paths';
+import StudioIcon from './StudioIcon.astro';
+interface Props { project: Project; index: number; }
+const { project, index } = Astro.props;
+const isBot = project.category === 'Telegram';
+const external = project.liveUrl?.startsWith('https://');
+---
+<article class:list={['work-card', { 'is-bot': isBot, 'is-kut': project.slug === 'kut-01', 'is-retreat': project.slug === 'carpathian-retreat' }]} data-category={project.category}>
+  <a class="work-card-visual" href={withBase(`/work/${project.slug}/`)} aria-label={`Переглянути кейс ${project.title}`}>
+    <img src={withBase(project.coverImage)} width="1440" height="900" alt={`${project.title} — ${isBot ? 'інтерфейс Telegram-бота' : 'перший екран сайту'}`} loading={index === 0 ? 'eager' : 'lazy'} fetchpriority={index === 0 ? 'high' : 'auto'} decoding="async"/>
+  </a>
+  <div class="work-card-info"><div><p class="eyebrow">{projectLabel(project)} / {isBot ? 'Telegram-бот' : 'Вебсайт'}</p><h2>{project.title}</h2><p>{project.portfolioStatement}</p></div>
+    <div class="work-card-actions"><a class="button button-outline" href={withBase(`/work/${project.slug}/`)}>Переглянути кейс<StudioIcon name="arrow" size={16}/></a>{project.liveUrl && <a class="button button-outline" href={external ? project.liveUrl : withBase(project.liveUrl)} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}>{isBot ? 'Відкрити бота' : 'Відкрити сайт'}<StudioIcon name="diagonal" size={16}/></a>}</div>
+  </div>
+</article>

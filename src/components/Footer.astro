@@ -1,32 +1,10 @@
 ---
-import { site } from '@/content/site';
 import { withBase } from '@/lib/paths';
-import Icon from './Icon.astro';
-
 const year = new Date().getFullYear();
 ---
-
-<footer class="site-footer">
-  <div class="footer-lead">
-    <a class="footer-wordmark" href={withBase('/')}>OKK Works</a>
-    <p>Незалежна студія цифрової розробки для українського бізнесу.</p>
-  </div>
-  <div class="footer-main">
-    <div class="footer-contact">
-      <p class="eyebrow">Почати розмову</p>
-      <a href={`mailto:${site.email}`}>{site.email}<Icon name="arrow" /></a>
-    </div>
-    <nav aria-label="Навігація у футері">
-      <a href={withBase('/#services')}>Послуги</a>
-      <a href={withBase('/work/')}>Роботи</a>
-      <a href={withBase('/#process')}>Процес</a>
-      <a href={withBase('/contact/')}>Контакти</a>
-    </nav>
-    {site.telegram && <div class="footer-external"><a href={site.telegram} rel="noreferrer" target="_blank">Telegram <Icon name="arrow" size={15} /></a></div>}
-  </div>
-  <div class="footer-bottom">
-    <span>&copy; {year} OKK Works</span>
-    <span>Україна / Працюємо дистанційно</span>
-    <a href={withBase('/privacy/')}>Приватність</a>
-  </div>
-</footer>
+<footer class="site-footer"><div class="shell footer-inner">
+  <a class="wordmark" href={withBase('/')}>OKK Works</a>
+  <p>Сайти. Боти. Автоматизація.</p>
+  <nav aria-label="Навігація у футері"><a href={withBase('/services/')}>Послуги</a><a href={withBase('/work/')}>Роботи</a><a href={withBase('/process/')}>Процес</a><a href={withBase('/contact/')}>Контакти</a></nav>
+  <div class="footer-legal"><span>© {year} OKK Works</span><a href={withBase('/privacy/')}>Приватність</a></div>
+</div></footer>

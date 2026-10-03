@@ -1,0 +1,740 @@
+---
+import VartaDemoLayout from '@/layouts/VartaDemoLayout.astro';
+
+const services = [
+  {
+    id: 'haircut',
+    code: 'SVC-01',
+    title: 'Чоловічі стрижки',
+    en: 'Men’s haircuts',
+    lead: 'Форма, що працює і після виходу з крісла.',
+    price: 'від 900 ₴',
+    items: [
+      ['Стрижка машинкою', '45 хв', '900 ₴'],
+      ['Класична стрижка', '60 хв', '1 100 ₴'],
+      ['Довге волосся / нова форма', '75 хв', '1 400 ₴'],
+    ],
+  },
+  {
+    id: 'beard',
+    code: 'SVC-02',
+    title: 'Борода та гоління',
+    en: 'Beard & shave',
+    lead: 'Чіткий контур, гарячий рушник і догляд.',
+    price: 'від 650 ₴',
+    items: [
+      ['Моделювання бороди', '40 хв', '650 ₴'],
+      ['Королівське гоління', '50 хв', '850 ₴'],
+      ['Камуфлювання бороди', '30 хв', '700 ₴'],
+    ],
+  },
+  {
+    id: 'combo',
+    code: 'SVC-03',
+    title: 'Комплекси',
+    en: 'Service sets',
+    lead: 'Стрижка й борода в одному візиті без поспіху.',
+    price: 'від 1 450 ₴',
+    items: [
+      ['Стрижка + борода', '90 хв', '1 450 ₴'],
+      ['Стрижка + гоління', '100 хв', '1 650 ₴'],
+      ['Повний образ + догляд', '110 хв', '1 900 ₴'],
+    ],
+  },
+  {
+    id: 'care',
+    code: 'SVC-04',
+    title: 'Догляд',
+    en: 'Care',
+    lead: 'Чиста шкіра, свіжа форма та зрозумілий домашній догляд.',
+    price: 'від 450 ₴',
+    items: [
+      ['Очищення шкіри голови', '30 хв', '500 ₴'],
+      ['Догляд за обличчям', '35 хв', '650 ₴'],
+      ['Укладка та консультація', '25 хв', '450 ₴'],
+    ],
+  },
+  {
+    id: 'color',
+    code: 'SVC-05',
+    title: 'Тонування',
+    en: 'Toning',
+    lead: 'Контроль сивини та кольору без різкого ефекту.',
+    price: 'від 800 ₴',
+    items: [
+      ['Камуфлювання сивини', '40 хв', '800 ₴'],
+      ['Тонування волосся', '50 хв', '1 100 ₴'],
+      ['Освітлення деталей', '75 хв', '1 400 ₴'],
+    ],
+  },
+  {
+    id: 'art',
+    code: 'SVC-06',
+    title: 'Hair art',
+    en: 'Hair art',
+    lead: 'Графічні лінії та акценти, спроєктовані під форму.',
+    price: 'від 500 ₴',
+    items: [
+      ['Одна графічна лінія', '25 хв', '500 ₴'],
+      ['Авторський патерн', '45 хв', '900 ₴'],
+      ['Патерн + оновлення форми', '70 хв', '1 300 ₴'],
+    ],
+  },
+];
+
+const team = [
+  { name: 'Макс', role: 'Класичні форми · ножиці', crop: 'left', availability: 'Сьогодні · 18:20' },
+  { name: 'Ден', role: 'Fade · борода · камуфляж', crop: 'center', availability: 'Завтра · 12:40' },
+  { name: 'Лев', role: 'Довге волосся · texture', crop: 'right', availability: 'Сьогодні · 19:10' },
+];
+---
+
+<VartaDemoLayout
+  title="VARTA//07 Barber Bureau — демонстраційний сайт барбершопу"
+  description="Демонстраційна концепція сучасного барбершопу: послуги, прозорі ціни, команда, атмосфера та зручний онлайн-запис."
+>
+  <header class="v-header" data-header>
+    <a class="v-mark" href="#top" aria-label="VARTA//07 — на початок">
+      <span class="v-mark-box" aria-hidden="true"><i></i><i></i></span>
+      <strong>VARTA<span>//07</span></strong>
+      <small>barber bureau</small>
+    </a>
+
+    <nav class="v-desktop-nav" aria-label="Головна навігація">
+      <a href="#about" data-copy-ua="Про нас" data-copy-en="About">Про нас</a>
+      <a href="#services" data-copy-ua="Послуги" data-copy-en="Services">Послуги</a>
+      <a href="#team" data-copy-ua="Команда" data-copy-en="Team">Команда</a>
+      <a href="#contact" data-copy-ua="Контакти" data-copy-en="Contacts">Контакти</a>
+    </nav>
+
+    <div class="v-header-tools">
+      <div class="v-lang" aria-label="Мова">
+        <button type="button" data-lang="uk" aria-pressed="true">UA</button>
+        <span>/</span>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <button class="v-theme" type="button" data-theme-toggle aria-label="Змінити тему">
+        <span aria-hidden="true">◐</span><span class="v-theme-copy">LIGHT</span>
+      </button>
+      <button class="v-book v-book-header" type="button" data-open-booking>
+        <span data-copy-ua="Записатися" data-copy-en="Book now">Записатися</span><i aria-hidden="true">↗</i>
+      </button>
+      <button class="v-menu-trigger" type="button" data-menu-open aria-label="Відкрити меню"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <dialog class="v-menu" data-menu aria-label="Головне меню">
+    <div class="v-menu-top">
+      <span>MENU / NAV</span>
+      <button type="button" data-menu-close aria-label="Закрити меню">×</button>
+    </div>
+    <nav aria-label="Мобільна навігація">
+      <a href="#about"><span>01</span>Про нас</a>
+      <a href="#services"><span>02</span>Послуги</a>
+      <a href="#team"><span>03</span>Команда</a>
+      <a href="#contact"><span>04</span>Контакти</a>
+    </nav>
+    <button class="v-book" type="button" data-open-booking>Записатися <i aria-hidden="true">↗</i></button>
+  </dialog>
+
+  <main id="main" data-services={JSON.stringify(services)}>
+    <section class="v-hero" id="top" aria-labelledby="hero-title">
+      <img class="v-hero-image" src="/assets/demos/varta/hero.webp" width="1672" height="941" alt="Барбер точно формує чоловічу стрижку в сучасній майстерні" fetchpriority="high" />
+      <div class="v-hero-shade" aria-hidden="true"></div>
+      <div class="v-scan" aria-hidden="true"></div>
+
+      <div class="v-hero-status v-load v-load-a">
+        <span class="v-online"><i></i> SYSTEM ONLINE</span>
+        <span>KYIV / 50.4501° N</span>
+      </div>
+
+      <div class="v-hero-copy v-load v-load-b">
+        <p data-copy-ua="Барбер-бюро · Київ" data-copy-en="Barber bureau · Kyiv">Барбер-бюро · Київ</p>
+        <h1 id="hero-title" data-copy-ua="Форма.<br />Характер.<br /><em>Без шуму.</em>" data-copy-en="Shape.<br />Character.<br /><em>No noise.</em>">
+          Форма.<br />Характер.<br /><em>Без шуму.</em>
+        </h1>
+      </div>
+
+      <div class="v-hero-action v-load v-load-c">
+        <p data-copy-ua="Точні стрижки, борода й догляд. Оберіть послугу та час — решту беремо на себе." data-copy-en="Precise cuts, beard and care. Choose a service and time — we handle the rest.">
+          Точні стрижки, борода й догляд. Оберіть послугу та час — решту беремо на себе.
+        </p>
+        <button class="v-book v-book-large" type="button" data-open-booking>
+          <span data-copy-ua="Обрати час" data-copy-en="Choose a time">Обрати час</span><i aria-hidden="true">↗</i>
+        </button>
+        <a href="#services" data-copy-ua="Переглянути прайс ↓" data-copy-en="View prices ↓">Переглянути прайс ↓</a>
+      </div>
+
+      <div class="v-hero-index v-load v-load-d" aria-hidden="true">
+        <span>FRAME</span><strong>01</strong><small>/ 07</small>
+      </div>
+    </section>
+
+    <aside class="v-signal-rail" aria-label="Швидкий запис">
+      <span>BOOKING SIGNAL</span>
+      <button type="button" data-open-booking aria-label="Відкрити онлайн-запис">↗</button>
+    </aside>
+
+    <div class="v-ticker" aria-hidden="true">
+      <div><span>VARTA//07</span><i>PRECISION CUTS</i><span>KYIV</span><i>BEARD / CARE</i><span>10:00—21:00</span><i>VARTA//07</i><span>PRECISION CUTS</span></div>
+    </div>
+
+    <section class="v-about" id="about" aria-labelledby="about-title">
+      <header class="v-section-head" data-reveal>
+        <span>ABOUT / ORIGIN</span>
+        <p>01 — BUREAU</p>
+      </header>
+      <div class="v-about-title" data-reveal>
+        <p data-copy-ua="Не салон на потоці." data-copy-en="Not a conveyor-belt salon.">Не салон на потоці.</p>
+        <h2 id="about-title" data-copy-ua="Місце, де форму<br />будують <em>точно.</em>" data-copy-en="A place where shape<br />is built <em>precisely.</em>">Місце, де форму<br />будують <em>точно.</em></h2>
+      </div>
+
+      <div class="v-gallery" data-gallery data-reveal>
+        <div class="v-gallery-viewport">
+          <figure class="is-active" data-slide="0">
+            <img src="/assets/demos/varta/interior.webp" width="1672" height="941" alt="Три робочі станції VARTA з чорними кріслами та металевими поверхнями" loading="lazy" />
+            <figcaption><span>IMG-001</span> Простір / до відкриття</figcaption>
+          </figure>
+          <figure data-slide="1">
+            <img src="/assets/demos/varta/hero.webp" width="1672" height="941" alt="Майстер працює над точною формою стрижки" loading="lazy" />
+            <figcaption><span>IMG-002</span> Процес / контроль форми</figcaption>
+          </figure>
+          <figure data-slide="2">
+            <img src="/assets/demos/varta/process.webp" width="1536" height="1024" alt="Крупний план точного оформлення контуру" loading="lazy" />
+            <figcaption><span>IMG-003</span> Деталь / hair art</figcaption>
+          </figure>
+        </div>
+        <div class="v-gallery-controls">
+          <p><strong data-gallery-current>01</strong> / 03</p>
+          <div><button type="button" data-gallery-prev aria-label="Попереднє фото">←</button><button type="button" data-gallery-next aria-label="Наступне фото">→</button></div>
+        </div>
+      </div>
+
+      <div class="v-about-copy" data-reveal>
+        <p data-copy-ua="Ми починаємо не з тренду, а з вашої форми: структура волосся, звичний ритм, скільки часу ви готові витрачати на укладку." data-copy-en="We start not with a trend, but with your shape: hair structure, daily rhythm and the time you want to spend styling.">
+          Ми починаємо не з тренду, а з вашої форми: структура волосся, звичний ритм, скільки часу ви готові витрачати на укладку.
+        </p>
+        <p data-copy-ua="До початку називаємо ціну й тривалість. Після — показуємо, як підтримувати результат без зайвих засобів." data-copy-en="Before we start, you know the price and duration. Afterward, we show how to maintain the result without unnecessary products.">
+          До початку називаємо ціну й тривалість. Після — показуємо, як підтримувати результат без зайвих засобів.
+        </p>
+      </div>
+
+      <dl class="v-facts" data-reveal>
+        <div><dt>45—110</dt><dd>хвилин на візит</dd></div>
+        <div><dt>06</dt><dd>напрямів послуг</dd></div>
+        <div><dt>10—21</dt><dd>щодня без вихідних</dd></div>
+      </dl>
+    </section>
+
+    <section class="v-services" id="services" aria-labelledby="services-title">
+      <header class="v-section-head" data-reveal>
+        <span>SERVICE / PROTOCOL</span>
+        <p>02 — PRICE</p>
+      </header>
+      <div class="v-services-intro" data-reveal>
+        <h2 id="services-title" data-copy-ua="Оберіть<br /><em>свій протокол.</em>" data-copy-en="Choose<br /><em>your protocol.</em>">Оберіть<br /><em>свій протокол.</em></h2>
+        <p data-copy-ua="У кожній категорії — конкретний час, зрозуміла ціна та жодних сюрпризів після процедури." data-copy-en="Every category has a clear duration, price and no surprises after the service.">
+          У кожній категорії — конкретний час, зрозуміла ціна та жодних сюрпризів після процедури.
+        </p>
+      </div>
+      <div class="v-service-grid">
+        {services.map((service, index) => (
+          <button class="v-service-card" type="button" data-service={service.id} data-reveal>
+            <span class="v-service-code">{service.code}</span>
+            <span class="v-service-no">0{index + 1}</span>
+            <strong>{service.title}</strong>
+            <small>{service.lead}</small>
+            <b>{service.price}</b>
+            <i aria-hidden="true">↗</i>
+          </button>
+        ))}
+      </div>
+      <p class="v-demo-note">DEMO DATA — ціни та доступний час наведені для демонстрації концепції.</p>
+    </section>
+
+    <section class="v-feature" aria-labelledby="feature-title">
+      <div class="v-feature-image" data-reveal>
+        <img src="/assets/demos/varta/process.webp" width="1536" height="1024" alt="Майстер створює точний графічний контур машинкою та бритвою" loading="lazy" />
+        <span>CRAFT FRAME / 04</span>
+      </div>
+      <div class="v-feature-copy" data-reveal>
+        <p>HAIR ART / CONTOUR</p>
+        <h2 id="feature-title" data-copy-ua="Лінія має<br /><em>причину.</em>" data-copy-en="Every line<br /><em>has a reason.</em>">Лінія має<br /><em>причину.</em></h2>
+        <p data-copy-ua="Графіку будуємо разом із силуетом стрижки. Вона підкреслює форму, а не сперечається з нею." data-copy-en="Hair graphics follow the silhouette of the cut. They reinforce the shape instead of fighting it.">
+          Графіку будуємо разом із силуетом стрижки. Вона підкреслює форму, а не сперечається з нею.
+        </p>
+        <button class="v-text-button" type="button" data-service="art">Детальніше про hair art <span>↗</span></button>
+      </div>
+    </section>
+
+    <section class="v-booking-explain" aria-labelledby="booking-explain-title">
+      <header class="v-section-head" data-reveal>
+        <span>BOOKING / SEQUENCE</span>
+        <p>03 — FLOW</p>
+      </header>
+      <div class="v-booking-title" data-reveal>
+        <h2 id="booking-explain-title" data-copy-ua="Запис без<br /><em>зайвих повідомлень.</em>" data-copy-en="Booking without<br /><em>extra messages.</em>">Запис без<br /><em>зайвих повідомлень.</em></h2>
+        <button class="v-book v-book-large" type="button" data-open-booking>Спробувати запис <i aria-hidden="true">↗</i></button>
+      </div>
+      <ol class="v-steps">
+        <li data-reveal><span>01</span><strong>Послуга</strong><p>Оберіть потрібну процедуру та одразу побачте вартість.</p></li>
+        <li data-reveal><span>02</span><strong>Майстер і час</strong><p>Покажемо спеціалізацію команди та вільні вікна.</p></li>
+        <li data-reveal><span>03</span><strong>Підтвердження</strong><p>Залиште контакт — адміністратор підтвердить візит.</p></li>
+      </ol>
+    </section>
+
+    <section class="v-team" id="team" aria-labelledby="team-title">
+      <header class="v-section-head" data-reveal>
+        <span>TEAM / STATIONS</span>
+        <p>04 — PEOPLE</p>
+      </header>
+      <div class="v-team-title" data-reveal>
+        <h2 id="team-title" data-copy-ua="Три майстри.<br /><em>Три почерки.</em>" data-copy-en="Three barbers.<br /><em>Three signatures.</em>">Три майстри.<br /><em>Три почерки.</em></h2>
+        <p>Оберіть спеціалізацію, яка відповідає вашій задачі.</p>
+      </div>
+      <div class="v-team-track" data-team-track>
+        {team.map((member, index) => (
+          <article class="v-person" data-person data-reveal>
+            <div class={`v-person-image v-crop-${member.crop}`}>
+              <img src="/assets/demos/varta/team.webp" width="1983" height="793" alt={`Барбер ${member.name}, ${member.role}`} loading="lazy" />
+              <span>STATION / 0{index + 1}</span>
+            </div>
+            <div class="v-person-copy">
+              <p><span>0{index + 1}</span><strong>{member.name}</strong></p>
+              <small>{member.role}</small>
+              <b><i></i>{member.availability}</b>
+              <button type="button" data-open-booking data-barber={member.name}>Обрати майстра ↗</button>
+            </div>
+          </article>
+        ))}
+      </div>
+      <div class="v-team-mobile-controls">
+        <button type="button" data-team-prev aria-label="Попередній майстер">←</button>
+        <span data-team-count>01 / 03</span>
+        <button type="button" data-team-next aria-label="Наступний майстер">→</button>
+      </div>
+    </section>
+
+    <section class="v-process" aria-labelledby="process-title">
+      <header class="v-section-head" data-reveal>
+        <span>PROCESS / DETAILS</span>
+        <p>05 — CRAFT</p>
+      </header>
+      <div class="v-process-title" data-reveal>
+        <h2 id="process-title" data-copy-ua="Роботу видно<br /><em>у деталях.</em>" data-copy-en="Craft lives<br /><em>in the details.</em>">Роботу видно<br /><em>у деталях.</em></h2>
+      </div>
+      <div class="v-process-grid">
+        <figure class="v-process-a" data-reveal><img src="/assets/demos/varta/hero.webp" width="1672" height="941" alt="Точна робота ножицями біля дзеркала" loading="lazy" /><figcaption>01 / SCISSOR FORM</figcaption></figure>
+        <figure class="v-process-b" data-reveal><img src="/assets/demos/varta/process.webp" width="1536" height="1024" alt="Оформлення графічної лінії бритвою" loading="lazy" /><figcaption>02 / CLEAN LINE</figcaption></figure>
+        <figure class="v-process-c" data-reveal><img src="/assets/demos/varta/interior.webp" width="1672" height="941" alt="Організована робоча станція майстра" loading="lazy" /><figcaption>03 / READY STATION</figcaption></figure>
+        <figure class="v-process-d" data-reveal><img src="/assets/demos/varta/team.webp" width="1983" height="793" alt="Команда VARTA в робочому просторі" loading="lazy" /><figcaption>04 / THE CREW</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="v-notes" aria-labelledby="notes-title">
+      <header class="v-section-head" data-reveal>
+        <span>SERVICE / NOTES</span>
+        <p>06 — STANDARD</p>
+      </header>
+      <div class="v-notes-title" data-reveal>
+        <h2 id="notes-title" data-copy-ua="Що ви контролюєте<br /><em>до візиту.</em>" data-copy-en="What you control<br /><em>before the visit.</em>">Що ви контролюєте<br /><em>до візиту.</em></h2>
+        <p>Замість вигаданих відгуків — конкретні правила сервісу.</p>
+      </div>
+      <div class="v-note-grid">
+        <article data-reveal><span>CLIENT NOTE / A</span><strong>Ціну</strong><p>Повна вартість відома до підтвердження запису.</p></article>
+        <article data-reveal><span>CLIENT NOTE / B</span><strong>Час</strong><p>Тривалість закладена в слот — майстер не працює поспіхом.</p></article>
+        <article data-reveal><span>CLIENT NOTE / C</span><strong>Результат</strong><p>Перед початком узгоджуємо форму та спосіб укладки.</p></article>
+      </div>
+    </section>
+
+    <section class="v-contact" id="contact" aria-labelledby="contact-title">
+      <div class="v-contact-main">
+        <header class="v-section-head" data-reveal>
+          <span>CONTACT / LOCATION</span>
+          <p>07 — VISIT</p>
+        </header>
+        <div class="v-contact-title" data-reveal>
+          <p>КИЇВ / ЦЕНТР</p>
+          <h2 id="contact-title" data-copy-ua="Зайдіть.<br /><em>Форму зробимо тут.</em>" data-copy-en="Come in.<br /><em>We shape it here.</em>">Зайдіть.<br /><em>Форму зробимо тут.</em></h2>
+        </div>
+        <div class="v-contact-data" data-reveal>
+          <dl>
+            <div><dt>Адреса</dt><dd>вул. Велика Васильківська, 00<br />Київ · демонстраційна адреса</dd></div>
+            <div><dt>Графік</dt><dd>Щодня<br />10:00—21:00</dd></div>
+            <div><dt>Зв’язок</dt><dd><a href="tel:+380000000000">+380 00 000 00 00</a><br /><a href="mailto:hello@varta.demo">hello@varta.demo</a></dd></div>
+            <div><dt>Соціальні</dt><dd><a href="#contact">Instagram ↗</a><br /><a href="#contact">Telegram ↗</a></dd></div>
+          </dl>
+          <button class="v-book v-book-large" type="button" data-open-booking>Записатися <i aria-hidden="true">↗</i></button>
+        </div>
+      </div>
+      <div class="v-map" aria-label="Схематична карта демонстраційної локації" data-reveal>
+        <svg viewBox="0 0 720 720" role="img" aria-label="Схема району з позначкою VARTA">
+          <path d="M-20 130H750M-20 422H750M177-20V750M521-20V750" />
+          <path class="v-map-road" d="M-30 610C133 555 233 571 341 492S562 262 760 300" />
+          <path class="v-map-road" d="M88-20C109 119 84 258 157 364s108 211 104 386" />
+          <circle cx="393" cy="443" r="12" />
+          <circle class="v-map-pulse" cx="393" cy="443" r="46" />
+        </svg>
+        <div class="v-map-label"><span>50.4501° N / 30.5234° E</span><strong>VARTA//07</strong><small>DEMO LOCATION</small></div>
+      </div>
+    </section>
+
+    <section class="v-final" aria-label="Фінальний запис">
+      <p>READY WHEN YOU ARE</p>
+      <h2 data-copy-ua="Ваш час.<br /><em>Ваше крісло.</em>" data-copy-en="Your time.<br /><em>Your chair.</em>">Ваш час.<br /><em>Ваше крісло.</em></h2>
+      <button class="v-book v-book-final" type="button" data-open-booking>Обрати вільний час <i aria-hidden="true">↗</i></button>
+    </section>
+  </main>
+
+  <footer class="v-footer">
+    <a class="v-mark" href="#top"><span class="v-mark-box" aria-hidden="true"><i></i><i></i></span><strong>VARTA<span>//07</span></strong><small>barber bureau</small></a>
+    <p>Демонстраційна концепція · не є сайтом реального закладу</p>
+    <a href="https://okkworks.com/" rel="noreferrer">Concept by OKK Works ↗</a>
+  </footer>
+
+  <dialog class="v-service-dialog" data-service-dialog aria-labelledby="service-dialog-title">
+    <div class="v-dialog-bar"><span data-service-code>SVC-01 / DETAILS</span><button type="button" data-service-close aria-label="Закрити">×</button></div>
+    <div class="v-service-dialog-body">
+      <header><p>SERVICE PROTOCOL</p><h2 id="service-dialog-title" data-service-title>Чоловічі стрижки</h2><p data-service-lead></p></header>
+      <div class="v-service-list" data-service-list></div>
+      <button class="v-book v-book-large" type="button" data-dialog-book>Обрати послугу <i aria-hidden="true">↗</i></button>
+    </div>
+  </dialog>
+
+  <dialog class="v-booking-dialog" data-booking-dialog aria-labelledby="booking-title">
+    <div class="v-dialog-bar"><span>BOOKING / DEMO FLOW</span><button type="button" data-booking-close aria-label="Закрити">×</button></div>
+    <div class="v-booking-layout">
+      <aside>
+        <p>BOOKING SIGNAL</p>
+        <h2 id="booking-title">Зберіть<br /><em>свій візит.</em></h2>
+        <ol><li class="is-current" data-booking-step-dot="0">01 / Послуга</li><li data-booking-step-dot="1">02 / Час</li><li data-booking-step-dot="2">03 / Контакт</li></ol>
+        <small>Це демонстрація: дані не надсилаються та не зберігаються.</small>
+      </aside>
+      <div class="v-booking-stage">
+        <section data-booking-step="0">
+          <p class="v-stage-count">STEP 01 / 03</p><h3>Що робимо?</h3>
+          <div class="v-booking-options">
+            {services.map((service) => <button type="button" data-book-service={service.id}><span><strong>{service.title}</strong><small>{service.lead}</small></span><b>{service.price}</b></button>)}
+          </div>
+          <button class="v-next" type="button" data-booking-next disabled>Далі <span>→</span></button>
+        </section>
+        <section data-booking-step="1" hidden>
+          <p class="v-stage-count">STEP 02 / 03</p><h3>Коли зручно?</h3>
+          <div class="v-days"><button type="button" data-book-day="Сьогодні"><small>Сьогодні</small><strong>06</strong><span>Нд</span></button><button type="button" data-book-day="Завтра"><small>Завтра</small><strong>07</strong><span>Пн</span></button><button type="button" data-book-day="Вівторок"><small>Вівторок</small><strong>08</strong><span>Вт</span></button></div>
+          <div class="v-times"><button type="button" disabled>10:00 <small>busy</small></button><button type="button" data-book-time="12:40">12:40 <small>free</small></button><button type="button" data-book-time="15:20">15:20 <small>free</small></button><button type="button" data-book-time="18:20">18:20 <small>free</small></button><button type="button" data-book-time="19:10">19:10 <small>free</small></button></div>
+          <div class="v-stage-actions"><button type="button" data-booking-back>Назад</button><button class="v-next" type="button" data-booking-next disabled>Далі <span>→</span></button></div>
+        </section>
+        <section data-booking-step="2" hidden>
+          <p class="v-stage-count">STEP 03 / 03</p><h3>Як із вами зв’язатися?</h3>
+          <form data-booking-form novalidate>
+            <label>Ім’я<input type="text" name="name" autocomplete="name" minlength="2" required placeholder="Ваше ім’я" /><span data-error="name"></span></label>
+            <label>Телефон або Telegram<input type="text" name="contact" minlength="5" required placeholder="+380… або @username" /><span data-error="contact"></span></label>
+            <label class="v-consent"><input type="checkbox" name="consent" required /><span>Розумію, що це демонстрація і заявка нікуди не надсилається.</span></label>
+            <div class="v-book-summary"><span data-book-summary-service>—</span><span data-book-summary-time>—</span></div>
+            <div class="v-stage-actions"><button type="button" data-booking-back>Назад</button><button class="v-next" type="submit">Сформувати запис <span>→</span></button></div>
+          </form>
+        </section>
+        <section class="v-book-success" data-booking-success hidden tabindex="-1" aria-live="polite">
+          <p class="v-stage-count">DEMO / COMPLETE</p><h3>Запис сформовано.</h3><p>У реальному проєкті адміністратор отримав би заявку та підтвердив вибраний час.</p><button class="v-next" type="button" data-booking-reset>Почати знову <span>↺</span></button>
+        </section>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    type Service = {
+      id: string;
+      code: string;
+      title: string;
+      en: string;
+      lead: string;
+      price: string;
+      items: string[][];
+    };
+
+    const root = document.documentElement;
+    const qs = <T extends Element = HTMLElement>(selector: string, scope: ParentNode = document) => scope.querySelector<T>(selector);
+    const qsa = <T extends Element = HTMLElement>(selector: string, scope: ParentNode = document) => [...scope.querySelectorAll<T>(selector)];
+    const translations: Record<string, string> = {
+      'Про нас': 'About',
+      'Послуги': 'Services',
+      'Команда': 'Team',
+      'Контакти': 'Contacts',
+      'Записатися': 'Book now',
+      'Обрати час': 'Choose a time',
+      'Не салон на потоці.': 'Not a conveyor-belt salon.',
+      'Простір / до відкриття': 'Space / before opening',
+      'Процес / контроль форми': 'Process / shape control',
+      'Деталь / hair art': 'Detail / hair art',
+      'хвилин на візит': 'minutes per visit',
+      'напрямів послуг': 'service directions',
+      'щодня без вихідних': 'open every day',
+      'Чоловічі стрижки': 'Men’s haircuts',
+      'Форма, що працює і після виходу з крісла.': 'A shape that works after you leave the chair.',
+      'Борода та гоління': 'Beard & shave',
+      'Чіткий контур, гарячий рушник і догляд.': 'Clean contour, hot towel and care.',
+      'Комплекси': 'Service sets',
+      'Стрижка й борода в одному візиті без поспіху.': 'Haircut and beard in one unhurried visit.',
+      'Догляд': 'Care',
+      'Чиста шкіра, свіжа форма та зрозумілий домашній догляд.': 'Clean skin, fresh shape and clear home care.',
+      'Тонування': 'Toning',
+      'Контроль сивини та кольору без різкого ефекту.': 'Grey and colour control without a harsh effect.',
+      'Графічні лінії та акценти, спроєктовані під форму.': 'Graphic lines and accents designed around the shape.',
+      'від 900 ₴': 'from ₴900',
+      'від 650 ₴': 'from ₴650',
+      'від 1 450 ₴': 'from ₴1,450',
+      'від 450 ₴': 'from ₴450',
+      'від 800 ₴': 'from ₴800',
+      'від 500 ₴': 'from ₴500',
+      '45 хв': '45 min',
+      '60 хв': '60 min',
+      '75 хв': '75 min',
+      '40 хв': '40 min',
+      '50 хв': '50 min',
+      '30 хв': '30 min',
+      '90 хв': '90 min',
+      '100 хв': '100 min',
+      '110 хв': '110 min',
+      '35 хв': '35 min',
+      '25 хв': '25 min',
+      '70 хв': '70 min',
+      'Стрижка машинкою': 'Clipper cut',
+      'Класична стрижка': 'Classic haircut',
+      'Довге волосся / нова форма': 'Long hair / new shape',
+      'Моделювання бороди': 'Beard shaping',
+      'Королівське гоління': 'Royal shave',
+      'Камуфлювання бороди': 'Beard toning',
+      'Стрижка + борода': 'Haircut + beard',
+      'Стрижка + гоління': 'Haircut + shave',
+      'Повний образ + догляд': 'Full look + care',
+      'Очищення шкіри голови': 'Scalp cleansing',
+      'Догляд за обличчям': 'Face care',
+      'Укладка та консультація': 'Styling and consultation',
+      'Камуфлювання сивини': 'Grey blending',
+      'Тонування волосся': 'Hair toning',
+      'Освітлення деталей': 'Detail lightening',
+      'Одна графічна лінія': 'Single graphic line',
+      'Авторський патерн': 'Custom pattern',
+      'Патерн + оновлення форми': 'Pattern + shape refresh',
+      'Детальніше про hair art': 'Explore hair art',
+      'Спробувати запис': 'Try booking',
+      'Послуга': 'Service',
+      'Оберіть потрібну процедуру та одразу побачте вартість.': 'Choose a service and see the price immediately.',
+      'Майстер і час': 'Barber and time',
+      'Покажемо спеціалізацію команди та вільні вікна.': 'See each barber’s focus and available slots.',
+      'Підтвердження': 'Confirmation',
+      'Залиште контакт — адміністратор підтвердить візит.': 'Leave a contact and the administrator confirms the visit.',
+      'Оберіть спеціалізацію, яка відповідає вашій задачі.': 'Choose the expertise that fits your goal.',
+      'Класичні форми · ножиці': 'Classic shapes · scissors',
+      'Fade · борода · камуфляж': 'Fade · beard · blending',
+      'Довге волосся · texture': 'Long hair · texture',
+      'Сьогодні · 18:20': 'Today · 18:20',
+      'Завтра · 12:40': 'Tomorrow · 12:40',
+      'Сьогодні · 19:10': 'Today · 19:10',
+      'Обрати майстра': 'Choose barber',
+      'Обрати майстра ↗': 'Choose barber ↗',
+      'Замість вигаданих відгуків — конкретні правила сервісу.': 'Specific service rules instead of invented reviews.',
+      'Ціну': 'Price',
+      'Повна вартість відома до підтвердження запису.': 'The full price is clear before booking confirmation.',
+      'Час': 'Time',
+      'Тривалість закладена в слот — майстер не працює поспіхом.': 'The slot includes the full service time — no rushed work.',
+      'Результат': 'Result',
+      'Перед початком узгоджуємо форму та спосіб укладки.': 'We agree on the shape and styling before starting.',
+      'Адреса': 'Address',
+      'Графік': 'Hours',
+      'Зв’язок': 'Contact',
+      'Соціальні': 'Social',
+      'Щодня': 'Daily',
+      'Київ · демонстраційна адреса': 'Kyiv · demonstration address',
+      'Обрати вільний час': 'Choose an available time',
+      'Демонстраційна концепція · не є сайтом реального закладу': 'Demonstration concept · not a real venue website',
+      'Закрити': 'Close',
+      'Обрати послугу': 'Choose service',
+      'Зберіть': 'Build',
+      'свій візит.': 'your visit.',
+      'Це демонстрація: дані не надсилаються та не зберігаються.': 'This is a demo: data is not sent or stored.',
+      '01 / Послуга': '01 / Service',
+      '02 / Час': '02 / Time',
+      '03 / Контакт': '03 / Contact',
+      'Що робимо?': 'What are we doing?',
+      'Далі': 'Next',
+      'Коли зручно?': 'When works for you?',
+      'Сьогодні': 'Today',
+      'Завтра': 'Tomorrow',
+      'Вівторок': 'Tuesday',
+      'Нд': 'Sun',
+      'Пн': 'Mon',
+      'Вт': 'Tue',
+      'Назад': 'Back',
+      'Як із вами зв’язатися?': 'How can we contact you?',
+      'Ім’я': 'Name',
+      'Телефон або Telegram': 'Phone or Telegram',
+      'Розумію, що це демонстрація і заявка нікуди не надсилається.': 'I understand this is a demo and the request is not sent.',
+      'Сформувати запис': 'Create booking',
+      'Запис сформовано.': 'Booking created.',
+      'У реальному проєкті адміністратор отримав би заявку та підтвердив вибраний час.': 'In a real project, the administrator would receive the request and confirm the selected time.',
+      'Почати знову': 'Start again',
+      'Почати знову ↺': 'Start again ↺',
+    };
+    const originalText = new WeakMap<Text, string>();
+    let activeLang = 'uk';
+    const translateTree = (scope: Node = document.body) => {
+      const walker = document.createTreeWalker(scope, NodeFilter.SHOW_TEXT);
+      let node = walker.nextNode() as Text | null;
+      while (node) {
+        const original = originalText.get(node) ?? node.textContent ?? '';
+        originalText.set(node, original);
+        const key = original.trim();
+        const translated = translations[key];
+        node.textContent = activeLang === 'en' && translated ? original.replace(key, translated) : original;
+        node = walker.nextNode() as Text | null;
+      }
+    };
+
+    const menu = qs<HTMLDialogElement>('[data-menu]');
+    qs('[data-menu-open]')?.addEventListener('click', () => menu?.showModal());
+    qsa('[data-menu-close], [data-menu] a').forEach((node) => node.addEventListener('click', () => menu?.close()));
+    menu?.addEventListener('click', (event: MouseEvent) => { if (event.target === menu) menu.close(); });
+
+    const themeButton = qs('[data-theme-toggle]');
+    themeButton?.addEventListener('click', () => {
+      const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+      root.dataset.theme = next;
+      const label = qs('.v-theme-copy');
+      if (label) label.textContent = next === 'light' ? 'DARK' : 'LIGHT';
+    });
+
+    qsa('[data-lang]').forEach((button) => button.addEventListener('click', () => {
+      const lang = button.dataset.lang;
+      activeLang = lang === 'en' ? 'en' : 'uk';
+      root.lang = lang === 'en' ? 'en' : 'uk';
+      qsa('[data-lang]').forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+      qsa('[data-copy-ua]').forEach((node) => {
+        const copy = lang === 'en' ? node.dataset.copyEn : node.dataset.copyUa;
+        if (copy) node.innerHTML = copy;
+      });
+      translateTree();
+    }));
+
+    const header = qs('[data-header]');
+    const updateHeader = () => header?.classList.toggle('is-scrolled', window.scrollY > 24);
+    updateHeader();
+    addEventListener('scroll', updateHeader, { passive: true });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); revealObserver.unobserve(entry.target); } });
+    }, { threshold: 0.12 });
+    qsa('[data-reveal]').forEach((node) => revealObserver.observe(node));
+
+    const gallery = qs('[data-gallery]')!;
+    const gallerySlides = qsa('[data-slide]', gallery);
+    let galleryIndex = 0;
+    const showGallery = (next: number) => {
+      galleryIndex = (next + gallerySlides.length) % gallerySlides.length;
+      gallerySlides.forEach((slide, index) => slide.classList.toggle('is-active', index === galleryIndex));
+      const counter = qs('[data-gallery-current]', gallery);
+      if (counter) counter.textContent = String(galleryIndex + 1).padStart(2, '0');
+    };
+    qs('[data-gallery-prev]', gallery)?.addEventListener('click', () => showGallery(galleryIndex - 1));
+    qs('[data-gallery-next]', gallery)?.addEventListener('click', () => showGallery(galleryIndex + 1));
+
+    const teamTrack = qs('[data-team-track]')!;
+    const people = qsa('[data-person]', teamTrack);
+    let teamIndex = 0;
+    const scrollPerson = (next: number) => {
+      teamIndex = (next + people.length) % people.length;
+      people[teamIndex]?.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', inline: 'start', block: 'nearest' });
+      const count = qs('[data-team-count]');
+      if (count) count.textContent = `${String(teamIndex + 1).padStart(2, '0')} / ${String(people.length).padStart(2, '0')}`;
+    };
+    qs('[data-team-prev]')?.addEventListener('click', () => scrollPerson(teamIndex - 1));
+    qs('[data-team-next]')?.addEventListener('click', () => scrollPerson(teamIndex + 1));
+
+    const services = JSON.parse(qs('main')?.dataset.services || '[]') as Service[];
+    const serviceDialog = qs<HTMLDialogElement>('[data-service-dialog]')!;
+    let activeService: Service = services[0];
+    const openService = (id: string | undefined) => {
+      activeService = services.find((service: Service) => service.id === id) || services[0];
+      qs('[data-service-code]')!.textContent = `${activeService.code} / DETAILS`;
+      qs('[data-service-title]')!.textContent = activeService.title;
+      qs('[data-service-lead]')!.textContent = activeService.lead;
+      qs('[data-service-list]')!.innerHTML = activeService.items.map((item: string[], index: number) => `<div><span>0${index + 1}</span><strong>${item[0]}</strong><small>${item[1]}</small><b>${item[2]}</b></div>`).join('');
+      translateTree(serviceDialog);
+      serviceDialog.showModal();
+    };
+    qsa('[data-service]').forEach((button) => button.addEventListener('click', () => openService(button.dataset.service)));
+    qs('[data-service-close]')?.addEventListener('click', () => serviceDialog?.close());
+    serviceDialog?.addEventListener('click', (event: MouseEvent) => { if (event.target === serviceDialog) serviceDialog.close(); });
+
+    const bookingDialog = qs<HTMLDialogElement>('[data-booking-dialog]')!;
+    const bookingSteps = qsa<HTMLElement>('[data-booking-step]', bookingDialog);
+    const state: { step: number; service: string; day: string; time: string; barber: string } = { step: 0, service: '', day: '', time: '', barber: '' };
+    const showStep = (step: number) => {
+      state.step = step;
+      bookingSteps.forEach((panel, index) => panel.hidden = index !== step);
+      qsa('[data-booking-step-dot]', bookingDialog).forEach((dot, index) => dot.classList.toggle('is-current', index === step));
+      qs<HTMLElement>('[data-booking-success]', bookingDialog)!.hidden = true;
+      qs('h3', bookingSteps[step])?.focus?.();
+    };
+    const chooseService = (id: string | undefined) => {
+      state.service = id || '';
+      qsa<HTMLButtonElement>('[data-book-service]', bookingDialog).forEach((button) => button.classList.toggle('is-selected', button.dataset.bookService === id));
+      qs<HTMLButtonElement>('[data-booking-step="0"] [data-booking-next]', bookingDialog)!.disabled = false;
+    };
+    const openBooking = (serviceId = '') => {
+      menu?.close?.();
+      serviceDialog?.close?.();
+      if (serviceId) chooseService(serviceId);
+      showStep(state.service ? 1 : 0);
+      bookingDialog.showModal();
+    };
+    qsa('[data-open-booking]').forEach((button) => button.addEventListener('click', () => { state.barber = button.dataset.barber || ''; openBooking(); }));
+    qsa<HTMLButtonElement>('[data-book-service]', bookingDialog).forEach((button) => button.addEventListener('click', () => chooseService(button.dataset.bookService)));
+    qs('[data-dialog-book]')?.addEventListener('click', () => openBooking(activeService.id));
+    qs('[data-booking-close]')?.addEventListener('click', () => bookingDialog?.close());
+    bookingDialog?.addEventListener('click', (event: MouseEvent) => { if (event.target === bookingDialog) bookingDialog.close(); });
+
+    qsa('[data-book-day]', bookingDialog).forEach((button) => button.addEventListener('click', () => {
+      state.day = button.dataset.bookDay || '';
+      qsa('[data-book-day]', bookingDialog).forEach((item) => item.classList.toggle('is-selected', item === button));
+      qs<HTMLButtonElement>('[data-booking-step="1"] [data-booking-next]', bookingDialog)!.disabled = !(state.day && state.time);
+    }));
+    qsa('[data-book-time]', bookingDialog).forEach((button) => button.addEventListener('click', () => {
+      state.time = button.dataset.bookTime || '';
+      qsa('[data-book-time]', bookingDialog).forEach((item) => item.classList.toggle('is-selected', item === button));
+      qs<HTMLButtonElement>('[data-booking-step="1"] [data-booking-next]', bookingDialog)!.disabled = !(state.day && state.time);
+    }));
+    qsa('[data-booking-next]', bookingDialog).forEach((button) => button.addEventListener('click', () => {
+      if (state.step === 1) {
+        const service = services.find((item: Service) => item.id === state.service);
+        qs('[data-book-summary-service]')!.textContent = service ? (activeLang === 'en' ? service.en : service.title) : '—';
+        qs('[data-book-summary-time]')!.textContent = `${state.day} · ${state.time}${state.barber ? ` · ${state.barber}` : ''}`;
+      }
+      showStep(Math.min(state.step + 1, 2));
+    }));
+    qsa('[data-booking-back]', bookingDialog).forEach((button) => button.addEventListener('click', () => showStep(Math.max(state.step - 1, 0))));
+
+    qs<HTMLFormElement>('[data-booking-form]', bookingDialog)?.addEventListener('submit', (event: SubmitEvent) => {
+      event.preventDefault();
+      const form = event.currentTarget as HTMLFormElement;
+      const name = form.elements.namedItem('name') as HTMLInputElement;
+      const contact = form.elements.namedItem('contact') as HTMLInputElement;
+      const consent = form.elements.namedItem('consent') as HTMLInputElement;
+      qs('[data-error="name"]', form)!.textContent = name.value.trim().length >= 2 ? '' : 'Вкажіть ім’я';
+      qs('[data-error="contact"]', form)!.textContent = contact.value.trim().length >= 5 ? '' : 'Вкажіть телефон або Telegram';
+      if (name.value.trim().length < 2 || contact.value.trim().length < 5 || !consent.checked) { if (!consent.checked) consent.focus(); return; }
+      bookingSteps.forEach((panel) => panel.hidden = true);
+      qsa('[data-booking-step-dot]', bookingDialog).forEach((dot) => dot.classList.remove('is-current'));
+      const success = qs<HTMLElement>('[data-booking-success]', bookingDialog)!;
+      success.hidden = false;
+      success.focus();
+    });
+    qs('[data-booking-reset]', bookingDialog)?.addEventListener('click', () => {
+      state.step = 0; state.service = ''; state.day = ''; state.time = ''; state.barber = '';
+      qs<HTMLFormElement>('[data-booking-form]', bookingDialog)?.reset();
+      qsa('.is-selected', bookingDialog).forEach((node) => node.classList.remove('is-selected'));
+      qsa<HTMLButtonElement>('[data-booking-next]', bookingDialog).forEach((button) => button.disabled = true);
+      showStep(0);
+    });
+  </script>
+</VartaDemoLayout>

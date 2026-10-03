@@ -1,0 +1,12 @@
+---
+import SiteHead, { type Props } from '@/components/SiteHead.astro';
+import { site } from '@/content/site';
+import '@/styles/home-v2.css';
+---
+<!doctype html>
+<html lang={site.language}>
+  <SiteHead {...Astro.props} />
+  <body class="home-v2" data-contact-email={site.email}>
+    <slot />
+  </body>
+</html>
