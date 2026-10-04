@@ -1,0 +1,352 @@
+/* Approved homepage continuation. The hero remains owned by home-v2.css. */
+.home-flow {
+  --home-canvas: #050716;
+  --home-panel: rgba(12, 13, 38, 0.78);
+  --home-panel-strong: rgba(14, 15, 43, 0.9);
+  --home-line: rgba(202, 180, 231, 0.22);
+  --home-line-strong: rgba(213, 190, 240, 0.42);
+  --home-lilac: #d9c5ec;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background-color: var(--home-canvas);
+  background-image:
+    linear-gradient(180deg, rgba(3, 4, 14, 0.98) 0%, rgba(5, 6, 20, 0.75) 1.4%, rgba(9, 8, 29, 0.24) 4.5%, transparent 8%),
+    radial-gradient(ellipse at 12% 5%, rgba(132, 91, 195, 0.3), transparent 28%),
+    radial-gradient(ellipse at 91% 20%, rgba(90, 58, 157, 0.23), transparent 27%),
+    radial-gradient(ellipse at 22% 43%, rgba(112, 72, 169, 0.2), transparent 31%),
+    radial-gradient(ellipse at 82% 61%, rgba(92, 55, 151, 0.22), transparent 30%),
+    radial-gradient(ellipse at 31% 84%, rgba(123, 77, 176, 0.19), transparent 30%),
+    linear-gradient(112deg, transparent 12%, rgba(113, 74, 171, 0.1) 36%, transparent 58%),
+    linear-gradient(180deg, #0a0b25 0%, #050614 13%, #090820 35%, #040510 57%, #0a081f 78%, #050614 100%);
+  box-shadow: inset 0 100px 150px -145px rgba(156, 112, 207, 0.24);
+}
+
+.home-flow::before {
+  content: '';
+  position: absolute;
+  inset: -2%;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.72;
+  background-image:
+    radial-gradient(circle, rgba(255, 251, 255, 0.96) 0 0.8px, rgba(236, 218, 255, 0.45) 1px, transparent 1.8px),
+    radial-gradient(circle, rgba(202, 169, 246, 0.9) 0 0.9px, rgba(137, 91, 207, 0.35) 1.2px, transparent 2px),
+    radial-gradient(circle, rgba(255, 255, 255, 0.72) 0 0.65px, transparent 1.45px),
+    radial-gradient(circle, rgba(211, 179, 255, 0.74) 0 1.3px, rgba(155, 106, 226, 0.18) 2.2px, transparent 3.2px);
+  background-size: 109px 101px, 173px 157px, 251px 229px, 397px 359px;
+  background-position: 13px 21px, 81px 57px, 137px 119px, 239px 183px;
+  filter: drop-shadow(0 0 3px rgba(189, 151, 239, 0.3));
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.86) 46%, #000 100%);
+  mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.86) 46%, #000 100%);
+  animation: home-stars-drift 75s linear infinite, home-stars-pulse 7s ease-in-out infinite alternate;
+}
+
+.home-flow::after {
+  content: '';
+  position: absolute;
+  inset: -3%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 8% 18%, rgba(151, 100, 212, 0.12), transparent 24%),
+    radial-gradient(ellipse at 94% 48%, rgba(126, 80, 193, 0.11), transparent 23%),
+    radial-gradient(ellipse at 38% 74%, rgba(166, 105, 218, 0.09), transparent 28%),
+    linear-gradient(180deg, rgba(14, 14, 46, 0.04), rgba(2, 3, 12, 0.32)),
+    radial-gradient(ellipse at 50% 48%, transparent 44%, rgba(2, 3, 12, 0.2) 100%);
+  background-size: 100% 100%;
+  animation: home-nebula-breathe 18s ease-in-out infinite alternate;
+}
+
+@keyframes home-stars-drift {
+  to {
+    background-position: 63px 121px, 19px 207px, 257px 39px, 129px 263px;
+  }
+}
+
+@keyframes home-stars-pulse {
+  from { opacity: 0.6; }
+  to { opacity: 0.82; }
+}
+
+@keyframes home-nebula-breathe {
+  from { transform: translate3d(-0.6%, -0.2%, 0) scale(1); opacity: 0.76; }
+  to { transform: translate3d(0.8%, 0.35%, 0) scale(1.025); opacity: 1; }
+}
+
+.home-flow > .section,
+.home-flow > .i-section {
+  position: relative;
+  z-index: 1;
+  border-top: 0;
+  background: transparent;
+}
+
+.home-flow > .i-section::before,
+.home-flow > .i-section::after {
+  display: none;
+}
+
+.home-flow .i-shell {
+  width: min(1320px, calc(100% - 88px));
+}
+
+.home-flow .section,
+.home-flow .i-section {
+  padding-top: clamp(82px, 8vw, 122px);
+  padding-bottom: clamp(82px, 8vw, 122px);
+}
+
+.home-flow .section-heading,
+.home-flow .i-heading {
+  margin-bottom: 34px;
+}
+
+.home-flow .section-label,
+.home-flow .i-kicker {
+  color: #bda7d4;
+  letter-spacing: 2px;
+}
+
+.home-flow .section-heading h2,
+.home-flow .i-heading h2 {
+  color: #f1e8f6;
+}
+
+.home-flow .section-description,
+.home-flow .i-heading-note,
+.home-flow .i-subtitle {
+  color: #b8aec8;
+}
+
+.home-flow .services-grid,
+.home-flow .i-project-grid,
+.home-flow .i-timeline,
+.home-flow .i-contact-grid {
+  border: 1px solid var(--home-line);
+  border-radius: 24px;
+  background: linear-gradient(145deg, rgba(18, 18, 48, 0.78), rgba(7, 9, 29, 0.72));
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.025), 0 26px 80px rgba(1, 2, 12, 0.18);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Services: one framed system with six equal modules. */
+.home-flow .services-grid {
+  gap: 10px;
+  padding: 10px;
+}
+
+.home-flow .service {
+  min-width: 0;
+  min-height: 285px;
+  padding: 30px;
+  border: 1px solid rgba(200, 179, 230, 0.17);
+  border-radius: 16px;
+  background: rgba(9, 11, 34, 0.55);
+  transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+}
+
+.home-flow .service:hover,
+.home-flow .service:focus-within {
+  border-color: var(--home-line-strong);
+  background: rgba(18, 16, 46, 0.72);
+  transform: translateY(-2px);
+}
+
+.home-flow .service > p {
+  min-height: 86px;
+}
+
+.home-flow .service summary {
+  max-width: none;
+}
+
+.home-flow .services-tail {
+  margin-top: 14px;
+  padding: 20px 24px;
+  border: 1px solid rgba(200, 179, 230, 0.16);
+  border-radius: 16px;
+  background: rgba(8, 10, 31, 0.55);
+}
+
+/* Portfolio: a restrained outer frame, image-led inner cards. */
+.home-flow .i-project-grid {
+  gap: 12px;
+  padding: 12px;
+}
+
+.home-flow .i-project {
+  border-color: rgba(206, 184, 235, 0.2);
+  border-radius: 17px;
+  background: rgba(10, 12, 35, 0.88);
+  box-shadow: none;
+}
+
+.home-flow .i-project:hover,
+.home-flow .i-project:focus-within {
+  border-color: rgba(220, 195, 246, 0.5);
+  box-shadow: 0 18px 46px rgba(3, 3, 18, 0.35), 0 0 30px rgba(133, 94, 179, 0.1);
+}
+
+.home-flow .i-other,
+.home-flow .i-gallery {
+  border-radius: 16px;
+  background: rgba(8, 10, 31, 0.5);
+}
+
+.home-flow .i-other {
+  padding: 22px;
+  border: 1px solid rgba(200, 179, 230, 0.16);
+}
+
+.home-flow .i-other > div {
+  margin-top: 12px;
+}
+
+/* Process: the sequence becomes the signature illuminated rail. */
+.home-flow .i-timeline {
+  padding: 14px 26px 14px 46px !important;
+}
+
+.home-flow .i-timeline::before {
+  left: 61px;
+  top: 58px;
+  bottom: 58px;
+  background: linear-gradient(180deg, rgba(225, 199, 249, 0.9), rgba(123, 93, 164, 0.4));
+}
+
+.home-flow .i-step {
+  margin: 0;
+  border-bottom-color: rgba(200, 179, 230, 0.16);
+}
+
+.home-flow .i-step[open] {
+  border-color: rgba(207, 180, 237, 0.32);
+  background: linear-gradient(100deg, rgba(75, 52, 106, 0.45), rgba(18, 19, 50, 0.42));
+}
+
+.home-flow .i-step-dot {
+  box-shadow: 0 0 0 5px #0b0c27;
+}
+
+/* Contact: one shared frame around the editorial copy and form. */
+.home-flow .i-contact-grid {
+  padding: clamp(28px, 4.2vw, 58px);
+}
+
+.home-flow .i-form {
+  border-color: rgba(209, 184, 238, 0.26);
+  background: rgba(8, 10, 31, 0.72);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.025);
+}
+
+.home-flow .i-email {
+  color: #f0e4f8;
+}
+
+.home-v2 > .i-footer {
+  background: #050716;
+  border-top-color: rgba(202, 180, 231, 0.16);
+}
+
+@media (max-width: 1000px) {
+  .home-flow .i-shell {
+    width: calc(100% - 64px);
+  }
+
+  .home-flow .service {
+    padding: 25px;
+  }
+}
+
+@media (max-width: 760px) {
+  .home-flow .i-shell {
+    width: calc(100% - 40px);
+  }
+
+  .home-flow .section,
+  .home-flow .i-section {
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+
+  .home-flow .services-grid,
+  .home-flow .i-project-grid,
+  .home-flow .i-timeline,
+  .home-flow .i-contact-grid {
+    border-radius: 19px;
+  }
+
+  .home-flow .services-grid {
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .home-flow .service {
+    min-height: 0;
+    padding: 22px 20px;
+    border-radius: 14px;
+  }
+
+  .home-flow .service:hover,
+  .home-flow .service:focus-within {
+    transform: none;
+  }
+
+  .home-flow .service > p {
+    min-height: 0;
+  }
+
+  .home-flow .i-project-grid {
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .home-flow .i-timeline {
+    padding: 10px 12px 10px 24px !important;
+  }
+
+  .home-flow .i-timeline::before {
+    left: 40px;
+  }
+
+  .home-flow .i-contact-grid {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 540px) {
+  .home-flow .section-heading {
+    display: block;
+  }
+
+  .home-flow .section-description {
+    margin-top: 18px;
+  }
+
+  .home-flow .services-tail {
+    padding: 18px;
+  }
+
+  .home-flow .i-contact-grid {
+    padding: 20px 16px;
+  }
+}
+
+@media (max-width: 359px) {
+  .home-flow .i-shell {
+    width: calc(100% - 28px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-flow::before,
+  .home-flow::after {
+    animation: none;
+  }
+
+  .home-flow .service {
+    transition: none;
+  }
+}

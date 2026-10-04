@@ -1,11 +1,12 @@
 ---
 import HomeLayout from '@/layouts/HomeLayout.astro';
-import Services from '@/components/inner/Services.astro';
+import HomeServices from '@/components/home-v2/HomeServices.astro';
 import Portfolio from '@/components/inner/Portfolio.astro';
 import Process from '@/components/inner/Process.astro';
 import Contact from '@/components/inner/Contact.astro';
 import Footer from '@/components/inner/Footer.astro';
 import '@/styles/inner.css';
+import '@/styles/home-unified.css';
 import { site } from '@/content/site';
 import { portfolio } from '@/content/portfolio';
 import { withBase } from '@/lib/paths';
@@ -46,7 +47,7 @@ const galleryItems = featured.map(item => {
 
   <main id="main">
     <section class="hero" id="home" aria-labelledby="hero-title">
-      <video class="hero-video" id="hero-video" autoplay muted loop playsinline preload="auto" poster="assets/purple-desert.jpg" aria-hidden="true"><source src="/assets/home-v2/purple-desert.mp4" type="video/mp4"></video>
+      <video class="hero-video" id="hero-video" autoplay muted loop playsinline preload="auto" poster="/assets/home-v2/purple-desert.jpg" aria-hidden="true"><source src="/assets/home-v2/purple-desert.mp4" type="video/mp4"></video>
       <div class="hero-copy">
         <p class="eyebrow hero-eyebrow">Вебсайти <span>·</span> боти <span>·</span> автоматизація</p>
         <h1 id="hero-title"><span>Цифрові рішення</span><em>для вашого бізнесу.</em></h1>
@@ -56,15 +57,17 @@ const galleryItems = featured.map(item => {
       <div class="hero-bottom"><span>Дизайн. Розробка. Запуск.</span><a class="scroll-link" href="#services">Наші послуги <span aria-hidden="true">↓</span></a><button class="motion-toggle" id="motion-toggle" type="button" aria-label="Призупинити відео" aria-pressed="false"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 5v10M13 5v10"/></svg><span>Пауза</span></button></div>
     </section>
 
-    <Services/>
-    <Portfolio>
-      <details class="i-gallery"><summary>Інтерактивний огляд сайтів <span aria-hidden="true">↔</span></summary>
-        <div id="portfolio-gallery" data-items={JSON.stringify(galleryItems)}></div>
-        <noscript><ul>{galleryItems.map(item => <li><a href={item.caseUrl}>{item.label} — переглянути кейс</a></li>)}</ul></noscript>
-      </details>
-    </Portfolio>
-    <Process/>
-    <Contact home/>
+    <div class="home-flow">
+      <HomeServices/>
+      <Portfolio>
+        <details class="i-gallery"><summary>Інтерактивний огляд сайтів <span aria-hidden="true">↔</span></summary>
+          <div id="portfolio-gallery" data-items={JSON.stringify(galleryItems)}></div>
+          <noscript><ul>{galleryItems.map(item => <li><a href={item.caseUrl}>{item.label} — переглянути кейс</a></li>)}</ul></noscript>
+        </details>
+      </Portfolio>
+      <Process/>
+      <Contact home/>
+    </div>
   </main>
   <Footer/>
 
