@@ -1,25 +1,7 @@
 ---
-import BaseLayout from '@/layouts/BaseLayout.astro';
-import StudioIcon from '@/components/StudioIcon.astro';
-import MetalSculpture from '@/components/MetalSculpture.astro';
-import { studioServices } from '@/content/studio';
-import { site } from '@/content/site';
-import { withBase } from '@/lib/paths';
+import InnerLayout from '@/layouts/InnerLayout.astro';
+import Contact from '@/components/inner/Contact.astro';
 ---
-<BaseLayout title="Обговорити вебсайт або Telegram-бот" description="Розкажіть OKK Works про ваш проєкт. Узгодимо задачу, формат і наступний крок." pageType="ContactPage">
-  <section class="shell contact-page">
-    <div class="contact-direct"><p class="eyebrow">Почнімо з розмови</p><h1>Що створимо<br/>разом?</h1><p>Розкажіть про свій проєкт — ми допоможемо визначити наступний крок.</p><a class="email-link" href={`mailto:${site.email}`}><StudioIcon name="mail"/>{site.email}</a>{site.telegram && <a class="text-link" href={site.telegram} target="_blank" rel="noreferrer">Telegram<StudioIcon name="arrow"/></a>}<MetalSculpture id="form-metal" compact/></div>
-    <form class="inquiry-form" data-inquiry-form>
-      <div class="form-row"><div class="field"><label for="name">Ваше ім’я</label><input name="name" id="name" autocomplete="name" placeholder="Як до вас звертатися?" maxlength="100" required/></div><div class="field"><label for="contact">Контакт</label><input name="contact" id="contact" placeholder="Email, телефон або @username" maxlength="200" required/></div></div>
-      <div class="field"><label for="service">Тип проєкту</label><select name="service" id="service" required><option value="">Оберіть напрям</option>{studioServices.map(service=><option value={service.key}>{service.title}</option>)}<option value="unsure">Поки не знаю — обговорімо</option></select></div>
-      <fieldset><legend>Орієнтовний бюджет</legend><div class="choice-options">{['До 15 000 грн','15 000–30 000 грн','30 000–50 000 грн','50 000+ грн'].map(budget=><label><input type="radio" name="budget" value={budget}/><span>{budget}</span></label>)}</div></fieldset>
-      <div class="field"><label for="message">Коротко про задачу</label><textarea name="message" id="message" placeholder="Що хочете створити або покращити?" maxlength="3000" required/></div>
-      <fieldset><legend>Зручний спосіб зв’язку</legend><div class="choice-options">{['Telegram','Email','Телефон','WhatsApp'].map(channel=><label><input type="radio" name="channel" value={channel}/><span>{channel}</span></label>)}</div></fieldset>
-      <p class="form-note" id="delivery-note">Форма підготує лист у вашому поштовому застосунку. Для відправлення підтвердьте його там. <a href={withBase('/privacy/')}>Про приватність</a></p>
-      <button class="button button-primary" type="submit" aria-describedby="delivery-note" disabled>Надіслати запит<StudioIcon name="arrow"/></button>
-      <p class="form-status" role="status" aria-live="polite" data-form-status></p>
-      <div class="form-fallback" data-form-fallback hidden><p class="form-note">Немає поштового застосунку? Скопіюйте запит і надішліть його на {site.email} зі своєї пошти.</p><button type="button" class="button button-outline" data-copy-inquiry>Скопіювати текст<StudioIcon name="file" size={18}/></button></div>
-      <noscript><p class="form-note">Щоб надіслати запит без JavaScript, напишіть на <a href={`mailto:${site.email}`}>{site.email}</a>.</p></noscript>
-    </form>
-  </section>
-</BaseLayout>
+<InnerLayout title="Обговорити проєкт з OKK Works" description="Розкажіть про вашу задачу. Узгодимо формат, обсяг та наступний крок створення сайту, Telegram-бота або внутрішньої системи." pageType="ContactPage">
+  <Contact page/>
+</InnerLayout>

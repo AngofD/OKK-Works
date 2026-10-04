@@ -1,0 +1,10 @@
+---
+import { processSteps } from '@/content/inner';
+import Icon from '@/components/StudioIcon.astro';
+import Heading from './SectionHeading.astro';
+const { page = false } = Astro.props;
+---
+<section class="i-world i-section i-process" id="process" aria-labelledby="process-title"><div class="i-shell">
+  <Heading title="Від ідеї до запуску." subtitle="Прозорий процес і чіткі етапи співпраці" id="process-title" page={page} note="Ви знаєте, що відбувається зараз, який результат отримаєте та коли потрібен ваш відгук."/>
+  <ol class="i-timeline">{processSteps.map((step, index) => <li><details class="i-step" name="process" open={index === 0}><summary><span class="i-step-dot">0{index + 1}</span><Icon name={step.icon} size={28}/><span class="i-step-title">{step.title}</span><span class="i-step-result"><small>Ви отримуєте</small>{step.result}</span><span class="i-expand"><Icon name="chevron" size={18}/></span></summary><div class="i-step-detail"><p>{step.detail}</p></div></details></li>)}</ol>
+</div></section>

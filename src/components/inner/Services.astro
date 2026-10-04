@@ -1,0 +1,18 @@
+---
+import { services } from '@/content/inner';
+import { withBase } from '@/lib/paths';
+import Icon from '@/components/StudioIcon.astro';
+import Heading from './SectionHeading.astro';
+const { page = false } = Astro.props;
+---
+<section class="i-world i-section i-services" id="services" aria-labelledby="services-title">
+  <div class="i-shell">
+    <Heading title="Послуги." subtitle="Від задачі до рішення" id="services-title" page={page} note="Створюємо цифрові продукти під ваш формат роботи. Від окремого інструмента до пов’язаної системи."/>
+    <div class="i-services-list">
+      {services.map((service, index) => <details class="i-service" name="services" open={index === 0}>
+        <summary><span class="i-number">0{index + 1}</span><Icon name={service.icon} size={30}/><span class="i-service-label"><span class="i-service-title">{service.title}</span><span class="i-service-summary">{service.summary}</span></span><span class="i-expand"><Icon name="chevron" size={20}/></span></summary>
+        <div class="i-service-content"><p>{service.detail}</p><ul>{service.features.map(feature => <li><Icon name="check" size={16}/>{feature}</li>)}</ul><a class="i-button" href={withBase(`/contact/?service=${service.key}`)}>{service.action}<span aria-hidden="true">↗</span></a></div>
+      </details>)}
+    </div>
+  </div>
+</section>

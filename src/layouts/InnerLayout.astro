@@ -1,0 +1,15 @@
+---
+import SiteHead, { type Props } from '@/components/SiteHead.astro';
+import Footer from '@/components/inner/Footer.astro';
+import { site } from '@/content/site';
+import { withBase } from '@/lib/paths';
+import '@/styles/inner.css';
+const navigation = [['/services/', 'Послуги'], ['/work/', 'Роботи'], ['/process/', 'Процес'], ['/contact/', 'Контакти']];
+const { ...head }: Props = Astro.props;
+---
+<!doctype html><html lang={site.language}><SiteHead {...head}/><body class="i-body">
+  <a class="i-skip" href="#main">Перейти до контенту</a>
+  <header class="i-world i-navigation"><a class="i-brand" href={withBase('/')} aria-label="OKK Works — головна"><img src={withBase('/assets/home-v2/logo.svg')} width="32" height="32" alt=""/>OKK Works</a><nav class="i-desktop-nav" aria-label="Головна навігація">{navigation.map(([url,label]) => <a href={withBase(url)} aria-current={Astro.url.pathname === withBase(url) ? 'page' : undefined}>{label}</a>)}</nav><a class="i-nav-cta" href={withBase('/contact/')}>Обговорити проєкт <span aria-hidden="true">↗</span></a><details class="i-mobile-nav"><summary aria-label="Мобільна навігація">Меню <span aria-hidden="true">☰</span></summary><nav aria-label="Мобільна навігація">{navigation.map(([url,label]) => <a href={withBase(url)} aria-current={Astro.url.pathname === withBase(url) ? 'page' : undefined}>{label}</a>)}<a href={withBase('/contact/')}>Обговорити проєкт ↗</a></nav></details></header>
+  <main id="main" class="i-main"><slot/></main><Footer/>
+  <script>import '@/lib/inner';</script>
+</body></html>

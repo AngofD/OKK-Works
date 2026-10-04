@@ -1,0 +1,26 @@
+---
+import { site } from '@/content/site';
+import { services } from '@/content/inner';
+import { withBase } from '@/lib/paths';
+const { page = false, home = false } = Astro.props;
+const Heading = page ? 'h1' : 'h2';
+---
+<section class="i-world i-section i-contact" id="contact" aria-labelledby="contact-title"><div class="i-shell i-contact-grid">
+  <div class="i-contact-copy"><p class="i-kicker">Наступний крок — розмова</p><Heading id="contact-title">Що створимо<br/>разом?</Heading><p class="i-contact-lead">Розкажіть, що хочете створити або покращити. Визначимо формат, обсяг і наступний крок.</p>
+    <div class="i-direct"><span class="i-meta">Напишіть нам напряму</span><a class="i-email" href={`mailto:${site.email}`}>{site.email}</a>{home && <><p id="inquiry-context" hidden></p><div class="i-direct-actions"><a id="email-inquiry" href={`mailto:${site.email}`}>Написати лист ↗</a><button class="copy-email" type="button">Скопіювати email ⧉</button></div></>}{site.telegram && <a href={site.telegram} target="_blank" rel="noopener noreferrer">Telegram ↗</a>}</div>
+
+  </div>
+  <form class="i-form" data-inquiry-form>
+    <div class="i-field"><label for="inquiry-name">Ваше ім’я</label><input id="inquiry-name" name="name" autocomplete="name" placeholder="Як до вас звертатися?" maxlength="100" required/></div>
+    <div class="i-field"><label for="inquiry-contact">Контакт</label><input id="inquiry-contact" name="contact" placeholder="Email, телефон або @username" maxlength="200" required/></div>
+    <div class="i-field"><label for="inquiry-service">Тип проєкту</label><select id="inquiry-service" name="service" required><option value="">Оберіть напрям</option>{services.map(service => <option value={service.key}>{service.title}</option>)}<option value="booking">Підключення онлайн-запису</option><option value="support">Підтримка та оновлення</option><option value="unsure">Поки не знаю — обговорімо</option></select></div>
+    <fieldset><legend>Орієнтовний бюджет</legend><div class="i-choices">{['До 15 000 грн', '15 000–30 000 грн', '30 000–50 000 грн', '50 000+ грн'].map(budget => <label><input type="radio" name="budget" value={budget}/><span>{budget}</span></label>)}</div></fieldset>
+    <div class="i-field"><label for="inquiry-message">Коротко про задачу</label><textarea id="inquiry-message" name="message" placeholder="Що потрібно зробити?" maxlength="3000" required/></div>
+    <fieldset><legend>Зручний спосіб зв’язку</legend><div class="i-choices">{['Telegram', 'Email', 'Телефон', 'WhatsApp'].map(channel => <label><input type="radio" name="channel" value={channel}/><span>{channel}</span></label>)}</div></fieldset>
+    <button class="i-button i-button-solid" type="submit" aria-describedby="delivery-note" disabled>Підготувати лист <span aria-hidden="true">↗</span></button>
+    <p class="i-form-note" id="delivery-note">Це відкриє ваш поштовий застосунок із заповненим листом. Ви перевіряєте й надсилаєте його самостійно. <a href={withBase('/privacy/')}>Про приватність</a></p>
+    <p class="i-form-status" role="status" data-form-status></p><div data-form-fallback hidden><p class="i-form-note">Поштовий застосунок не відкрився? Скопіюйте текст і надішліть на {site.email}.</p><button class="i-button" type="button" data-copy-inquiry>Скопіювати текст <span aria-hidden="true">⧉</span></button></div>
+    <noscript><p>Напишіть напряму на <a href={`mailto:${site.email}`}>{site.email}</a>.</p></noscript>
+  </form>
+  <div class="i-contact-secondary"><div class="i-contact-services"><p class="i-kicker">Що можемо створити</p><ul>{services.map(service => <li><a href={withBase(`/contact/?service=${service.key}`)}>{service.title} <span aria-hidden="true">↗</span></a></li>)}</ul></div><p class="i-contact-footnote">Задачі, терміни та вартість погоджуємо до початку роботи.</p></div>
+</div></section>

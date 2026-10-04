@@ -1,0 +1,26 @@
+---
+import { portfolio, portfolioFilters, projectLabel } from '@/content/portfolio';
+import { withBase } from '@/lib/paths';
+import Heading from './SectionHeading.astro';
+const { page = false } = Astro.props;
+const ProjectHeading = page ? 'h2' : 'h3';
+---
+<section class="i-world i-section i-work" id="work" aria-labelledby="work-title">
+  <div class="i-shell" data-inner-portfolio>
+    <Heading title="Роботи." subtitle="Демо-концепти та власні продукти" id="work-title" page={page} note="Відкрийте сайт або спробуйте бота. У кейсі — задача, рішення та деталі реалізації."/>
+    <div class="i-filters" role="group" aria-label="Тип проєкту">{portfolioFilters.map((filter, index) => <button type="button" data-inner-filter={filter} aria-pressed={index === 0}>{filter === 'Telegram' ? 'Telegram-боти' : filter}</button>)}</div>
+    <p class="i-sr" role="status" data-inner-filter-status>Показано проєктів: {portfolio.length}</p>
+    <div class="i-project-grid">
+      {portfolio.map(project => <article class="i-project" data-inner-category={project.category}>
+        <a class="i-project-image" href={withBase(`/work/${project.slug}/`)} aria-label={`Переглянути кейс ${project.title}`}><img src={withBase(project.coverImage)} width="1440" height="900" alt={`${project.title} — ${project.category === 'Telegram' ? 'інтерфейс бота' : 'екран сайту'}`} loading="lazy" decoding="async"/></a>
+        <div class="i-project-copy"><p class="i-meta">{projectLabel(project)} · {project.category === 'Telegram' ? 'Telegram-бот' : 'Вебсайт'}</p><ProjectHeading>{project.title}</ProjectHeading><p>{project.portfolioStatement}</p>
+          <div class="i-project-actions"><a href={withBase(`/work/${project.slug}/`)}>Переглянути кейс <span aria-hidden="true">→</span></a>{project.liveUrl && <a href={project.liveUrl.startsWith('/') ? withBase(project.liveUrl) : project.liveUrl} target="_blank" rel="noopener noreferrer">{project.category === 'Telegram' ? 'Відкрити бота' : 'Відкрити сайт'} <span aria-hidden="true">↗</span></a>}</div>
+          <details class="i-project-details"><summary>Про рішення <span aria-hidden="true">+</span></summary><p>{project.summary}</p><ul>{project.built.slice(0, 3).map(item => <li>{item}</li>)}</ul></details>
+        </div>
+      </article>)}
+    </div>
+    <div class="i-empty" data-inner-empty hidden><h3>Кейси автоматизації — попереду.</h3><p>У цій категорії ще немає опублікованих робіт. Можемо обговорити ваш процес та можливі інтеграції.</p><a class="i-button" href={withBase('/contact/?service=automation')}>Обговорити задачу <span aria-hidden="true">↗</span></a></div>
+    <div class="i-other" data-inner-other><p class="i-kicker">Інші демо сайтів для барбершопів</p><div><a href={withBase('/demos/ritual/')}><span>Ritual Barber Studio<small>Демо-концепт · барбершоп</small></span><span aria-hidden="true">↗</span></a><a href={withBase('/demos/kontur/')}><span>Maison Seventeen<small>Демо-концепт · барбершоп</small></span><span aria-hidden="true">↗</span></a></div></div>
+    <slot/>
+  </div>
+</section>

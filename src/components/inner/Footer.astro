@@ -1,0 +1,5 @@
+---
+import { site } from '@/content/site';
+import { withBase } from '@/lib/paths';
+---
+<footer class="i-world i-footer"><div class="i-shell"><a class="i-brand" href={withBase('/')}><img src={withBase('/assets/home-v2/logo.svg')} width="28" height="28" alt=""/>OKK Works</a><p>Від ідеї до працюючого продукту.</p><nav aria-label="Навігація в підвалі"><a href={withBase('/services/')}>Послуги</a><a href={withBase('/work/')}>Роботи</a><a href={withBase('/process/')}>Процес</a><a href={withBase('/contact/')}>Контакти</a><a href={withBase('/privacy/')}>Конфіденційність</a></nav><a href={`mailto:${site.email}`}>{site.email}</a></div></footer>

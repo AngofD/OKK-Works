@@ -1,0 +1,9 @@
+---
+interface Props { title: string; subtitle: string; note?: string; page?: boolean; id: string; }
+const { title, subtitle, note, page = false, id } = Astro.props;
+const Heading = page ? 'h1' : 'h2';
+---
+<header class="i-heading">
+  <div><p class="i-kicker">OKK Works / цифрові продукти</p><Heading id={id}>{title}</Heading><p class="i-subtitle">{subtitle}</p></div>
+  {note && <p class="i-heading-note">{note}</p>}
+</header>
